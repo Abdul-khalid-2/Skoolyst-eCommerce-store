@@ -6,8 +6,29 @@ $active = 'products';
 
 $img = $product['image'] ?: 'https://images.pexels.com/photos/207580/pexels-photo-207580.jpeg?auto=compress&cs=tinysrgb&w=800';
 
+$productSchema = [
+    '@context' => 'https://schema.org',
+    '@type' => 'Product',
+    'name' => $product['name'],
+    'image' => [$img],
+    'description' => $product['description'] ?: ($product['name'] . ' — available at ' . $product['store_name'] . ' on Skoolyst Store.'),
+    'sku' => (string) $product['id'],
+    'offers' => [
+        '@type' => 'Offer',
+        'url' => url('products/' . $product['slug']),
+        'priceCurrency' => 'PKR',
+        'price' => number_format((float) ($product['sale_price'] ?: $product['price']), 2, '.', ''),
+        'availability' => $product['stock'] > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+        'seller' => [
+            '@type' => 'Organization',
+            'name' => $product['store_name'],
+        ],
+    ],
+];
+
 ob_start();
 ?>
+<script type="application/ld+json"><?= json_encode($productSchema, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE) ?></script>
 <div class="sk-breadcrumb"><div class="container"><nav aria-label="breadcrumb"><ol class="breadcrumb">
   <li class="breadcrumb-item"><a href="<?= url('') ?>">Home</a></li>
   <li class="breadcrumb-item"><a href="<?= url('products') ?>">Products</a></li>

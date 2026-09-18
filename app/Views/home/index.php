@@ -82,7 +82,7 @@ ob_start();
               <div>
                 <h5 class="mb-0 fs-6"><?= clean($store['name']) ?> <?php if ($store['verified']): ?><i class="bi bi-patch-check-fill verified-icon" title="Verified"></i><?php endif; ?></h5>
                 <div class="small text-muted"><i class="bi bi-geo-alt"></i> <?= clean($store['city'] ?? '') ?></div>
-                <div class="stars mt-1"><?= $stars((float) $store['rating']) ?> <span class="rating-num ms-1"><?= number_format((float) $store['rating'], 1) ?></span></div>
+                <div class="stars mt-1" title="Skoolyst listing score, not a customer review"><?= $stars((float) $store['rating']) ?> <span class="rating-num ms-1"><?= number_format((float) $store['rating'], 1) ?></span> <span class="text-muted" style="font-size:.7em">Skoolyst Score</span></div>
               </div>
             </div>
             <p class="small text-muted mb-0"><?= clean(mb_strimwidth((string) $store['description'], 0, 110, '...')) ?></p>

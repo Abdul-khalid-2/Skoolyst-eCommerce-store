@@ -3,6 +3,7 @@
 $title = 'Checkout — Skoolyst Store';
 $description = 'Checkout — Complete your order on Skoolyst Store.';
 $active = 'products';
+$robots = 'noindex, follow';
 $old = $old ?? [];
 $errors = $errors ?? [];
 $val = static fn (string $key, string $default = '') => (string) ($old[$key] ?? $default);
@@ -89,7 +90,7 @@ ob_start();
                 </label>
               </div>
             </div>
-            <div class="small text-muted mt-2"><i class="bi bi-shield-check text-success"></i> Your payment information is secure and encrypted.</div>
+            <div class="small text-muted mt-2"><i class="bi bi-info-circle text-navy"></i> We don't collect any card or wallet details at checkout — Cash on Delivery is paid directly to the courier or store.</div>
           </div>
         </div>
 

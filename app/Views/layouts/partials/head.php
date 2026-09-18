@@ -1,18 +1,22 @@
 <?php
 /**
  * Shared <head> partial.
- * Vars: $title, $description (optional), $canonical (optional), $extraCss (array, optional).
+ * Vars: $title, $description (optional), $canonical (optional), $extraCss (array, optional),
+ * $robots (optional, defaults to "index, follow"; set to "noindex, follow" for
+ * session/transactional pages like cart, checkout and favorites).
  */
 $title = $title ?? 'Skoolyst Store';
 $description = $description ?? "Discover trusted school uniform, shoe, stationery and book stores near you \u{2014} Skoolyst's education store directory.";
 $extraCss = $extraCss ?? [];
 $canonical = $canonical ?? url(trim(Skoolyst\Core\Request::uri(), '/'));
+$robots = $robots ?? 'index, follow';
 ?>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf-token" content="<?= clean(csrf_token()) ?>">
 <title><?= clean($title) ?></title>
 <meta name="description" content="<?= clean($description) ?>">
+<meta name="robots" content="<?= clean($robots) ?>">
 <link rel="canonical" href="<?= clean($canonical) ?>">
 <meta property="og:title" content="<?= clean($title) ?>">
 <meta property="og:description" content="<?= clean($description) ?>">

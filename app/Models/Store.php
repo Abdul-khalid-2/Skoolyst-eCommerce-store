@@ -58,6 +58,13 @@ class Store extends Model {
         return $stmt->fetchAll();
     }
 
+    /** Slug + last-modified for every active store, used to build the XML sitemap. */
+    public static function allActiveForSitemap(): array {
+        return static::db()
+            ->query('SELECT slug, updated_at FROM store_stores WHERE status = "active" ORDER BY id ASC')
+            ->fetchAll();
+    }
+
     public static function findActiveBySlug(string $slug): ?array {
         $stmt = static::db()->prepare(
             'SELECT s.*, sc.name AS category_name FROM store_stores s

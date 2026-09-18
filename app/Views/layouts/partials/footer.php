@@ -16,8 +16,10 @@
         </ul>
       </div>
       <div class="col-6 col-lg-2">
-        <h5>Account</h5>
+        <h5>Company</h5>
         <ul class="list-unstyled d-flex flex-column gap-2">
+          <li><a href="<?= url('about') ?>">About Us</a></li>
+          <li><a href="<?= url('contact') ?>">Contact Us</a></li>
           <li><a href="<?= url('login') ?>">Login</a></li>
         </ul>
       </div>
@@ -29,6 +31,11 @@
     </div>
     <div class="footer-bottom d-flex justify-content-between flex-wrap gap-2">
       <span>&copy; <?= date('Y') ?> Skoolyst Store. All rights reserved.</span>
+      <ul class="list-unstyled d-flex flex-wrap gap-3 mb-0">
+        <li><a href="<?= url('privacy-policy') ?>">Privacy Policy</a></li>
+        <li><a href="<?= url('terms') ?>">Terms of Service</a></li>
+        <li><a href="<?= url('returns-refunds') ?>">Returns &amp; Refunds</a></li>
+      </ul>
     </div>
   </div>
 </footer>

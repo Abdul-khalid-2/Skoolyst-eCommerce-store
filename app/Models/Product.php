@@ -37,6 +37,13 @@ class Product extends Model {
         return ['rows' => $stmt->fetchAll(), 'total' => $total];
     }
 
+    /** Slug + last-modified for every active product, used to build the XML sitemap. */
+    public static function allActiveForSitemap(): array {
+        return static::db()
+            ->query('SELECT slug, updated_at FROM store_products WHERE status = "active" ORDER BY id ASC')
+            ->fetchAll();
+    }
+
     public static function findActiveBySlug(string $slug): ?array {
         $stmt = static::db()->prepare(
             'SELECT p.*, s.name AS store_name, s.slug AS store_slug FROM store_products p

@@ -3,6 +3,7 @@
 $title = 'Shopping Cart — Skoolyst Store';
 $description = 'Your shopping cart on Skoolyst Store.';
 $active = 'products';
+$robots = 'noindex, follow';
 
 ob_start();
 ?>
@@ -69,7 +70,7 @@ ob_start();
           <div class="small text-muted mt-2"><i class="bi bi-info-circle"></i> Add Rs. <?= number_format(3000 - $subtotal) ?> more for free delivery</div>
           <?php endif; ?>
           <a href="<?= url('checkout') ?>" class="btn btn-accent w-100 mt-3"><i class="bi bi-bag-check me-2"></i>Proceed to Checkout</a>
-          <div class="small text-center text-muted mt-2"><i class="bi bi-shield-check"></i> Secure checkout</div>
+          <div class="small text-center text-muted mt-2"><i class="bi bi-cash-coin"></i> Cash on Delivery available — pay when your order arrives</div>
         </div>
       </div>
     </div>

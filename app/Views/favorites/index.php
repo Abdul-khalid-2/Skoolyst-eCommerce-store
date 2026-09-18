@@ -4,6 +4,7 @@ require __DIR__ . '/../products/_card.php';
 $title = 'My Favorites — Skoolyst Store';
 $description = 'Products you have saved on Skoolyst Store.';
 $active = 'products';
+$robots = 'noindex, follow';
 
 ob_start();
 ?>

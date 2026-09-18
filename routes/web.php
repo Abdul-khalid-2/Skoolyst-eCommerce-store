@@ -12,6 +12,7 @@ use Skoolyst\Controllers\FavoriteController;
 use Skoolyst\Controllers\HomeController;
 use Skoolyst\Controllers\PageController;
 use Skoolyst\Controllers\ProductController;
+use Skoolyst\Controllers\SitemapController;
 use Skoolyst\Controllers\StoreController;
 use Skoolyst\Controllers\StoreOwnerController;
 use Skoolyst\Middleware\AdminMiddleware;
@@ -22,6 +23,9 @@ use Skoolyst\Middleware\StoreOwnerMiddleware;
 /** @var \Skoolyst\Core\Router $router */
 
 // ---- Public storefront ----
+$router->get('/robots.txt', [SitemapController::class, 'robots']);
+$router->get('/sitemap.xml', [SitemapController::class, 'sitemap']);
+
 $router->get('/', [HomeController::class, 'index']);
 
 $router->get('/stores', [StoreController::class, 'index']);

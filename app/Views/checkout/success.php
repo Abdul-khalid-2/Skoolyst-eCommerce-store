@@ -3,6 +3,7 @@
 $title = 'Order Confirmed — Skoolyst Store';
 $description = 'Your order has been placed successfully.';
 $active = 'products';
+$robots = 'noindex, follow';
 
 ob_start();
 ?>
