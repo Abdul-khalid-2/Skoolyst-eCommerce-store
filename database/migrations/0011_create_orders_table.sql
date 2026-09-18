@@ -1,0 +1,23 @@
+CREATE TABLE IF NOT EXISTS store_orders (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  order_number VARCHAR(20) NOT NULL,
+  user_id INT UNSIGNED DEFAULT NULL,
+  full_name VARCHAR(160) NOT NULL,
+  phone VARCHAR(30) NOT NULL,
+  email VARCHAR(160) NOT NULL,
+  address VARCHAR(255) NOT NULL,
+  city VARCHAR(80) NOT NULL,
+  area VARCHAR(120) DEFAULT NULL,
+  postal_code VARCHAR(20) DEFAULT NULL,
+  delivery_method ENUM('delivery','pickup') NOT NULL DEFAULT 'delivery',
+  payment_method ENUM('cod','online') NOT NULL DEFAULT 'cod',
+  subtotal DECIMAL(10,2) NOT NULL DEFAULT 0,
+  delivery_fee DECIMAL(10,2) NOT NULL DEFAULT 0,
+  total DECIMAL(10,2) NOT NULL DEFAULT 0,
+  status ENUM('pending','processing','completed','cancelled') NOT NULL DEFAULT 'pending',
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  UNIQUE KEY uq_orders_order_number (order_number),
+  KEY idx_orders_user (user_id),
+  CONSTRAINT fk_orders_user FOREIGN KEY (user_id) REFERENCES store_users(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

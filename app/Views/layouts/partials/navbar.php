@@ -26,6 +26,14 @@ $navLink = static fn (string $key, string $label, string $href) =>
             <input type="text" name="q" class="form-control" placeholder="Search stores...">
           </form>
         </div>
+        <a href="<?= url('favorites') ?>" class="nav-icon-link position-relative" aria-label="Favorites">
+          <i class="bi bi-heart text-white fs-5"></i>
+          <span class="badge rounded-pill bg-accent favorite-count" style="<?= favorites_count() > 0 ? '' : 'display:none' ?>"><?= favorites_count() ?></span>
+        </a>
+        <a href="<?= url('cart') ?>" class="nav-icon-link position-relative" aria-label="Shopping cart">
+          <i class="bi bi-bag text-white fs-5"></i>
+          <span class="badge rounded-pill bg-accent cart-count" style="<?= cart_count() > 0 ? '' : 'display:none' ?>"><?= cart_count() ?></span>
+        </a>
         <?php if (is_admin()): ?>
         <a href="<?= url('admin/dashboard') ?>" class="btn btn-sm btn-outline-light">Admin</a>
         <a href="<?= url('logout') ?>" class="btn btn-sm btn-accent">Logout</a>
@@ -60,6 +68,10 @@ $navLink = static fn (string $key, string $label, string $href) =>
         <li><a class="nav-link text-navy fw-semibold" href="<?= url('products') ?>">Products</a></li>
       </ul>
       <hr>
+      <div class="d-flex gap-3 mb-3">
+        <a href="<?= url('favorites') ?>" class="btn btn-outline-navy flex-fill"><i class="bi bi-heart me-1"></i> Favorites <span class="badge rounded-pill bg-accent favorite-count" style="<?= favorites_count() > 0 ? '' : 'display:none' ?>"><?= favorites_count() ?></span></a>
+        <a href="<?= url('cart') ?>" class="btn btn-outline-navy flex-fill"><i class="bi bi-bag me-1"></i> Cart <span class="badge rounded-pill bg-accent cart-count" style="<?= cart_count() > 0 ? '' : 'display:none' ?>"><?= cart_count() ?></span></a>
+      </div>
       <div class="d-flex flex-column gap-2">
         <?php if (is_admin()): ?>
         <a href="<?= url('admin/dashboard') ?>" class="btn btn-outline-navy">Admin</a>

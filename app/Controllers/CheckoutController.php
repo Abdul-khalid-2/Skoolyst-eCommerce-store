@@ -4,14 +4,79 @@ declare(strict_types=1);
 namespace Skoolyst\Controllers;
 
 use Skoolyst\Core\Controller;
+use Skoolyst\Core\Request;
+use Skoolyst\Core\Response;
+use Skoolyst\Models\Order;
+use Skoolyst\Models\OrderItem;
+use Skoolyst\Services\CartService;
+use Skoolyst\Services\OrderService;
 
 class CheckoutController extends Controller {
+    private CartService $cart;
+    private OrderService $orders;
+
+    public function __construct() {
+        $this->cart = new CartService();
+        $this->orders = new OrderService();
+    }
+
     public function index(): mixed {
-        return $this->view('frontend/checkout');
+        $cart = $this->cart->items();
+        if (!$cart['items']) {
+            flash('error', 'Your cart is empty. Add some products before checking out.');
+            Response::redirect(url('cart'));
+        }
+
+        $deliveryFee = $this->cart->deliveryFee($cart['subtotal']);
+
+        return $this->view('checkout/index', [
+            'items' => $cart['items'],
+            'subtotal' => $cart['subtotal'],
+            'deliveryFee' => $deliveryFee,
+            'total' => $cart['subtotal'] + $deliveryFee,
+            'old' => [],
+            'errors' => [],
+        ]);
     }
 
     public function store(): mixed {
-        // No order backend yet — prototype only, re-render the form.
-        return $this->view('frontend/checkout');
+        csrf_verify_or_abort();
+
+        $cart = $this->cart->items();
+        if (!$cart['items']) {
+            flash('error', 'Your cart is empty. Add some products before checking out.');
+            Response::redirect(url('cart'));
+        }
+
+        $data = Request::all();
+        $result = $this->orders->place($data, $cart['items'], $cart['subtotal'], auth_id());
+
+        if ($result['errors']) {
+            $deliveryFee = $this->cart->deliveryFee($cart['subtotal']);
+            return $this->view('checkout/index', [
+                'items' => $cart['items'],
+                'subtotal' => $cart['subtotal'],
+                'deliveryFee' => $deliveryFee,
+                'total' => $cart['subtotal'] + $deliveryFee,
+                'old' => $data,
+                'errors' => $result['errors'],
+            ]);
+        }
+
+        $this->cart->clear();
+        Response::redirect(url('checkout/success/' . $result['order']['order_number']));
+    }
+
+    public function success(string $orderNumber): mixed {
+        $order = Order::findByOrderNumber($orderNumber);
+        if (!$order) {
+            http_response_code(404);
+            return $this->view('errors/404');
+        }
+
+        return $this->view('checkout/success', [
+            'order' => $order,
+            'items' => OrderItem::byOrderId((int) $order['id']),
+        ]);
     }
 }

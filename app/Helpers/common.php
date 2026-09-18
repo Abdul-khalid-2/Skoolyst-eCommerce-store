@@ -38,9 +38,14 @@ function slugify(string $text): string
     return trim($slug, '-');
 }
 
+/** Appends a filemtime-based ?v= query string so browsers pick up new CSS/JS after every deploy. */
 function asset(string $path): string
 {
-    return url('assets/' . ltrim($path, '/'));
+    $relative = 'assets/' . ltrim($path, '/');
+    $absolute = dirname(__DIR__, 2) . '/public/' . $relative;
+    $version = is_file($absolute) ? filemtime($absolute) : null;
+
+    return url($relative) . ($version ? '?v=' . $version : '');
 }
 
 function paginate_offset(int $page, int $perPage): int

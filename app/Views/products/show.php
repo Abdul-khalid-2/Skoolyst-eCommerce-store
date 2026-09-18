@@ -37,6 +37,20 @@ ob_start();
             <?= $product['stock'] > 0 ? 'In Stock' : 'Out of Stock' ?>
           </span>
         </div>
+        <?php $isFav = is_favorited((int) $product['id']); ?>
+        <div class="d-flex align-items-center gap-2 mb-4">
+          <div class="quantity-selector">
+            <button data-qty-btn="minus" aria-label="Decrease">−</button>
+            <input type="text" value="1" data-qty aria-label="Quantity" readonly>
+            <button data-qty-btn="plus" aria-label="Increase">+</button>
+          </div>
+          <button type="button" class="btn btn-navy flex-grow-1" data-add-cart data-id="<?= (int) $product['id'] ?>" <?= $product['stock'] > 0 ? '' : 'disabled' ?>>
+            <i class="bi bi-cart-plus me-2"></i><?= $product['stock'] > 0 ? 'Add to Cart' : 'Out of Stock' ?>
+          </button>
+          <button type="button" class="btn btn-outline-navy favorite-toggle-btn-inline<?= $isFav ? ' active' : '' ?>" data-favorite-toggle data-id="<?= (int) $product['id'] ?>" aria-label="<?= $isFav ? 'Remove from favorites' : 'Add to favorites' ?>">
+            <i class="bi bi-heart<?= $isFav ? '-fill' : '' ?>"></i>
+          </button>
+        </div>
         <div class="card">
           <div class="card-body d-flex align-items-center gap-3 flex-wrap">
             <div class="flex-grow-1">

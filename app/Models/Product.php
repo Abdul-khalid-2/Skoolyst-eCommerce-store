@@ -48,6 +48,17 @@ class Product extends Model {
         return $row === false ? null : $row;
     }
 
+    public static function findActiveById(int $id): ?array {
+        $stmt = static::db()->prepare(
+            'SELECT p.*, s.name AS store_name, s.slug AS store_slug FROM store_products p
+             JOIN store_stores s ON s.id = p.store_id
+             WHERE p.id = :id AND p.status = "active" LIMIT 1'
+        );
+        $stmt->execute(['id' => $id]);
+        $row = $stmt->fetch();
+        return $row === false ? null : $row;
+    }
+
     public static function byStore(int $storeId): array {
         $stmt = static::db()->prepare('SELECT * FROM store_products WHERE store_id = :store_id ORDER BY id DESC');
         $stmt->execute(['store_id' => $storeId]);

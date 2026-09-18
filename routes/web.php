@@ -8,6 +8,7 @@ use Skoolyst\Controllers\Admin\StoreController as AdminStoreController;
 use Skoolyst\Controllers\AuthController;
 use Skoolyst\Controllers\CartController;
 use Skoolyst\Controllers\CheckoutController;
+use Skoolyst\Controllers\FavoriteController;
 use Skoolyst\Controllers\HomeController;
 use Skoolyst\Controllers\ProductController;
 use Skoolyst\Controllers\StoreController;
@@ -30,8 +31,16 @@ $router->get('/products', [ProductController::class, 'index']);
 $router->get('/products/{slug}', [ProductController::class, 'show']);
 
 $router->get('/cart', [CartController::class, 'index']);
+$router->post('/cart/add', [CartController::class, 'add']);
+$router->post('/cart/update', [CartController::class, 'update']);
+$router->post('/cart/remove/{id}', [CartController::class, 'remove']);
+
 $router->get('/checkout', [CheckoutController::class, 'index']);
 $router->post('/checkout', [CheckoutController::class, 'store']);
+$router->get('/checkout/success/{orderNumber}', [CheckoutController::class, 'success']);
+
+$router->get('/favorites', [FavoriteController::class, 'index']);
+$router->post('/favorites/toggle/{id}', [FavoriteController::class, 'toggle']);
 
 // ---- Auth ----
 $router->get('/login', [AuthController::class, 'loginForm'], [GuestMiddleware::class]);
