@@ -8,6 +8,17 @@ use Skoolyst\Core\Model;
 class Store extends Model {
     protected static string $table = 'stores';
 
+    public static function findByUserId(int $userId): ?array {
+        $stmt = static::db()->prepare(
+            'SELECT s.*, sc.name AS category_name FROM stores s
+             LEFT JOIN store_categories sc ON sc.id = s.category_id
+             WHERE s.user_id = :user_id LIMIT 1'
+        );
+        $stmt->execute(['user_id' => $userId]);
+        $row = $stmt->fetch();
+        return $row === false ? null : $row;
+    }
+
     /**
      * Filtered, paginated store search. $filters may contain:
      * q (name search), city, category_id, store_type, verified_only.

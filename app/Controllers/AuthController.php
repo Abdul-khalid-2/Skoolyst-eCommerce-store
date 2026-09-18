@@ -32,7 +32,11 @@ class AuthController extends Controller {
             return $this->view('auth/login', ['errors' => $errors]);
         }
 
-        Response::redirect(url('admin/dashboard'));
+        Response::redirect(url(match (auth_role()) {
+            'admin' => 'admin/dashboard',
+            'store_admin' => 'store/dashboard',
+            default => '',
+        }));
     }
 
     public function registerForm(): mixed {

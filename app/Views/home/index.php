@@ -130,6 +130,20 @@ ob_start();
     </div>
   </div>
 </section>
+
+<?php if (!is_store_admin() && !is_admin()): ?>
+<section class="section">
+  <div class="container">
+    <div class="cta-section">
+      <div class="position-relative" style="z-index:1">
+        <h2 class="mb-3">Run a school uniform, shoe, stationery or book store?</h2>
+        <p class="mb-4">Open your store on Skoolyst and get discovered by parents and students searching for what you sell.</p>
+        <?= skoolyst_btn('Open Your Store', ['variant' => 'accent', 'size' => 'lg', 'icon' => 'bi-shop-window', 'href' => url(is_authenticated() ? 'store/create' : 'register')]) ?>
+      </div>
+    </div>
+  </div>
+</section>
+<?php endif; ?>
 <?php
 $content = ob_get_clean();
 require __DIR__ . '/../layouts/app.php';

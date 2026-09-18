@@ -11,8 +11,11 @@ use Skoolyst\Controllers\CheckoutController;
 use Skoolyst\Controllers\HomeController;
 use Skoolyst\Controllers\ProductController;
 use Skoolyst\Controllers\StoreController;
+use Skoolyst\Controllers\StoreOwnerController;
 use Skoolyst\Middleware\AdminMiddleware;
+use Skoolyst\Middleware\AuthMiddleware;
 use Skoolyst\Middleware\GuestMiddleware;
+use Skoolyst\Middleware\StoreOwnerMiddleware;
 
 /** @var \Skoolyst\Core\Router $router */
 
@@ -36,6 +39,17 @@ $router->post('/login', [AuthController::class, 'login'], [GuestMiddleware::clas
 $router->get('/register', [AuthController::class, 'registerForm'], [GuestMiddleware::class]);
 $router->post('/register', [AuthController::class, 'register'], [GuestMiddleware::class]);
 $router->get('/logout', [AuthController::class, 'logout']);
+
+// ---- Store owner self-service ("Open a Store") ----
+$router->get('/store/create', [StoreOwnerController::class, 'create'], [AuthMiddleware::class]);
+$router->post('/store/create', [StoreOwnerController::class, 'store'], [AuthMiddleware::class]);
+$router->get('/store/dashboard', [StoreOwnerController::class, 'dashboard'], [StoreOwnerMiddleware::class]);
+$router->get('/store/edit', [StoreOwnerController::class, 'edit'], [StoreOwnerMiddleware::class]);
+$router->post('/store/update', [StoreOwnerController::class, 'update'], [StoreOwnerMiddleware::class]);
+$router->get('/store/products', [StoreOwnerController::class, 'productsIndex'], [StoreOwnerMiddleware::class]);
+$router->get('/store/products/create', [StoreOwnerController::class, 'productCreate'], [StoreOwnerMiddleware::class]);
+$router->post('/store/products', [StoreOwnerController::class, 'productStore'], [StoreOwnerMiddleware::class]);
+$router->post('/store/products/{id}/delete', [StoreOwnerController::class, 'productDestroy'], [StoreOwnerMiddleware::class]);
 
 // ---- Admin (platform admin managing the store directory) ----
 $router->get('/admin/dashboard', [AdminDashboardController::class, 'index'], [AdminMiddleware::class]);

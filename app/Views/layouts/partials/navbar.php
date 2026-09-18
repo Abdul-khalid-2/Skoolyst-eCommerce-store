@@ -26,11 +26,18 @@ $navLink = static fn (string $key, string $label, string $href) =>
             <input type="text" name="q" class="form-control" placeholder="Search stores...">
           </form>
         </div>
-        <?php if (is_authenticated()): ?>
-        <a href="<?= url('admin/dashboard') ?>" class="btn btn-sm btn-outline-light">Dashboard</a>
+        <?php if (is_admin()): ?>
+        <a href="<?= url('admin/dashboard') ?>" class="btn btn-sm btn-outline-light">Admin</a>
         <a href="<?= url('logout') ?>" class="btn btn-sm btn-accent">Logout</a>
+        <?php elseif (is_store_admin()): ?>
+        <a href="<?= url('store/dashboard') ?>" class="btn btn-sm btn-outline-light">My Store</a>
+        <a href="<?= url('logout') ?>" class="btn btn-sm btn-accent">Logout</a>
+        <?php elseif (is_authenticated()): ?>
+        <a href="<?= url('store/create') ?>" class="btn btn-sm btn-accent">Open a Store</a>
+        <a href="<?= url('logout') ?>" class="btn btn-sm btn-outline-light">Logout</a>
         <?php else: ?>
         <a href="<?= url('login') ?>" class="btn btn-sm btn-outline-light">Login</a>
+        <a href="<?= url('register') ?>" class="btn btn-sm btn-accent">Open a Store</a>
         <?php endif; ?>
       </div>
     </div>
@@ -54,11 +61,18 @@ $navLink = static fn (string $key, string $label, string $href) =>
       </ul>
       <hr>
       <div class="d-flex flex-column gap-2">
-        <?php if (is_authenticated()): ?>
-        <a href="<?= url('admin/dashboard') ?>" class="btn btn-outline-navy">Dashboard</a>
+        <?php if (is_admin()): ?>
+        <a href="<?= url('admin/dashboard') ?>" class="btn btn-outline-navy">Admin</a>
         <a href="<?= url('logout') ?>" class="btn btn-accent">Logout</a>
+        <?php elseif (is_store_admin()): ?>
+        <a href="<?= url('store/dashboard') ?>" class="btn btn-outline-navy">My Store</a>
+        <a href="<?= url('logout') ?>" class="btn btn-accent">Logout</a>
+        <?php elseif (is_authenticated()): ?>
+        <a href="<?= url('store/create') ?>" class="btn btn-accent">Open a Store</a>
+        <a href="<?= url('logout') ?>" class="btn btn-outline-navy">Logout</a>
         <?php else: ?>
         <a href="<?= url('login') ?>" class="btn btn-outline-navy">Login</a>
+        <a href="<?= url('register') ?>" class="btn btn-accent">Open a Store</a>
         <?php endif; ?>
       </div>
     </div>

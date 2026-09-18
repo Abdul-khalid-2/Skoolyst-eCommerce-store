@@ -61,6 +61,16 @@ class ProductService {
         return ['errors' => [], 'id' => $id];
     }
 
+    /**
+     * Store-owner product creation — store_id is forced to their own store,
+     * never trusted from client input.
+     * @return array{errors: array<string,string>, id: ?int}
+     */
+    public function createForStore(int $storeId, array $data, ?string $imagePath): array {
+        $data['store_id'] = $storeId;
+        return $this->create($data, $imagePath);
+    }
+
     public function setStatus(int $id, string $status): void {
         Product::updateById($id, ['status' => $status]);
     }
