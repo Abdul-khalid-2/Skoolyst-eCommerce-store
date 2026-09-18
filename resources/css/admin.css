@@ -1,0 +1,116 @@
+/* ============================================
+   Skoolyst Unified Design System — Admin/Seller Dashboard
+   Loaded in addition to app.css on every /admin/* page.
+   Follows Section 14 (Admin Dashboard Style) of
+   SKOOLYST-DESIGN-SYSTEM.md: dark sidebar, no gradients
+   on content, badges/status-dots for state, .btn-sm +
+   .btn-light-navy for row actions.
+   ============================================ */
+
+.dashboard-body { background: var(--skoolyst-surface-alt); }
+.dashboard-layout { display: flex; min-height: 100vh; }
+
+/* ---------- Sidebar (Section 8: dark, 260px) ---------- */
+.dashboard-sidebar {
+  width: var(--skoolyst-sidebar-width);
+  background: var(--skoolyst-brand-dark);
+  color: rgba(255,255,255,.7);
+  position: fixed; top: 0; left: 0; bottom: 0; z-index: 1040;
+  overflow-y: auto; transition: transform .25s;
+}
+.dashboard-sidebar .sidebar-brand {
+  height: var(--skoolyst-header-height);
+  padding: 0 1.5rem; display: flex; align-items: center; gap: .5rem;
+  font-weight: 800; font-size: 1.2rem; color: #fff;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.dashboard-sidebar .sidebar-brand .brand-accent { color: var(--skoolyst-accent); }
+.dashboard-sidebar .nav-section-label { font-size: .7rem; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,.38); padding: 1.25rem 1.5rem .5rem; font-weight: 700; }
+.dashboard-sidebar .nav-link { color: rgba(255,255,255,.68); font-size: .875rem; font-weight: 500; padding: .65rem 1.5rem; display: flex; align-items: center; gap: .75rem; border-radius: 0; transition: all .15s; }
+.dashboard-sidebar .nav-link .bi { font-size: 1.1rem; }
+.dashboard-sidebar .nav-link:hover { color: rgba(255,255,255,.92); background: rgba(255,255,255,.08); }
+.dashboard-sidebar .nav-link.active { color: #fff; background: rgba(255,255,255,.1); font-weight: 600; border-left: 3px solid var(--skoolyst-accent); }
+
+/* ---------- Main / Topbar (Section 10 layout) ---------- */
+.dashboard-main { flex: 1; margin-left: var(--skoolyst-sidebar-width); padding: 1.5rem; min-width: 0; }
+.dashboard-topbar { background: var(--skoolyst-surface); border: 1px solid var(--skoolyst-border); border-radius: var(--skoolyst-radius); padding: .75rem 1.25rem; display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; gap: 1rem; }
+.dashboard-topbar .topbar-title { font-weight: 700; font-size: 1.1rem; color: var(--skoolyst-text-heading); margin: 0; }
+.dashboard-topbar .topbar-search { max-width: 280px; }
+.dashboard-topbar .topbar-search .input-group-text { background: var(--skoolyst-surface-alt); border-right: 0; }
+.dashboard-topbar .topbar-search .form-control { border-left: 0; font-size: .85rem; }
+.dashboard-topbar .topbar-search .form-control:focus { box-shadow: none; }
+.dashboard-content { min-height: calc(100vh - 140px); }
+
+/* ---------- Stat card icon variants (rule 2: no colourful backgrounds by default; kept as soft neutral accents, number stays the focus) ---------- */
+.stat-card { display: flex; align-items: center; gap: 1rem; }
+.stat-card .stat-icon { width: 52px; height: 52px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
+.stat-card .stat-icon.bg-navy-soft { background: var(--skoolyst-primary-soft); color: var(--skoolyst-primary); }
+.stat-card .stat-icon.bg-accent-soft { background: #FDF1D9; color: var(--skoolyst-accent-dark); }
+.stat-card .stat-icon.bg-teal-soft { background: #D7F7FA; color: var(--skoolyst-secondary-dark); }
+.stat-card .stat-icon.bg-success-soft { background: var(--skoolyst-success-bg); color: var(--skoolyst-success); }
+
+/* ---------- Panel ---------- */
+.dash-panel { background: var(--skoolyst-surface); border: 1px solid var(--skoolyst-border); border-radius: var(--skoolyst-radius); padding: 1.5rem; }
+.dash-panel .panel-title { font-weight: 700; font-size: 1rem; color: var(--skoolyst-text-heading); margin-bottom: 1.25rem; }
+
+/* ---------- Charts (pure CSS/JS, no external chart lib) ---------- */
+.chart-container { position: relative; height: 240px; display: flex; align-items: flex-end; gap: .5rem; padding: 0 .5rem; }
+.chart-bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: .35rem; height: 100%; justify-content: flex-end; }
+.chart-bar { width: 100%; max-width: 36px; background: linear-gradient(180deg, var(--skoolyst-primary-light) 0%, var(--skoolyst-primary) 100%); border-radius: 6px 6px 0 0; transition: height .6s ease; position: relative; min-height: 4px; }
+.chart-bar:hover { background: linear-gradient(180deg, var(--skoolyst-accent) 0%, var(--skoolyst-accent-dark) 100%); }
+.chart-bar .bar-value { position: absolute; top: -22px; left: 50%; transform: translateX(-50%); font-size: .7rem; font-weight: 700; color: var(--skoolyst-muted); opacity: 0; transition: opacity .15s; }
+.chart-bar:hover .bar-value { opacity: 1; }
+.chart-bar-label { font-size: .72rem; color: var(--skoolyst-muted); font-weight: 600; }
+
+.donut-chart { width: 160px; height: 160px; border-radius: 50%; position: relative; margin: 0 auto; }
+.donut-chart::before { content: ""; position: absolute; inset: 20px; background: var(--skoolyst-surface); border-radius: 50%; }
+.donut-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 1; }
+.donut-center .donut-value { font-size: 1.5rem; font-weight: 800; color: var(--skoolyst-text-heading); }
+.donut-center .donut-label { font-size: .72rem; color: var(--skoolyst-muted); }
+
+/* ---------- Status badges (Section 13, dashboard pill variant) ---------- */
+.status-badge { font-size: .72rem; font-weight: 600; padding: .3em .7em; border-radius: var(--skoolyst-radius-full); }
+.status-pending { background: var(--skoolyst-warning-bg); color: var(--skoolyst-warning); }
+.status-processing { background: var(--skoolyst-info-bg); color: var(--skoolyst-info); }
+.status-shipped { background: var(--skoolyst-primary-soft); color: var(--skoolyst-primary); }
+.status-delivered { background: var(--skoolyst-success-bg); color: var(--skoolyst-success); }
+.status-cancelled { background: var(--skoolyst-danger-bg); color: var(--skoolyst-danger); }
+.status-active { background: var(--skoolyst-success-bg); color: var(--skoolyst-success); }
+.status-draft { background: var(--skoolyst-border); color: var(--skoolyst-muted); }
+.status-out-of-stock { background: var(--skoolyst-danger-bg); color: var(--skoolyst-danger); }
+
+/* ---------- Dashboard table ---------- */
+.dash-table { width: 100%; }
+.dash-table th { font-size: .75rem; text-transform: uppercase; letter-spacing: .5px; color: var(--skoolyst-muted); font-weight: 700; padding: .75rem 1rem; border-bottom: 2px solid var(--skoolyst-border); white-space: nowrap; }
+.dash-table td { padding: .85rem 1rem; border-bottom: 1px solid var(--skoolyst-border); font-size: .875rem; vertical-align: middle; }
+.dash-table tbody tr:hover { background: var(--skoolyst-surface-alt); }
+
+/* ---------- Product / settings form card ---------- */
+.form-card { background: var(--skoolyst-surface); border: 1px solid var(--skoolyst-border); border-radius: var(--skoolyst-radius); padding: 1.5rem; margin-bottom: 1.5rem; }
+.form-card .form-card-title { font-weight: 700; font-size: .95rem; color: var(--skoolyst-text-heading); margin-bottom: 1.25rem; padding-bottom: .75rem; border-bottom: 1px solid var(--skoolyst-border); }
+.form-card .form-label { font-weight: 600; font-size: .82rem; color: var(--skoolyst-text); }
+.form-card .form-control, .form-card .form-select { font-size: .875rem; }
+.form-card .form-control:focus, .form-card .form-select:focus { border-color: var(--skoolyst-primary-light); box-shadow: 0 0 0 .2rem rgba(15,64,119,.08); }
+
+/* ---------- Image upload UI ---------- */
+.upload-area { border: 2px dashed var(--skoolyst-border-dark); border-radius: var(--skoolyst-radius); padding: 2rem; text-align: center; cursor: pointer; transition: border-color .15s, background .15s; }
+.upload-area:hover { border-color: var(--skoolyst-primary-light); background: var(--skoolyst-primary-soft); }
+.upload-area .upload-icon { font-size: 2rem; color: var(--skoolyst-faint); }
+.upload-area p { color: var(--skoolyst-muted); font-size: .85rem; margin: .5rem 0 0; }
+.upload-preview { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .75rem; }
+.upload-preview .preview-item { width: 80px; height: 80px; border-radius: var(--skoolyst-radius-sm); overflow: hidden; border: 1px solid var(--skoolyst-border); position: relative; }
+.upload-preview .preview-item img { width: 100%; height: 100%; object-fit: cover; }
+.upload-preview .preview-item .remove-btn { position: absolute; top: 2px; right: 2px; background: rgba(0,0,0,.5); color: #fff; border: none; border-radius: 50%; width: 20px; height: 20px; font-size: .7rem; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+
+/* ---------- Mobile sidebar overlay/toggle (Section 15) ---------- */
+.sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 1035; }
+.sidebar-overlay.show { display: block; }
+
+@media (max-width: 1024px) {
+  .dashboard-sidebar { transform: translateX(-100%); }
+  .dashboard-sidebar.show { transform: translateX(0); }
+  .dashboard-main { margin-left: 0; }
+}
+@media (max-width: 768px) {
+  .dashboard-main { padding: 1rem; }
+}

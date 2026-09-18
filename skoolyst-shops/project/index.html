@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skoolyst Stores — Everything Students Need, From Trusted Stores</title>
+  <meta name="description" content="Discover school uniforms, shoes, bags, stationery, books and educational essentials from trusted stores across Pakistan.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+  <meta property="og:image" content="https://bolt.new/static/og_default.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://bolt.new/static/og_default.png">
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<nav class="navbar navbar-expand-lg sk-header sticky-top" data-navbar>
+  <div class="container">
+    <a class="navbar-brand" href="index.html">Skoolyst<span class="brand-accent">Stores</span></a>
+    <button class="navbar-toggler text-white border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileNav">
+      <i class="bi bi-list text-white fs-4"></i>
+    </button>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav mx-auto gap-1">
+        <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="stores.html">Stores</a></li>
+        <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Categories</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="products.html?cat=uniforms">Uniforms</a></li>
+            <li><a class="dropdown-item" href="products.html?cat=shoes">Shoes</a></li>
+            <li><a class="dropdown-item" href="products.html?cat=bags">School Bags</a></li>
+            <li><a class="dropdown-item" href="products.html?cat=stationery">Stationery</a></li>
+            <li><a class="dropdown-item" href="products.html?cat=books">Books</a></li>
+            <li><a class="dropdown-item" href="products.html?cat=supplies">Educational Supplies</a></li>
+            <li><a class="dropdown-item" href="products.html?cat=accessories">Accessories</a></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="d-flex align-items-center gap-2">
+        <div class="search-bar d-none d-lg-flex">
+          <div class="input-group input-group-sm">
+            <span class="input-group-text"><i class="bi bi-search"></i></span>
+            <input type="text" class="form-control" placeholder="Search products, stores...">
+          </div>
+        </div>
+        <a href="cart.html" class="btn btn-search-icon position-relative px-2">
+          <i class="bi bi-bag fs-5"></i>
+          <span class="cart-count" style="display:none">0</span>
+        </a>
+        <a href="login.html" class="btn btn-sm btn-outline-light">Login</a>
+        <a href="register.html" class="btn btn-sm btn-accent">Open a Store</a>
+      </div>
+    </div>
+  </div>
+  <div class="offcanvas offcanvas-end d-lg-none" tabindex="-1" id="mobileNav">
+    <div class="offcanvas-header border-bottom">
+      <h5 class="offcanvas-title text-navy">Skoolyst<span class="text-accent">Stores</span></h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="mb-3">
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-search"></i></span>
+          <input type="text" class="form-control" placeholder="Search products, stores...">
+        </div>
+      </div>
+      <ul class="nav flex-column gap-1">
+        <li><a class="nav-link text-navy fw-semibold" href="index.html">Home</a></li>
+        <li><a class="nav-link text-navy fw-semibold" href="stores.html">Stores</a></li>
+        <li><a class="nav-link text-navy fw-semibold" href="products.html">Products</a></li>
+        <li><a class="nav-link text-navy fw-semibold" href="products.html?cat=uniforms">Uniforms</a></li>
+        <li><a class="nav-link text-navy fw-semibold" href="products.html?cat=shoes">Shoes</a></li>
+        <li><a class="nav-link text-navy fw-semibold" href="products.html?cat=bags">School Bags</a></li>
+        <li><a class="nav-link text-navy fw-semibold" href="products.html?cat=stationery">Stationery</a></li>
+        <li><a class="nav-link text-navy fw-semibold" href="products.html?cat=books">Books</a></li>
+      </ul>
+      <hr>
+      <div class="d-flex flex-column gap-2">
+        <a href="cart.html" class="btn btn-outline-navy"><i class="bi bi-bag me-1"></i> Cart</a>
+        <a href="login.html" class="btn btn-outline-navy">Login</a>
+        <a href="register.html" class="btn btn-accent">Open a Store</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== Hero ===== -->
+<section class="hero-section">
+  <div class="container position-relative">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-6">
+        <span class="badge bg-accent mb-3 px-3 py-2">Pakistan's Education Marketplace</span>
+        <h1 class="mb-3">Everything Students Need, From Trusted Stores</h1>
+        <p class="hero-sub mb-4">Discover school uniforms, shoes, bags, stationery, books and educational essentials from stores across Pakistan.</p>
+        <div class="d-flex flex-wrap gap-3">
+          <a href="stores.html" class="btn btn-accent btn-lg"><i class="bi bi-shop me-2"></i>Explore Stores</a>
+          <a href="products.html" class="btn btn-outline-light btn-lg"><i class="bi bi-grid me-2"></i>Browse Products</a>
+        </div>
+        <div class="d-flex gap-4 mt-4 pt-2">
+          <div><div class="fs-4 fw-bold">500+</div><div class="small text-white-50">Trusted Stores</div></div>
+          <div><div class="fs-4 fw-bold">10,000+</div><div class="small text-white-50">Products</div></div>
+          <div><div class="fs-4 fw-bold">8</div><div class="small text-white-50">Cities</div></div>
+        </div>
+      </div>
+      <div class="col-lg-6 text-center">
+        <div class="hero-img-wrap">
+          <img src="https://images.pexels.com/photos/8617715/pexels-photo-8617715.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Students with school supplies" loading="eager" style="width:100%;height:360px;object-fit:cover;">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Categories ===== -->
+<section class="section">
+  <div class="container">
+    <div class="section-heading">
+      <h2>Shop by Category</h2>
+      <a href="products.html">View all products <i class="bi bi-arrow-right"></i></a>
+    </div>
+    <div class="row g-3">
+      <div class="col-6 col-md-3 col-lg">
+        <a href="products.html?cat=uniforms" class="card card-hover text-decoration-none">
+          <div class="card-body category-card">
+            <div class="cat-icon"><i class="bi bi-person-badge"></i></div>
+            <div class="cat-name">Uniforms</div>
+          </div>
+        </a>
+      </div>
+      <div class="col-6 col-md-3 col-lg">
+        <a href="products.html?cat=shoes" class="card card-hover text-decoration-none">
+          <div class="card-body category-card">
+            <div class="cat-icon"><i class="bi bi-bag-heart"></i></div>
+            <div class="cat-name">Shoes</div>
+          </div>
+        </a>
+      </div>
+      <div class="col-6 col-md-3 col-lg">
+        <a href="products.html?cat=bags" class="card card-hover text-decoration-none">
+          <div class="card-body category-card">
+            <div class="cat-icon"><i class="bi bi-backpack"></i></div>
+            <div class="cat-name">School Bags</div>
+          </div>
+        </a>
+      </div>
+      <div class="col-6 col-md-3 col-lg">
+        <a href="products.html?cat=stationery" class="card card-hover text-decoration-none">
+          <div class="card-body category-card">
+            <div class="cat-icon"><i class="bi bi-pencil-ruler"></i></div>
+            <div class="cat-name">Stationery</div>
+          </div>
+        </a>
+      </div>
+      <div class="col-6 col-md-3 col-lg">
+        <a href="products.html?cat=books" class="card card-hover text-decoration-none">
+          <div class="card-body category-card">
+            <div class="cat-icon"><i class="bi bi-book"></i></div>
+            <div class="cat-name">Books</div>
+          </div>
+        </a>
+      </div>
+      <div class="col-6 col-md-3 col-lg">
+        <a href="products.html?cat=supplies" class="card card-hover text-decoration-none">
+          <div class="card-body category-card">
+            <div class="cat-icon"><i class="bi bi-rulers"></i></div>
+            <div class="cat-name">Supplies</div>
+          </div>
+        </a>
+      </div>
+      <div class="col-6 col-md-3 col-lg">
+        <a href="products.html?cat=accessories" class="card card-hover text-decoration-none">
+          <div class="card-body category-card">
+            <div class="cat-icon"><i class="bi bi-watch"></i></div>
+            <div class="cat-name">Accessories</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Featured Stores ===== -->
+<section class="section bg-light-surface">
+  <div class="container">
+    <div class="section-heading">
+      <h2>Featured Stores</h2>
+      <a href="stores.html">View all stores <i class="bi bi-arrow-right"></i></a>
+    </div>
+    <div class="row g-4">
+      <!-- Store 1 -->
+      <div class="col-md-6 col-lg-3">
+        <div class="card card-hover store-card h-100">
+          <div class="card-body d-flex flex-column gap-3">
+            <div class="d-flex gap-3 align-items-center">
+              <div class="store-logo-wrap"><img src="https://images.pexels.com/photos/8364020/pexels-photo-8364020.jpeg?auto=compress&cs=tinysrgb&w=200" alt="School Choice Store logo"></div>
+              <div>
+                <h5 class="mb-0 fs-6">School Choice Store <i class="bi bi-patch-check-fill verified-icon" title="Verified"></i></h5>
+                <div class="small text-muted"><i class="bi bi-geo-alt"></i> Karachi</div>
+                <div class="stars mt-1"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i> <span class="rating-num ms-1">4.9</span></div>
+              </div>
+            </div>
+            <p class="small text-muted mb-0">Your one-stop shop for quality school uniforms and accessories in Karachi.</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="badge badge-navy">128 products</span>
+              <a href="store.html" class="btn btn-sm btn-navy">View Store</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Store 2 -->
+      <div class="col-md-6 col-lg-3">
+        <div class="card card-hover store-card h-100">
+          <div class="card-body d-flex flex-column gap-3">
+            <div class="d-flex gap-3 align-items-center">
+              <div class="store-logo-wrap"><img src="https://images.pexels.com/photos/5212320/pexels-photo-5212320.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Student Essentials logo"></div>
+              <div>
+                <h5 class="mb-0 fs-6">Student Essentials <i class="bi bi-patch-check-fill verified-icon" title="Verified"></i></h5>
+                <div class="small text-muted"><i class="bi bi-geo-alt"></i> Lahore</div>
+                <div class="stars mt-1"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i> <span class="rating-num ms-1">4.7</span></div>
+              </div>
+            </div>
+            <p class="small text-muted mb-0">Trusted destination for school uniforms, bags, stationery and everyday educational supplies.</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="badge badge-navy">95 products</span>
+              <a href="store.html" class="btn btn-sm btn-navy">View Store</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Store 3 -->
+      <div class="col-md-6 col-lg-3">
+        <div class="card card-hover store-card h-100">
+          <div class="card-body d-flex flex-column gap-3">
+            <div class="d-flex gap-3 align-items-center">
+              <div class="store-logo-wrap"><img src="https://images.pexels.com/photos/8364020/pexels-photo-8364020.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Karachi School Mart logo"></div>
+              <div>
+                <h5 class="mb-0 fs-6">Karachi School Mart <i class="bi bi-patch-check-fill verified-icon" title="Verified"></i></h5>
+                <div class="small text-muted"><i class="bi bi-geo-alt"></i> Karachi</div>
+                <div class="stars mt-1"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i> <span class="rating-num ms-1">4.8</span></div>
+              </div>
+            </div>
+            <p class="small text-muted mb-0">Premium school shoes, bags and accessories for students of all ages.</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="badge badge-navy">76 products</span>
+              <a href="store.html" class="btn btn-sm btn-navy">View Store</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Store 4 -->
+      <div class="col-md-6 col-lg-3">
+        <div class="card card-hover store-card h-100">
+          <div class="card-body d-flex flex-column gap-3">
+            <div class="d-flex gap-3 align-items-center">
+              <div class="store-logo-wrap"><img src="https://images.pexels.com/photos/5212320/pexels-photo-5212320.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Education Point logo"></div>
+              <div>
+                <h5 class="mb-0 fs-6">Education Point</h5>
+                <div class="small text-muted"><i class="bi bi-geo-alt"></i> Islamabad</div>
+                <div class="stars mt-1"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i> <span class="rating-num ms-1">4.6</span></div>
+              </div>
+            </div>
+            <p class="small text-muted mb-0">Books, stationery and educational supplies for schools across Islamabad.</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="badge badge-navy">112 products</span>
+              <a href="store.html" class="btn btn-sm btn-navy">View Store</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Popular Products ===== -->
+<section class="section">
+  <div class="container">
+    <div class="section-heading">
+      <h2>Popular Products</h2>
+      <a href="products.html">View all products <i class="bi bi-arrow-right"></i></a>
+    </div>
+    <div class="row g-3 g-lg-4">
+      <!-- Product 1 -->
+      <div class="col-6 col-md-4 col-lg-3">
+        <div class="card card-hover product-card h-100">
+          <a href="product.html" class="text-decoration-none">
+            <div class="product-img-wrap">
+              <img src="https://images.pexels.com/photos/8364020/pexels-photo-8364020.jpeg?auto=compress&cs=tinysrgb&w=400" alt="School Uniform Set">
+              <span class="badge badge-discount position-absolute top-0 start-0 m-2">-15%</span>
+            </div>
+          </a>
+          <div class="card-body d-flex flex-column gap-1">
+            <a href="product.html" class="product-title text-decoration-none text-reset">School Uniform Set — White Shirt & Navy Trousers</a>
+            <div class="store-name"><i class="bi bi-shop"></i> School Choice Store</div>
+            <div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i> <span class="rating-num">4.5 (128)</span></div>
+            <div class="d-flex align-items-baseline gap-2 mt-1">
+              <span class="product-price">Rs. 1,850</span>
+              <span class="product-old-price">Rs. 2,200</span>
+            </div>
+            <button class="btn btn-sm btn-navy mt-2 w-100" data-add-cart data-name="School Uniform Set" data-price="1850" data-store="School Choice Store" data-img="https://images.pexels.com/photos/8364020/pexels-photo-8364020.jpeg?auto=compress&cs=tinysrgb&w=400"><i class="bi bi-bag-plus me-1"></i>Add to Cart</button>
+          </div>
+        </div>
+      </div>
+      <!-- Product 2 -->
+      <div class="col-6 col-md-4 col-lg-3">
+        <div class="card card-hover product-card h-100">
+          <a href="product.html" class="text-decoration-none">
+            <div class="product-img-wrap">
+              <img src="https://images.pexels.com/photos/19090/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=400" alt="School Backpack">
+            </div>
+          </a>
+          <div class="card-body d-flex flex-column gap-1">
+            <a href="product.html" class="product-title text-decoration-none text-reset">Premium School Backpack — Water Resistant</a>
+            <div class="store-name"><i class="bi bi-shop"></i> Student Essentials</div>
+            <div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i> <span class="rating-num">4.9 (85)</span></div>
+            <div class="d-flex align-items-baseline gap-2 mt-1">
+              <span class="product-price">Rs. 2,500</span>
+            </div>
+            <button class="btn btn-sm btn-navy mt-2 w-100" data-add-cart data-name="Premium School Backpack" data-price="2500" data-store="Student Essentials" data-img="https://images.pexels.com/photos/19090/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=400"><i class="bi bi-bag-plus me-1"></i>Add to Cart</button>
+          </div>
+        </div>
+      </div>
+      <!-- Product 3 -->
+      <div class="col-6 col-md-4 col-lg-3">
+        <div class="card card-hover product-card h-100">
+          <a href="product.html" class="text-decoration-none">
+            <div class="product-img-wrap">
+              <img src="https://images.pexels.com/photos/298863/pexels-photo-298863.jpeg?auto=compress&cs=tinysrgb&w=400" alt="School Shoes">
+              <span class="badge badge-discount position-absolute top-0 start-0 m-2">-10%</span>
+            </div>
+          </a>
+          <div class="card-body d-flex flex-column gap-1">
+            <a href="product.html" class="product-title text-decoration-none text-reset">Black Leather School Shoes — Size 32-38</a>
+            <div class="store-name"><i class="bi bi-shop"></i> Karachi School Mart</div>
+            <div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i> <span class="rating-num">4.6 (64)</span></div>
+            <div class="d-flex align-items-baseline gap-2 mt-1">
+              <span class="product-price">Rs. 2,200</span>
+              <span class="product-old-price">Rs. 2,450</span>
+            </div>
+            <button class="btn btn-sm btn-navy mt-2 w-100" data-add-cart data-name="Black Leather School Shoes" data-price="2200" data-store="Karachi School Mart" data-img="https://images.pexels.com/photos/298863/pexels-photo-298863.jpeg?auto=compress&cs=tinysrgb&w=400"><i class="bi bi-bag-plus me-1"></i>Add to Cart</button>
+          </div>
+        </div>
+      </div>
+      <!-- Product 4 -->
+      <div class="col-6 col-md-4 col-lg-3">
+        <div class="card card-hover product-card h-100">
+          <a href="product.html" class="text-decoration-none">
+            <div class="product-img-wrap">
+              <img src="https://images.pexels.com/photos/207580/pexels-photo-207580.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Stationery Set">
+            </div>
+          </a>
+          <div class="card-body d-flex flex-column gap-1">
+            <a href="product.html" class="product-title text-decoration-none text-reset">Complete Stationery Set — 24 Pcs</a>
+            <div class="store-name"><i class="bi bi-shop"></i> Education Point</div>
+            <div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i> <span class="rating-num">4.7 (92)</span></div>
+            <div class="d-flex align-items-baseline gap-2 mt-1">
+              <span class="product-price">Rs. 750</span>
+            </div>
+            <button class="btn btn-sm btn-navy mt-2 w-100" data-add-cart data-name="Complete Stationery Set" data-price="750" data-store="Education Point" data-img="https://images.pexels.com/photos/207580/pexels-photo-207580.jpeg?auto=compress&cs=tinysrgb&w=400"><i class="bi bi-bag-plus me-1"></i>Add to Cart</button>
+          </div>
+        </div>
+      </div>
+      <!-- Product 5 -->
+      <div class="col-6 col-md-4 col-lg-3">
+        <div class="card card-hover product-card h-100">
+          <a href="product.html" class="text-decoration-none">
+            <div class="product-img-wrap">
+              <img src="https://images.pexels.com/photos/256541/pexels-photo-256541.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Mathematics Textbook">
+              <span class="badge badge-discount position-absolute top-0 start-0 m-2">-20%</span>
+            </div>
+          </a>
+          <div class="card-body d-flex flex-column gap-1">
+            <a href="product.html" class="product-title text-decoration-none text-reset">Mathematics Textbook — Class 8</a>
+            <div class="store-name"><i class="bi bi-shop"></i> Education Point</div>
+            <div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i> <span class="rating-num">4.4 (56)</span></div>
+            <div class="d-flex align-items-baseline gap-2 mt-1">
+              <span class="product-price">Rs. 680</span>
+              <span class="product-old-price">Rs. 850</span>
+            </div>
+            <button class="btn btn-sm btn-navy mt-2 w-100" data-add-cart data-name="Mathematics Textbook Class 8" data-price="680" data-store="Education Point" data-img="https://images.pexels.com/photos/256541/pexels-photo-256541.jpeg?auto=compress&cs=tinysrgb&w=400"><i class="bi bi-bag-plus me-1"></i>Add to Cart</button>
+          </div>
+        </div>
+      </div>
+      <!-- Product 6 -->
+      <div class="col-6 col-md-4 col-lg-3">
+        <div class="card card-hover product-card h-100">
+          <a href="product.html" class="text-decoration-none">
+            <div class="product-img-wrap">
+              <img src="https://images.pexels.com/photos/1152078/pexels-photo-1152078.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Water Bottle">
+            </div>
+          </a>
+          <div class="card-body d-flex flex-column gap-1">
+            <a href="product.html" class="product-title text-decoration-none text-reset">Insulated Water Bottle — 750ml</a>
+            <div class="store-name"><i class="bi bi-shop"></i> Student Essentials</div>
+            <div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i> <span class="rating-num">4.5 (43)</span></div>
+            <div class="d-flex align-items-baseline gap-2 mt-1">
+              <span class="product-price">Rs. 950</span>
+            </div>
+            <button class="btn btn-sm btn-navy mt-2 w-100" data-add-cart data-name="Insulated Water Bottle" data-price="950" data-store="Student Essentials" data-img="https://images.pexels.com/photos/1152078/pexels-photo-1152078.jpeg?auto=compress&cs=tinysrgb&w=400"><i class="bi bi-bag-plus me-1"></i>Add to Cart</button>
+          </div>
+        </div>
+      </div>
+      <!-- Product 7 -->
+      <div class="col-6 col-md-4 col-lg-3">
+        <div class="card card-hover product-card h-100">
+          <a href="product.html" class="text-decoration-none">
+            <div class="product-img-wrap">
+              <img src="https://images.pexels.com/photos/636243/pexels-photo-636243.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Lunch Box">
+              <span class="badge badge-discount position-absolute top-0 start-0 m-2">-12%</span>
+            </div>
+          </a>
+          <div class="card-body d-flex flex-column gap-1">
+            <a href="product.html" class="product-title text-decoration-none text-reset">3-Compartment Lunch Box — BPA Free</a>
+            <div class="store-name"><i class="bi bi-shop"></i> Karachi School Mart</div>
+            <div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i> <span class="rating-num">4.3 (38)</span></div>
+            <div class="d-flex align-items-baseline gap-2 mt-1">
+              <span class="product-price">Rs. 1,100</span>
+              <span class="product-old-price">Rs. 1,250</span>
+            </div>
+            <button class="btn btn-sm btn-navy mt-2 w-100" data-add-cart data-name="3-Compartment Lunch Box" data-price="1100" data-store="Karachi School Mart" data-img="https://images.pexels.com/photos/636243/pexels-photo-636243.jpeg?auto=compress&cs=tinysrgb&w=400"><i class="bi bi-bag-plus me-1"></i>Add to Cart</button>
+          </div>
+        </div>
+      </div>
+      <!-- Product 8 -->
+      <div class="col-6 col-md-4 col-lg-3">
+        <div class="card card-hover product-card h-100">
+          <a href="product.html" class="text-decoration-none">
+            <div class="product-img-wrap">
+              <img src="https://images.pexels.com/photos/207580/pexels-photo-207580.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Geometry Box">
+            </div>
+          </a>
+          <div class="card-body d-flex flex-column gap-1">
+            <a href="product.html" class="product-title text-decoration-none text-reset">Mathematical Geometry Box — 10 Pcs</a>
+            <div class="store-name"><i class="bi bi-shop"></i> School Choice Store</div>
+            <div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i> <span class="rating-num">4.6 (71)</span></div>
+            <div class="d-flex align-items-baseline gap-2 mt-1">
+              <span class="product-price">Rs. 450</span>
+            </div>
+            <button class="btn btn-sm btn-navy mt-2 w-100" data-add-cart data-name="Mathematical Geometry Box" data-price="450" data-store="School Choice Store" data-img="https://images.pexels.com/photos/207580/pexels-photo-207580.jpeg?auto=compress&cs=tinysrgb&w=400"><i class="bi bi-bag-plus me-1"></i>Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Why Skoolyst Stores ===== -->
+<section class="section bg-light-surface">
+  <div class="container">
+    <div class="text-center mb-4">
+      <h2>Why Skoolyst Stores?</h2>
+      <p class="text-muted">The trusted education marketplace built for Pakistani schools, parents and students.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3">
+        <div class="card feature-card h-100">
+          <div class="feat-icon"><i class="bi bi-shield-check"></i></div>
+          <h5>Trusted Stores</h5>
+          <p>Every store is verified. Shop with confidence from established school-related businesses.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="card feature-card h-100">
+          <div class="feat-icon"><i class="bi bi-mortarboard"></i></div>
+          <h5>Education-Focused Products</h5>
+          <p>Uniforms, books, stationery, bags and supplies — everything a student needs, in one place.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="card feature-card h-100">
+          <div class="feat-icon"><i class="bi bi-bag-check"></i></div>
+          <h5>Easy Shopping</h5>
+          <p>Browse stores, compare products and checkout with cash on delivery or online payment.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="card feature-card h-100">
+          <div class="feat-icon"><i class="bi bi-graph-up-arrow"></i></div>
+          <h5>Growing Local Marketplace</h5>
+          <p>Connecting schools, parents and businesses across 8 cities in Pakistan and growing.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="section">
+  <div class="container">
+    <div class="cta-section">
+      <div class="position-relative" style="z-index:1">
+        <h2 class="mb-3">Are you a school-related business?</h2>
+        <p class="mb-4">Create your store on Skoolyst and reach students, parents and schools across Pakistan.</p>
+        <a href="register.html" class="btn btn-accent btn-lg"><i class="bi bi-shop-window me-2"></i>Open Your Store</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="sk-footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="footer-brand mb-2">Skoolyst<span class="brand-accent">Stores</span></div>
+        <p class="small">Pakistan's education marketplace connecting schools, parents, students and school-related businesses.</p>
+        <div class="d-flex gap-2 mt-3">
+          <a href="#" class="btn btn-sm btn-outline-light" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="btn btn-sm btn-outline-light" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="btn btn-sm btn-outline-light" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+          <a href="#" class="btn btn-sm btn-outline-light" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h5>Marketplace</h5>
+        <ul class="list-unstyled d-flex flex-column gap-2">
+          <li><a href="stores.html">Stores</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="cart.html">Cart</a></li>
+          <li><a href="checkout.html">Checkout</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h5>Account</h5>
+        <ul class="list-unstyled d-flex flex-column gap-2">
+          <li><a href="login.html">Login</a></li>
+          <li><a href="register.html">Register</a></li>
+          <li><a href="dashboard/index.html">Seller Dashboard</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4">
+        <h5>Contact</h5>
+        <p class="small mb-1"><i class="bi bi-geo-alt me-1"></i> Karachi, Pakistan</p>
+        <p class="small mb-1"><i class="bi bi-envelope me-1"></i> hello@skoolyst.pk</p>
+        <p class="small mb-0"><i class="bi bi-telephone me-1"></i> +92 21 1234 5678</p>
+      </div>
+    </div>
+    <div class="footer-bottom d-flex justify-content-between flex-wrap gap-2">
+      <span>&copy; 2026 Skoolyst Stores. All rights reserved.</span>
+      <span>UI Prototype — Frontend Only</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

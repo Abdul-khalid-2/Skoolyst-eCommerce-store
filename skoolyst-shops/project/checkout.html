@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout — Skoolyst Stores</title>
+  <meta name="description" content="Checkout — Complete your order on Skoolyst Stores. Prototype UI only.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<nav class="navbar navbar-expand-lg sk-header sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">Skoolyst<span class="brand-accent">Stores</span></a>
+    <button class="navbar-toggler text-white border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileNav"><i class="bi bi-list text-white fs-4"></i></button>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav mx-auto gap-1">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="stores.html">Stores</a></li>
+        <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
+        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Categories</a>
+          <ul class="dropdown-menu"><li><a class="dropdown-item" href="products.html?cat=uniforms">Uniforms</a></li><li><a class="dropdown-item" href="products.html?cat=shoes">Shoes</a></li><li><a class="dropdown-item" href="products.html?cat=bags">School Bags</a></li><li><a class="dropdown-item" href="products.html?cat=stationery">Stationery</a></li><li><a class="dropdown-item" href="products.html?cat=books">Books</a></li><li><a class="dropdown-item" href="products.html?cat=supplies">Educational Supplies</a></li><li><a class="dropdown-item" href="products.html?cat=accessories">Accessories</a></li></ul>
+        </li>
+      </ul>
+      <div class="d-flex align-items-center gap-2">
+        <div class="search-bar d-none d-lg-flex"><div class="input-group input-group-sm"><span class="input-group-text"><i class="bi bi-search"></i></span><input type="text" class="form-control" placeholder="Search products, stores..."></div></div>
+        <a href="cart.html" class="btn btn-search-icon position-relative px-2"><i class="bi bi-bag fs-5"></i><span class="cart-count" style="display:none">0</span></a>
+        <a href="login.html" class="btn btn-sm btn-outline-light">Login</a>
+        <a href="register.html" class="btn btn-sm btn-accent">Open a Store</a>
+      </div>
+    </div>
+  </div>
+  <div class="offcanvas offcanvas-end d-lg-none" tabindex="-1" id="mobileNav">
+    <div class="offcanvas-header border-bottom"><h5 class="offcanvas-title text-navy">Skoolyst<span class="text-accent">Stores</span></h5><button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button></div>
+    <div class="offcanvas-body">
+      <div class="mb-3"><div class="input-group"><span class="input-group-text"><i class="bi bi-search"></i></span><input type="text" class="form-control" placeholder="Search products, stores..."></div></div>
+      <ul class="nav flex-column gap-1"><li><a class="nav-link text-navy fw-semibold" href="index.html">Home</a></li><li><a class="nav-link text-navy fw-semibold" href="stores.html">Stores</a></li><li><a class="nav-link text-navy fw-semibold" href="products.html">Products</a></li><li><a class="nav-link text-navy fw-semibold" href="products.html?cat=uniforms">Uniforms</a></li><li><a class="nav-link text-navy fw-semibold" href="products.html?cat=shoes">Shoes</a></li><li><a class="nav-link text-navy fw-semibold" href="products.html?cat=bags">School Bags</a></li><li><a class="nav-link text-navy fw-semibold" href="products.html?cat=stationery">Stationery</a></li><li><a class="nav-link text-navy fw-semibold" href="products.html?cat=books">Books</a></li></ul>
+      <hr><div class="d-flex flex-column gap-2"><a href="cart.html" class="btn btn-outline-navy"><i class="bi bi-bag me-1"></i> Cart</a><a href="login.html" class="btn btn-outline-navy">Login</a><a href="register.html" class="btn btn-accent">Open a Store</a></div>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== Breadcrumb ===== -->
+<div class="sk-breadcrumb"><div class="container"><nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="index.html">Home</a></li><li class="breadcrumb-item"><a href="cart.html">Cart</a></li><li class="breadcrumb-item active" aria-current="page">Checkout</li></ol></nav></div></div>
+
+<!-- ===== Checkout ===== -->
+<section class="section-sm">
+  <div class="container">
+    <div class="alert alert-info d-flex align-items-center gap-2 mb-4" role="alert">
+      <i class="bi bi-info-circle-fill"></i>
+      <span class="small">This is a prototype checkout. No real orders will be placed and no payment will be processed.</span>
+    </div>
+    <h1 class="mb-4">Checkout</h1>
+    <form data-validate>
+      <div class="row g-4">
+        <div class="col-lg-8">
+          <!-- Customer Info -->
+          <div class="form-card">
+            <div class="form-card-title"><i class="bi bi-person-lines-fill text-navy me-1"></i> Customer Information</div>
+            <div class="row g-3">
+              <div class="col-md-6"><label class="form-label" for="fullName">Full Name</label><input type="text" class="form-control" id="fullName" name="fullName" required placeholder="e.g. Ayesha Khan"></div>
+              <div class="col-md-6"><label class="form-label" for="phone">Phone</label><input type="tel" class="form-control" id="phone" name="phone" required placeholder="e.g. 0300 1234567"></div>
+              <div class="col-12"><label class="form-label" for="email">Email</label><input type="email" class="form-control" id="email" name="email" required placeholder="e.g. ayesha@example.com"></div>
+            </div>
+          </div>
+
+          <!-- Delivery Address -->
+          <div class="form-card">
+            <div class="form-card-title"><i class="bi bi-geo-alt-fill text-navy me-1"></i> Delivery Address</div>
+            <div class="row g-3">
+              <div class="col-12"><label class="form-label" for="address">Address</label><textarea class="form-control" id="address" name="address" rows="2" required placeholder="House #, Street, Area"></textarea></div>
+              <div class="col-md-4"><label class="form-label" for="city">City</label><select class="form-select" id="city" name="city" required><option value="">Select City</option><option>Karachi</option><option>Lahore</option><option>Islamabad</option><option>Rawalpindi</option><option>Hyderabad</option><option>Faisalabad</option><option>Multan</option><option>Peshawar</option></select></div>
+              <div class="col-md-4"><label class="form-label" for="area">Area</label><input type="text" class="form-control" id="area" name="area" required placeholder="e.g. Gulberg"></div>
+              <div class="col-md-4"><label class="form-label" for="postal">Postal Code</label><input type="text" class="form-control" id="postal" name="postal" placeholder="e.g. 75300"></div>
+            </div>
+          </div>
+
+          <!-- Delivery Method -->
+          <div class="form-card">
+            <div class="form-card-title"><i class="bi bi-truck text-navy me-1"></i> Delivery Method</div>
+            <div class="d-flex flex-column gap-2">
+              <div class="form-check border rounded p-3">
+                <input class="form-check-input" type="radio" name="deliveryMethod" id="dmStandard" checked>
+                <label class="form-check-label d-flex justify-content-between align-items-center w-100 ms-2" for="dmStandard">
+                  <span><i class="bi bi-truck me-2"></i>Standard Delivery <span class="small text-muted d-block ms-4">3-5 business days</span></span>
+                  <span class="fw-bold text-navy">Rs. 200</span>
+                </label>
+              </div>
+              <div class="form-check border rounded p-3">
+                <input class="form-check-input" type="radio" name="deliveryMethod" id="dmPickup">
+                <label class="form-check-label d-flex justify-content-between align-items-center w-100 ms-2" for="dmPickup">
+                  <span><i class="bi bi-shop me-2"></i>Store Pickup <span class="small text-muted d-block ms-4">Pick up from store</span></span>
+                  <span class="fw-bold text-success">Free</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Payment Method -->
+          <div class="form-card">
+            <div class="form-card-title"><i class="bi bi-credit-card-fill text-navy me-1"></i> Payment Method</div>
+            <div class="d-flex flex-column gap-2">
+              <div class="form-check border rounded p-3">
+                <input class="form-check-input" type="radio" name="paymentMethod" id="pmCod" checked>
+                <label class="form-check-label d-flex align-items-center w-100 ms-2" for="pmCod">
+                  <i class="bi bi-cash-coin me-2 fs-5 text-success"></i>
+                  <span>Cash on Delivery <span class="small text-muted d-block">Pay when you receive your order</span></span>
+                </label>
+              </div>
+              <div class="form-check border rounded p-3">
+                <input class="form-check-input" type="radio" name="paymentMethod" id="pmOnline">
+                <label class="form-check-label d-flex align-items-center w-100 ms-2" for="pmOnline">
+                  <i class="bi bi-credit-card me-2 fs-5 text-navy"></i>
+                  <span>Online Payment <span class="small text-muted d-block">Pay with card or mobile wallet</span></span>
+                </label>
+              </div>
+            </div>
+            <div class="small text-muted mt-2"><i class="bi bi-shield-check text-success"></i> Your payment information is secure and encrypted.</div>
+          </div>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="col-lg-4">
+          <div class="order-summary sticky-top" style="top:80px">
+            <h5 class="mb-3">Order Summary</h5>
+            <div class="d-flex flex-column gap-2 mb-3">
+              <div class="d-flex gap-2 align-items-center"><div class="cart-item-img" style="width:48px;height:48px"><img src="https://images.pexels.com/photos/19090/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=100" alt="Backpack"></div><div class="flex-grow-1"><div class="small fw-semibold">Premium School Backpack</div><div class="small text-muted">Qty: 1</div></div><div class="small fw-bold">Rs. 2,500</div></div>
+              <div class="d-flex gap-2 align-items-center"><div class="cart-item-img" style="width:48px;height:48px"><img src="https://images.pexels.com/photos/207580/pexels-photo-207580.jpeg?auto=compress&cs=tinysrgb&w=100" alt="Stationery Set"></div><div class="flex-grow-1"><div class="small fw-semibold">Complete Stationery Set</div><div class="small text-muted">Qty: 2</div></div><div class="small fw-bold">Rs. 1,500</div></div>
+              <div class="d-flex gap-2 align-items-center"><div class="cart-item-img" style="width:48px;height:48px"><img src="https://images.pexels.com/photos/8364020/pexels-photo-8364020.jpeg?auto=compress&cs=tinysrgb&w=100" alt="Uniform Set"></div><div class="flex-grow-1"><div class="small fw-semibold">School Uniform Set</div><div class="small text-muted">Qty: 1</div></div><div class="small fw-bold">Rs. 1,850</div></div>
+            </div>
+            <hr>
+            <div class="summary-row"><span class="text-muted">Subtotal (4 items)</span><span class="fw-semibold">Rs. 5,850</span></div>
+            <div class="summary-row"><span class="text-muted">Delivery</span><span class="fw-semibold">Rs. 200</span></div>
+            <div class="summary-row"><span class="text-muted">Discount</span><span class="fw-semibold text-success">−Rs. 0</span></div>
+            <div class="summary-row summary-total"><span>Total</span><span>Rs. 6,050</span></div>
+            <button type="submit" class="btn btn-accent w-100 mt-3"><i class="bi bi-bag-check-fill me-2"></i>Place Order</button>
+            <a href="cart.html" class="btn btn-outline-navy w-100 mt-2"><i class="bi bi-arrow-left me-2"></i>Back to Cart</a>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="sk-footer mt-auto">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4"><div class="footer-brand mb-2">Skoolyst<span class="brand-accent">Stores</span></div><p class="small">Pakistan's education marketplace connecting schools, parents, students and school-related businesses.</p><div class="d-flex gap-2 mt-3"><a href="#" class="btn btn-sm btn-outline-light" aria-label="Facebook"><i class="bi bi-facebook"></i></a><a href="#" class="btn btn-sm btn-outline-light" aria-label="Instagram"><i class="bi bi-instagram"></i></a><a href="#" class="btn btn-sm btn-outline-light" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a><a href="#" class="btn btn-sm btn-outline-light" aria-label="YouTube"><i class="bi bi-youtube"></i></a></div></div>
+      <div class="col-6 col-lg-2"><h5>Marketplace</h5><ul class="list-unstyled d-flex flex-column gap-2"><li><a href="stores.html">Stores</a></li><li><a href="products.html">Products</a></li><li><a href="cart.html">Cart</a></li><li><a href="checkout.html">Checkout</a></li></ul></div>
+      <div class="col-6 col-lg-2"><h5>Account</h5><ul class="list-unstyled d-flex flex-column gap-2"><li><a href="login.html">Login</a></li><li><a href="register.html">Register</a></li><li><a href="dashboard/index.html">Seller Dashboard</a></li></ul></div>
+      <div class="col-lg-4"><h5>Contact</h5><p class="small mb-1"><i class="bi bi-geo-alt me-1"></i> Karachi, Pakistan</p><p class="small mb-1"><i class="bi bi-envelope me-1"></i> hello@skoolyst.pk</p><p class="small mb-0"><i class="bi bi-telephone me-1"></i> +92 21 1234 5678</p></div>
+    </div>
+    <div class="footer-bottom d-flex justify-content-between flex-wrap gap-2"><span>&copy; 2026 Skoolyst Stores. All rights reserved.</span><span>UI Prototype — Frontend Only</span></div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customers — Skoolyst Stores Dashboard</title>
+  <meta name="description" content="View and manage your store customers on Skoolyst Stores.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/css/style.css" rel="stylesheet">
+</head>
+<body class="dashboard-body">
+
+<div class="dashboard-layout">
+  <aside class="dashboard-sidebar" id="dashSidebar">
+    <div class="sidebar-brand">Skoolyst<span class="brand-accent">Stores</span></div>
+    <nav>
+      <div class="nav-section-label">Main</div>
+      <a class="nav-link" href="index.html"><i class="bi bi-speedometer2"></i> Overview</a>
+      <a class="nav-link" href="store-profile.html"><i class="bi bi-shop"></i> Store Profile</a>
+      <a class="nav-link" href="products.html"><i class="bi bi-box-seam"></i> Products</a>
+      <a class="nav-link" href="add-product.html"><i class="bi bi-plus-circle"></i> Add Product</a>
+      <div class="nav-section-label">Sales</div>
+      <a class="nav-link" href="orders.html"><i class="bi bi-bag-check"></i> Orders</a>
+      <a class="nav-link active" href="customers.html"><i class="bi bi-people"></i> Customers</a>
+      <a class="nav-link" href="analytics.html"><i class="bi bi-graph-up"></i> Analytics</a>
+      <div class="nav-section-label">Account</div>
+      <a class="nav-link" href="settings.html"><i class="bi bi-gear"></i> Settings</a>
+      <a class="nav-link" href="../login.html"><i class="bi bi-box-arrow-right"></i> Logout</a>
+    </nav>
+  </aside>
+  <div class="sidebar-overlay"></div>
+
+  <div class="dashboard-main">
+    <div class="dashboard-topbar">
+      <div class="d-flex align-items-center gap-2">
+        <button class="btn btn-sm btn-outline-secondary d-lg-none" data-sidebar-toggle><i class="bi bi-list"></i></button>
+        <h1 class="topbar-title">Customers</h1>
+      </div>
+      <div class="d-flex align-items-center gap-2">
+        <div class="dropdown"><button class="btn btn-sm btn-light-navy dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-person-circle me-1"></i> Store Owner</button>
+          <ul class="dropdown-menu dropdown-menu-end"><li><a class="dropdown-item" href="settings.html"><i class="bi bi-gear me-2"></i>Settings</a></li><li><hr class="dropdown-divider"></li><li><a class="dropdown-item" href="../login.html"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li></ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="dashboard-content">
+      <!-- Controls -->
+      <div class="d-flex gap-2 mb-4 flex-wrap">
+        <div class="flex-grow-1" style="min-width:200px"><div class="input-group input-group-sm"><span class="input-group-text"><i class="bi bi-search"></i></span><input type="text" class="form-control" placeholder="Search customers..."></div></div>
+        <select class="form-select form-select-sm" style="width:auto"><option>All Customers</option><option>Active</option><option>Inactive</option><option>VIP</option></select>
+      </div>
+
+      <!-- Customers table -->
+      <div class="dash-panel">
+        <div class="table-wrap">
+          <table class="dash-table">
+            <thead><tr><th>Customer</th><th>Email</th><th>Phone</th><th>Orders</th><th>Total Spent</th><th>Last Order</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><div class="d-flex align-items-center gap-2"><div class="avatar-circle">AK</div><div><div class="fw-semibold small">Ayesha Khan</div><div class="small text-muted">Karachi</div></div></div></td>
+                <td class="small">ayesha@example.com</td><td class="small">0300 1234567</td><td><span class="fw-semibold">14</span></td><td class="fw-bold text-navy">Rs. 28,450</td><td class="small text-muted">10 Sep 2026</td><td><span class="status-badge status-active">Active</span></td>
+                <td><button class="btn btn-sm btn-light-navy" data-bs-toggle="modal" data-bs-target="#custModal">View</button></td>
+              </tr>
+              <tr>
+                <td><div class="d-flex align-items-center gap-2"><div class="avatar-circle">MR</div><div><div class="fw-semibold small">Mohammad Raza</div><div class="small text-muted">Lahore</div></div></div></td>
+                <td class="small">raza@example.com</td><td class="small">0321 7654321</td><td><span class="fw-semibold">9</span></td><td class="fw-bold text-navy">Rs. 19,200</td><td class="small text-muted">10 Sep 2026</td><td><span class="status-badge status-active">Active</span></td>
+                <td><button class="btn btn-sm btn-light-navy" data-bs-toggle="modal" data-bs-target="#custModal">View</button></td>
+              </tr>
+              <tr>
+                <td><div class="d-flex align-items-center gap-2"><div class="avatar-circle">FA</div><div><div class="fw-semibold small">Fatima Ali</div><div class="small text-muted">Islamabad</div></div></div></td>
+                <td class="small">fatima@example.com</td><td class="small">0333 9876543</td><td><span class="fw-semibold">7</span></td><td class="fw-bold text-navy">Rs. 15,800</td><td class="small text-muted">9 Sep 2026</td><td><span class="status-badge status-active">Active</span></td>
+                <td><button class="btn btn-sm btn-light-navy" data-bs-toggle="modal" data-bs-target="#custModal">View</button></td>
+              </tr>
+              <tr>
+                <td><div class="d-flex align-items-center gap-2"><div class="avatar-circle">SI</div><div><div class="fw-semibold small">Sana Iqbal</div><div class="small text-muted">Karachi</div></div></div></td>
+                <td class="small">sana@example.com</td><td class="small">0301 4567890</td><td><span class="fw-semibold">5</span></td><td class="fw-bold text-navy">Rs. 11,300</td><td class="small text-muted">9 Sep 2026</td><td><span class="status-badge status-active">Active</span></td>
+                <td><button class="btn btn-sm btn-light-navy" data-bs-toggle="modal" data-bs-target="#custModal">View</button></td>
+              </tr>
+              <tr>
+                <td><div class="d-flex align-items-center gap-2"><div class="avatar-circle">BA</div><div><div class="fw-semibold small">Bilal Ahmed</div><div class="small text-muted">Hyderabad</div></div></div></td>
+                <td class="small">bilal@example.com</td><td class="small">0345 1112223</td><td><span class="fw-semibold">3</span></td><td class="fw-bold text-navy">Rs. 4,950</td><td class="small text-muted">8 Sep 2026</td><td><span class="status-badge status-draft">Inactive</span></td>
+                <td><button class="btn btn-sm btn-light-navy" data-bs-toggle="modal" data-bs-target="#custModal">View</button></td>
+              </tr>
+              <tr>
+                <td><div class="d-flex align-items-center gap-2"><div class="avatar-circle">ZM</div><div><div class="fw-semibold small">Zainab Malik</div><div class="small text-muted">Multan</div></div></div></td>
+                <td class="small">zainab@example.com</td><td class="small">0302 3334445</td><td><span class="fw-semibold">11</span></td><td class="fw-bold text-navy">Rs. 22,600</td><td class="small text-muted">8 Sep 2026</td><td><span class="status-badge status-active">Active</span></td>
+                <td><button class="btn btn-sm btn-light-navy" data-bs-toggle="modal" data-bs-target="#custModal">View</button></td>
+              </tr>
+              <tr>
+                <td><div class="d-flex align-items-center gap-2"><div class="avatar-circle">UT</div><div><div class="fw-semibold small">Usman Tariq</div><div class="small text-muted">Faisalabad</div></div></div></td>
+                <td class="small">usman@example.com</td><td class="small">0312 5556667</td><td><span class="fw-semibold">6</span></td><td class="fw-bold text-navy">Rs. 13,400</td><td class="small text-muted">7 Sep 2026</td><td><span class="status-badge status-active">Active</span></td>
+                <td><button class="btn btn-sm btn-light-navy" data-bs-toggle="modal" data-bs-target="#custModal">View</button></td>
+              </tr>
+              <tr>
+                <td><div class="d-flex align-items-center gap-2"><div class="avatar-circle">HS</div><div><div class="fw-semibold small">Hira Shah</div><div class="small text-muted">Peshawar</div></div></div></td>
+                <td class="small">hira@example.com</td><td class="small">0334 7778889</td><td><span class="fw-semibold">4</span></td><td class="fw-bold text-navy">Rs. 8,900</td><td class="small text-muted">7 Sep 2026</td><td><span class="status-badge status-active">Active</span></td>
+                <td><button class="btn btn-sm btn-light-navy" data-bs-toggle="modal" data-bs-target="#custModal">View</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <nav class="mt-4" aria-label="Customers pagination"><div class="sk-pagination"><button class="page-btn" disabled><i class="bi bi-chevron-left"></i></button><button class="page-btn active">1</button><button class="page-btn">2</button><button class="page-btn">3</button><button class="page-btn"><i class="bi bi-chevron-right"></i></button></div></nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Customer detail modal -->
+<div class="modal fade" id="custModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header"><h5 class="modal-title">Customer Details</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+      <div class="modal-body">
+        <div class="d-flex align-items-center gap-3 mb-3"><div class="avatar-circle lg">AK</div><div><h6 class="mb-0">Ayesha Khan</h6><div class="small text-muted">Customer since Jan 2026</div></div></div>
+        <div class="row g-3">
+          <div class="col-6"><div class="small text-muted">Email</div><div class="small fw-semibold">ayesha@example.com</div></div>
+          <div class="col-6"><div class="small text-muted">Phone</div><div class="small fw-semibold">0300 1234567</div></div>
+          <div class="col-6"><div class="small text-muted">City</div><div class="small fw-semibold">Karachi</div></div>
+          <div class="col-6"><div class="small text-muted">Total Orders</div><div class="small fw-semibold">14</div></div>
+          <div class="col-6"><div class="small text-muted">Total Spent</div><div class="small fw-semibold text-navy">Rs. 28,450</div></div>
+          <div class="col-6"><div class="small text-muted">Last Order</div><div class="small fw-semibold">10 Sep 2026</div></div>
+        </div>
+        <hr class="my-3">
+        <h6 class="fw-bold text-navy mb-2">Recent Orders</h6>
+        <div class="d-flex flex-column gap-2">
+          <div class="d-flex justify-content-between align-items-center"><span class="small">#SK-1024 — 10 Sep</span><span class="small fw-bold">Rs. 4,350</span><span class="status-badge status-pending">Pending</span></div>
+          <div class="d-flex justify-content-between align-items-center"><span class="small">#SK-1015 — 5 Sep</span><span class="small fw-bold">Rs. 2,100</span><span class="status-badge status-delivered">Delivered</span></div>
+          <div class="d-flex justify-content-between align-items-center"><span class="small">#SK-1008 — 28 Aug</span><span class="small fw-bold">Rs. 3,500</span><span class="status-badge status-delivered">Delivered</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

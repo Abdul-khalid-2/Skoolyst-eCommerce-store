@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore Stores — Skoolyst Stores</title>
+  <meta name="description" content="Find trusted stores for school and educational needs across Pakistan.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<nav class="navbar navbar-expand-lg sk-header sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">Skoolyst<span class="brand-accent">Stores</span></a>
+    <button class="navbar-toggler text-white border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileNav">
+      <i class="bi bi-list text-white fs-4"></i>
+    </button>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav mx-auto gap-1">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" href="stores.html">Stores</a></li>
+        <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Categories</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="products.html?cat=uniforms">Uniforms</a></li>
+            <li><a class="dropdown-item" href="products.html?cat=shoes">Shoes</a></li>
+            <li><a class="dropdown-item" href="products.html?cat=bags">School Bags</a></li>
+            <li><a class="dropdown-item" href="products.html?cat=stationery">Stationery</a></li>
+            <li><a class="dropdown-item" href="products.html?cat=books">Books</a></li>
+            <li><a class="dropdown-item" href="products.html?cat=supplies">Educational Supplies</a></li>
+            <li><a class="dropdown-item" href="products.html?cat=accessories">Accessories</a></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="d-flex align-items-center gap-2">
+        <div class="search-bar d-none d-lg-flex">
+          <div class="input-group input-group-sm">
+            <span class="input-group-text"><i class="bi bi-search"></i></span>
+            <input type="text" class="form-control" placeholder="Search products, stores...">
+          </div>
+        </div>
+        <a href="cart.html" class="btn btn-search-icon position-relative px-2">
+          <i class="bi bi-bag fs-5"></i><span class="cart-count" style="display:none">0</span>
+        </a>
+        <a href="login.html" class="btn btn-sm btn-outline-light">Login</a>
+        <a href="register.html" class="btn btn-sm btn-accent">Open a Store</a>
+      </div>
+    </div>
+  </div>
+  <div class="offcanvas offcanvas-end d-lg-none" tabindex="-1" id="mobileNav">
+    <div class="offcanvas-header border-bottom">
+      <h5 class="offcanvas-title text-navy">Skoolyst<span class="text-accent">Stores</span></h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="mb-3"><div class="input-group"><span class="input-group-text"><i class="bi bi-search"></i></span><input type="text" class="form-control" placeholder="Search products, stores..."></div></div>
+      <ul class="nav flex-column gap-1">
+        <li><a class="nav-link text-navy fw-semibold" href="index.html">Home</a></li>
+        <li><a class="nav-link text-navy fw-semibold" href="stores.html">Stores</a></li>
+        <li><a class="nav-link text-navy fw-semibold" href="products.html">Products</a></li>
+        <li><a class="nav-link text-navy fw-semibold" href="products.html?cat=uniforms">Uniforms</a></li>
+        <li><a class="nav-link text-navy fw-semibold" href="products.html?cat=shoes">Shoes</a></li>
+        <li><a class="nav-link text-navy fw-semibold" href="products.html?cat=bags">School Bags</a></li>
+        <li><a class="nav-link text-navy fw-semibold" href="products.html?cat=stationery">Stationery</a></li>
+        <li><a class="nav-link text-navy fw-semibold" href="products.html?cat=books">Books</a></li>
+      </ul>
+      <hr>
+      <div class="d-flex flex-column gap-2">
+        <a href="cart.html" class="btn btn-outline-navy"><i class="bi bi-bag me-1"></i> Cart</a>
+        <a href="login.html" class="btn btn-outline-navy">Login</a>
+        <a href="register.html" class="btn btn-accent">Open a Store</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== Breadcrumb ===== -->
+<div class="sk-breadcrumb">
+  <div class="container">
+    <nav aria-label="breadcrumb"><ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Stores</li>
+    </ol></nav>
+  </div>
+</div>
+
+<!-- ===== Page Header ===== -->
+<section class="section-sm">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+      <div>
+        <h1 class="mb-1">Explore Stores</h1>
+        <p class="text-muted mb-0">Find trusted stores for school and educational needs.</p>
+      </div>
+      <div class="d-flex gap-2 align-items-center">
+        <button class="btn btn-outline-navy btn-sm d-lg-none" data-filter-toggle><i class="bi bi-funnel"></i> Filters</button>
+        <select class="form-select form-select-sm" style="width:auto">
+          <option>Sort by: Top Rated</option>
+          <option>Sort by: Most Products</option>
+          <option>Sort by: Newest</option>
+          <option>Sort by: Name (A-Z)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Main ===== -->
+<section class="pb-5">
+  <div class="container">
+    <div class="row g-4">
+      <!-- Filter Sidebar -->
+      <div class="col-lg-3 d-none d-lg-block" data-filter-sidebar>
+        <div class="filter-sidebar sticky-top" style="top:80px">
+          <div class="filter-group">
+            <div class="filter-title">Search</div>
+            <div class="input-group input-group-sm">
+              <span class="input-group-text"><i class="bi bi-search"></i></span>
+              <input type="text" class="form-control" placeholder="Search stores...">
+            </div>
+          </div>
+          <div class="filter-group">
+            <div class="filter-title">Location</div>
+            <select class="form-select form-select-sm">
+              <option value="">All Cities</option>
+              <option>Karachi</option><option>Lahore</option><option>Islamabad</option>
+              <option>Rawalpindi</option><option>Hyderabad</option><option>Faisalabad</option>
+              <option>Multan</option><option>Peshawar</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <div class="filter-title">Category</div>
+            <div class="form-check"><input class="form-check-input" type="checkbox" id="catU"><label class="form-check-label" for="catU">Uniforms</label></div>
+            <div class="form-check"><input class="form-check-input" type="checkbox" id="catS"><label class="form-check-label" for="catS">Shoes</label></div>
+            <div class="form-check"><input class="form-check-input" type="checkbox" id="catB"><label class="form-check-label" for="catB">School Bags</label></div>
+            <div class="form-check"><input class="form-check-input" type="checkbox" id="catSt"><label class="form-check-label" for="catSt">Stationery</label></div>
+            <div class="form-check"><input class="form-check-input" type="checkbox" id="catBk"><label class="form-check-label" for="catBk">Books</label></div>
+            <div class="form-check"><input class="form-check-input" type="checkbox" id="catSup"><label class="form-check-label" for="catSup">Educational Supplies</label></div>
+            <div class="form-check"><input class="form-check-input" type="checkbox" id="catAcc"><label class="form-check-label" for="catAcc">Accessories</label></div>
+          </div>
+          <div class="filter-group">
+            <div class="filter-title">Store Type</div>
+            <div class="form-check"><input class="form-check-input" type="radio" name="stype" id="stAll" checked><label class="form-check-label" for="stAll">All</label></div>
+            <div class="form-check"><input class="form-check-input" type="radio" name="stype" id="stRetail"><label class="form-check-label" for="stRetail">Retail Store</label></div>
+            <div class="form-check"><input class="form-check-input" type="radio" name="stype" id="stWholesale"><label class="form-check-label" for="stWholesale">Wholesale</label></div>
+            <div class="form-check"><input class="form-check-input" type="radio" name="stype" id="stBrand"><label class="form-check-label" for="stBrand">Brand Outlet</label></div>
+          </div>
+          <div class="filter-group">
+            <div class="filter-title">Rating</div>
+            <div class="form-check"><input class="form-check-input" type="radio" name="rating" id="r4" checked><label class="form-check-label" for="r4"><span class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i></span> & Up</label></div>
+            <div class="form-check"><input class="form-check-input" type="radio" name="rating" id="r3"><label class="form-check-label" for="r3"><span class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i><i class="bi bi-star"></i></span> & Up</label></div>
+            <div class="form-check"><input class="form-check-input" type="radio" name="rating" id="r2"><label class="form-check-label" for="r2"><span class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i></span> & Up</label></div>
+          </div>
+          <div class="filter-group">
+            <div class="form-check"><input class="form-check-input" type="checkbox" id="verified" checked><label class="form-check-label" for="verified"><i class="bi bi-patch-check-fill verified-icon"></i> Verified stores only</label></div>
+          </div>
+          <button class="btn btn-sm btn-outline-navy w-100">Clear All Filters</button>
+        </div>
+      </div>
+
+      <!-- Store Grid -->
+      <div class="col-lg-9">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-muted small">Showing 1–8 of 42 stores</span>
+        </div>
+        <div class="row g-3 g-lg-4" id="storeGrid">
+          <!-- Store 1 -->
+          <div class="col-md-6 col-xl-4">
+            <div class="card card-hover store-card h-100">
+              <div class="card-body d-flex flex-column gap-3">
+                <div class="d-flex gap-3 align-items-center">
+                  <div class="store-logo-wrap"><img src="https://images.pexels.com/photos/8364020/pexels-photo-8364020.jpeg?auto=compress&cs=tinysrgb&w=200" alt="School Choice Store logo"></div>
+                  <div>
+                    <h5 class="mb-0 fs-6">School Choice Store <i class="bi bi-patch-check-fill verified-icon"></i></h5>
+                    <div class="small text-muted"><i class="bi bi-geo-alt"></i> Karachi</div>
+                    <div class="stars mt-1"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i> <span class="rating-num ms-1">4.9</span></div>
+                  </div>
+                </div>
+                <p class="small text-muted mb-0">Your one-stop shop for quality school uniforms and accessories in Karachi.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="badge badge-navy">128 products</span>
+                  <a href="store.html" class="btn btn-sm btn-navy">View Store</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Store 2 -->
+          <div class="col-md-6 col-xl-4">
+            <div class="card card-hover store-card h-100">
+              <div class="card-body d-flex flex-column gap-3">
+                <div class="d-flex gap-3 align-items-center">
+                  <div class="store-logo-wrap"><img src="https://images.pexels.com/photos/5212320/pexels-photo-5212320.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Student Essentials logo"></div>
+                  <div>
+                    <h5 class="mb-0 fs-6">Student Essentials <i class="bi bi-patch-check-fill verified-icon"></i></h5>
+                    <div class="small text-muted"><i class="bi bi-geo-alt"></i> Lahore</div>
+                    <div class="stars mt-1"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i> <span class="rating-num ms-1">4.7</span></div>
+                  </div>
+                </div>
+                <p class="small text-muted mb-0">Trusted destination for school uniforms, bags, stationery and everyday educational supplies.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="badge badge-navy">95 products</span>
+                  <a href="store.html" class="btn btn-sm btn-navy">View Store</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Store 3 -->
+          <div class="col-md-6 col-xl-4">
+            <div class="card card-hover store-card h-100">
+              <div class="card-body d-flex flex-column gap-3">
+                <div class="d-flex gap-3 align-items-center">
+                  <div class="store-logo-wrap"><img src="https://images.pexels.com/photos/8364020/pexels-photo-8364020.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Karachi School Mart logo"></div>
+                  <div>
+                    <h5 class="mb-0 fs-6">Karachi School Mart <i class="bi bi-patch-check-fill verified-icon"></i></h5>
+                    <div class="small text-muted"><i class="bi bi-geo-alt"></i> Karachi</div>
+                    <div class="stars mt-1"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i> <span class="rating-num ms-1">4.8</span></div>
+                  </div>
+                </div>
+                <p class="small text-muted mb-0">Premium school shoes, bags and accessories for students of all ages.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="badge badge-navy">76 products</span>
+                  <a href="store.html" class="btn btn-sm btn-navy">View Store</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Store 4 -->
+          <div class="col-md-6 col-xl-4">
+            <div class="card card-hover store-card h-100">
+              <div class="card-body d-flex flex-column gap-3">
+                <div class="d-flex gap-3 align-items-center">
+                  <div class="store-logo-wrap"><img src="https://images.pexels.com/photos/5212320/pexels-photo-5212320.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Education Point logo"></div>
+                  <div>
+                    <h5 class="mb-0 fs-6">Education Point</h5>
+                    <div class="small text-muted"><i class="bi bi-geo-alt"></i> Islamabad</div>
+                    <div class="stars mt-1"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i> <span class="rating-num ms-1">4.6</span></div>
+                  </div>
+                </div>
+                <p class="small text-muted mb-0">Books, stationery and educational supplies for schools across Islamabad.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="badge badge-navy">112 products</span>
+                  <a href="store.html" class="btn btn-sm btn-navy">View Store</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Store 5 -->
+          <div class="col-md-6 col-xl-4">
+            <div class="card card-hover store-card h-100">
+              <div class="card-body d-flex flex-column gap-3">
+                <div class="d-flex gap-3 align-items-center">
+                  <div class="store-logo-wrap"><img src="https://images.pexels.com/photos/8364020/pexels-photo-8364020.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Lahore Book Corner logo"></div>
+                  <div>
+                    <h5 class="mb-0 fs-6">Lahore Book Corner <i class="bi bi-patch-check-fill verified-icon"></i></h5>
+                    <div class="small text-muted"><i class="bi bi-geo-alt"></i> Lahore</div>
+                    <div class="stars mt-1"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i> <span class="rating-num ms-1">4.5</span></div>
+                  </div>
+                </div>
+                <p class="small text-muted mb-0">Textbooks, reference books and novels for all grade levels.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="badge badge-navy">203 products</span>
+                  <a href="store.html" class="btn btn-sm btn-navy">View Store</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Store 6 -->
+          <div class="col-md-6 col-xl-4">
+            <div class="card card-hover store-card h-100">
+              <div class="card-body d-flex flex-column gap-3">
+                <div class="d-flex gap-3 align-items-center">
+                  <div class="store-logo-wrap"><img src="https://images.pexels.com/photos/5212320/pexels-photo-5212320.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Hyderabad Uniform House logo"></div>
+                  <div>
+                    <h5 class="mb-0 fs-6">Hyderabad Uniform House</h5>
+                    <div class="small text-muted"><i class="bi bi-geo-alt"></i> Hyderabad</div>
+                    <div class="stars mt-1"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i><i class="bi bi-star"></i> <span class="rating-num ms-1">4.2</span></div>
+                  </div>
+                </div>
+                <p class="small text-muted mb-0">Custom school uniforms stitched to your school's specifications.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="badge badge-navy">54 products</span>
+                  <a href="store.html" class="btn btn-sm btn-navy">View Store</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Store 7 -->
+          <div class="col-md-6 col-xl-4">
+            <div class="card card-hover store-card h-100">
+              <div class="card-body d-flex flex-column gap-3">
+                <div class="d-flex gap-3 align-items-center">
+                  <div class="store-logo-wrap"><img src="https://images.pexels.com/photos/8364020/pexels-photo-8364020.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Faisalabad Stationery Mart logo"></div>
+                  <div>
+                    <h5 class="mb-0 fs-6">Faisalabad Stationery Mart <i class="bi bi-patch-check-fill verified-icon"></i></h5>
+                    <div class="small text-muted"><i class="bi bi-geo-alt"></i> Faisalabad</div>
+                    <div class="stars mt-1"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i> <span class="rating-num ms-1">4.6</span></div>
+                  </div>
+                </div>
+                <p class="small text-muted mb-0">Wholesale and retail stationery for schools, offices and students.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="badge badge-navy">167 products</span>
+                  <a href="store.html" class="btn btn-sm btn-navy">View Store</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Store 8 -->
+          <div class="col-md-6 col-xl-4">
+            <div class="card card-hover store-card h-100">
+              <div class="card-body d-flex flex-column gap-3">
+                <div class="d-flex gap-3 align-items-center">
+                  <div class="store-logo-wrap"><img src="https://images.pexels.com/photos/5212320/pexels-photo-5212320.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Multan School Supplies logo"></div>
+                  <div>
+                    <h5 class="mb-0 fs-6">Multan School Supplies</h5>
+                    <div class="small text-muted"><i class="bi bi-geo-alt"></i> Multan</div>
+                    <div class="stars mt-1"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i><i class="bi bi-star"></i> <span class="rating-num ms-1">4.1</span></div>
+                  </div>
+                </div>
+                <p class="small text-muted mb-0">School supplies, bags and accessories at affordable prices in Multan.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="badge badge-navy">43 products</span>
+                  <a href="store.html" class="btn btn-sm btn-navy">View Store</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <nav class="mt-4" aria-label="Store pagination">
+          <div class="sk-pagination">
+            <button class="page-btn" disabled><i class="bi bi-chevron-left"></i></button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn">4</button>
+            <button class="page-btn">5</button>
+            <button class="page-btn"><i class="bi bi-chevron-right"></i></button>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="sk-footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="footer-brand mb-2">Skoolyst<span class="brand-accent">Stores</span></div>
+        <p class="small">Pakistan's education marketplace connecting schools, parents, students and school-related businesses.</p>
+        <div class="d-flex gap-2 mt-3">
+          <a href="#" class="btn btn-sm btn-outline-light" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="btn btn-sm btn-outline-light" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="btn btn-sm btn-outline-light" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+          <a href="#" class="btn btn-sm btn-outline-light" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2"><h5>Marketplace</h5><ul class="list-unstyled d-flex flex-column gap-2"><li><a href="stores.html">Stores</a></li><li><a href="products.html">Products</a></li><li><a href="cart.html">Cart</a></li><li><a href="checkout.html">Checkout</a></li></ul></div>
+      <div class="col-6 col-lg-2"><h5>Account</h5><ul class="list-unstyled d-flex flex-column gap-2"><li><a href="login.html">Login</a></li><li><a href="register.html">Register</a></li><li><a href="dashboard/index.html">Seller Dashboard</a></li></ul></div>
+      <div class="col-lg-4"><h5>Contact</h5><p class="small mb-1"><i class="bi bi-geo-alt me-1"></i> Karachi, Pakistan</p><p class="small mb-1"><i class="bi bi-envelope me-1"></i> hello@skoolyst.pk</p><p class="small mb-0"><i class="bi bi-telephone me-1"></i> +92 21 1234 5678</p></div>
+    </div>
+    <div class="footer-bottom d-flex justify-content-between flex-wrap gap-2"><span>&copy; 2026 Skoolyst Stores. All rights reserved.</span><span>UI Prototype — Frontend Only</span></div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
