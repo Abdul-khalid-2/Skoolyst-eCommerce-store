@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS stores (
+CREATE TABLE IF NOT EXISTS shop_stores (
   id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   user_id INT UNSIGNED DEFAULT NULL,
   category_id INT UNSIGNED DEFAULT NULL,
@@ -22,6 +22,6 @@ CREATE TABLE IF NOT EXISTS stores (
   KEY idx_stores_city (city),
   KEY idx_stores_status (status),
   KEY idx_stores_category (category_id),
-  CONSTRAINT fk_stores_category FOREIGN KEY (category_id) REFERENCES store_categories(id) ON DELETE SET NULL,
-  CONSTRAINT fk_stores_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
+  CONSTRAINT fk_stores_category FOREIGN KEY (category_id) REFERENCES shop_store_categories(id) ON DELETE SET NULL,
+  CONSTRAINT fk_stores_user FOREIGN KEY (user_id) REFERENCES shop_users(id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

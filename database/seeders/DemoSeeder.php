@@ -25,7 +25,7 @@ function seed_upsert(PDO $pdo, string $table, string $uniqueCol, array $data): i
 }
 
 // Admin user
-seed_upsert($pdo, 'users', 'email', [
+seed_upsert($pdo, 'shop_users', 'email', [
     'name' => 'Skoolyst Admin',
     'email' => 'admin@skoolyst.pk',
     'password' => password_hash('password', PASSWORD_DEFAULT),
@@ -43,14 +43,14 @@ $storeCategories = [
 ];
 $categoryIds = [];
 foreach ($storeCategories as $cat) {
-    $categoryIds[$cat['slug']] = seed_upsert($pdo, 'store_categories', 'slug', $cat);
+    $categoryIds[$cat['slug']] = seed_upsert($pdo, 'shop_store_categories', 'slug', $cat);
 }
 echo count($storeCategories) . " store categories seeded\n";
 
 // Product categories (mirror store categories for simplicity at this stage)
 $productCategoryIds = [];
 foreach ($storeCategories as $cat) {
-    $productCategoryIds[$cat['slug']] = seed_upsert($pdo, 'product_categories', 'slug', [
+    $productCategoryIds[$cat['slug']] = seed_upsert($pdo, 'shop_product_categories', 'slug', [
         'name' => $cat['name'],
         'slug' => $cat['slug'],
     ]);
@@ -105,7 +105,7 @@ foreach ($stores as $store) {
     $category = $store['category'];
     unset($store['category']);
     $store['category_id'] = $categoryIds[$category];
-    $storeIds[$store['slug']] = seed_upsert($pdo, 'stores', 'slug', $store);
+    $storeIds[$store['slug']] = seed_upsert($pdo, 'shop_stores', 'slug', $store);
 }
 echo count($stores) . " stores seeded\n";
 
@@ -125,7 +125,7 @@ foreach ($products as $product) {
     $product['category_id'] = $productCategoryIds[$product['category']];
     unset($product['store'], $product['category']);
     $product['status'] = $product['stock'] > 0 ? 'active' : 'out_of_stock';
-    seed_upsert($pdo, 'products', 'slug', $product);
+    seed_upsert($pdo, 'shop_products', 'slug', $product);
 }
 echo count($products) . " products seeded\n";
 

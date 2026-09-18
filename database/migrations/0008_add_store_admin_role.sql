@@ -1,2 +1,2 @@
-ALTER TABLE users
+ALTER TABLE shop_users
   MODIFY COLUMN role ENUM('admin','store_admin','user') NOT NULL DEFAULT 'user';

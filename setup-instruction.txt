@@ -1,0 +1,162 @@
+========================================================================
+ Skoolyst Store — Deployment / Setup Instructions
+========================================================================
+Core PHP MVC app. No Node/npm build step. Requires PHP 8.2+, MySQL,
+Composer (only for the phpdotenv dependency + PSR-4 autoload), and
+Apache/XAMPP (or any web server that can point its docroot at /public).
+
+------------------------------------------------------------------------
+1. Clone the repository
+------------------------------------------------------------------------
+    cd /path/to/htdocs/Projects
+    git clone <repo-url> Skoolyst-shop-system
+    cd Skoolyst-shop-system/skoolyst-module-blueprint
+
+(If you already have the folder via zip/copy instead of git, skip this
+step and just place the project under your XAMPP htdocs, e.g.:
+    B:\xampp-8.2\htdocs\Projects\Skoolyst-shop-system\skoolyst-module-blueprint )
+
+------------------------------------------------------------------------
+2. Install PHP dependencies (Composer)
+------------------------------------------------------------------------
+    composer install
+
+This installs vlucas/phpdotenv and registers the PSR-4 autoloader
+(Skoolyst\ -> app/). No other packages are required. Do not run
+"composer require" for frontend tooling — this project intentionally
+has none.
+
+------------------------------------------------------------------------
+3. Copy and configure the .env file
+------------------------------------------------------------------------
+    copy .env.example .env        (Windows / PowerShell)
+    cp .env.example .env          (bash)
+
+Edit .env and set at minimum:
+
+    APP_NAME=Skoolyst Module
+    APP_ENV=local
+    APP_DEBUG=true
+    APP_URL=http://localhost/Projects/Skoolyst-shop-system/skoolyst-module-blueprint/public
+
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=skoolyst_module
+    DB_USERNAME=root
+    DB_PASSWORD=
+
+    SESSION_NAME=skoolyst_eCommerce_store
+    SESSION_SECURE=false
+    SESSION_HTTP_ONLY=true
+
+    UPLOAD_MAX_SIZE=10485760
+
+Notes:
+  - APP_URL must match the exact path you will browse to (no trailing
+    slash). All internal links are generated from this value via url().
+  - SESSION_SECURE must stay false on plain http:// (XAMPP/local). Only
+    set it true when serving over https.
+  - .env is git-ignored — never commit it. Each environment (local,
+    staging, prod) gets its own.
+
+------------------------------------------------------------------------
+4. Create the database
+------------------------------------------------------------------------
+In phpMyAdmin or the mysql CLI:
+
+    CREATE DATABASE skoolyst_module CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+Make sure DB_DATABASE in .env matches the name you created.
+
+------------------------------------------------------------------------
+5. Run migrations
+------------------------------------------------------------------------
+    php database/migrate.php
+
+This applies every *.sql file in database/migrations/ in order (currently
+0001 through 0009) and tracks applied migrations in a `migrations` table,
+so it's safe to re-run — only pending files are applied.
+
+All domain tables are created with a `shop_` prefix (shop_users,
+shop_stores, shop_products, shop_store_categories, shop_product_categories,
+shop_store_images, shop_product_images). Migration 0009 renames the
+originally-unprefixed tables for databases that were migrated before this
+convention was introduced; on a fresh install 0001-0007 create the
+prefixed tables directly and 0009 has nothing to do.
+
+(A full reference schema dump also exists at database/sql/module_database.sql
+if you ever need to inspect or import the final schema directly, but the
+supported path is the migration runner above.)
+
+------------------------------------------------------------------------
+6. Seed demo data (optional, recommended for local dev)
+------------------------------------------------------------------------
+    php database/seeders/DemoSeeder.php
+
+Creates one admin user (admin@skoolyst.pk), store categories, a handful
+of demo stores and a few products per store. Safe to re-run — it upserts
+on the unique key, it won't duplicate rows.
+
+Check the top of database/seeders/DemoSeeder.php for the seeded admin
+password if you need to log in as admin.
+
+------------------------------------------------------------------------
+7. Set upload folder permissions
+------------------------------------------------------------------------
+Product/store images are uploaded to:
+    public/uploads/stores/
+    public/uploads/products/
+
+These folders must be writable by the web server process. On XAMPP
+(Windows) this is normally already the case. On Linux:
+
+    chmod -R 775 public/uploads
+    chown -R www-data:www-data public/uploads
+
+------------------------------------------------------------------------
+8. Point the web server at /public
+------------------------------------------------------------------------
+The document root MUST be the public/ folder (it contains index.php and
+.htaccess with the front-controller rewrite rules), not the project root.
+
+XAMPP (Apache), simplest option — just browse via the existing htdocs
+path, Apache already serves everything under htdocs:
+
+    http://localhost/Projects/Skoolyst-shop-system/skoolyst-module-blueprint/public/
+
+Make sure mod_rewrite is enabled in Apache (it is by default on XAMPP)
+so routes like /stores/some-slug resolve through public/.htaccess into
+public/index.php.
+
+If you'd rather serve it at a clean root URL, create an Apache vhost
+whose DocumentRoot points directly at .../skoolyst-module-blueprint/public
+and set APP_URL in .env to match that vhost's URL.
+
+Quick alternative for local testing without touching Apache config —
+PHP's built-in server:
+
+    php -S 127.0.0.1:8099 -t public
+
+Then browse http://127.0.0.1:8099/ (update APP_URL accordingly).
+
+------------------------------------------------------------------------
+9. Verify
+------------------------------------------------------------------------
+  - Visit APP_URL — the storefront home page should load with categories
+    and featured stores.
+  - Log in as the seeded admin (admin@skoolyst.pk) and confirm
+    /admin/dashboard loads.
+  - Register a new user, log in, visit /store/create and submit a store
+    — it should appear as "pending" until approved from /admin/stores.
+
+------------------------------------------------------------------------
+10. Production notes
+------------------------------------------------------------------------
+  - Set APP_ENV=production and APP_DEBUG=false in .env on any public
+    deployment — debug mode should never be on in production.
+  - Set SESSION_SECURE=true once served over https.
+  - Never commit .env, /vendor, or /public/uploads/* (already covered
+    by .gitignore).
+  - Re-run "composer install" (not "composer update") on deploy to
+    respect composer.lock exactly.
+========================================================================

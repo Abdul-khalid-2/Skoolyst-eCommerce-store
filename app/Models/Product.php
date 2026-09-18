@@ -6,7 +6,7 @@ namespace Skoolyst\Models;
 use Skoolyst\Core\Model;
 
 class Product extends Model {
-    protected static string $table = 'products';
+    protected static string $table = 'shop_products';
 
     /**
      * Filtered, paginated product search. $filters may contain:
@@ -15,14 +15,14 @@ class Product extends Model {
     public static function search(array $filters, int $page, int $perPage): array {
         [$where, $params] = self::buildWhere($filters);
 
-        $countStmt = static::db()->prepare("SELECT COUNT(*) FROM products p {$where}");
+        $countStmt = static::db()->prepare("SELECT COUNT(*) FROM shop_products p {$where}");
         $countStmt->execute($params);
         $total = (int) $countStmt->fetchColumn();
 
         $offset = paginate_offset($page, $perPage);
         $sql = "SELECT p.*, s.name AS store_name, s.slug AS store_slug
-                FROM products p
-                JOIN stores s ON s.id = p.store_id
+                FROM shop_products p
+                JOIN shop_stores s ON s.id = p.store_id
                 {$where}
                 ORDER BY p.id DESC
                 LIMIT :limit OFFSET :offset";
@@ -39,8 +39,8 @@ class Product extends Model {
 
     public static function findActiveBySlug(string $slug): ?array {
         $stmt = static::db()->prepare(
-            'SELECT p.*, s.name AS store_name, s.slug AS store_slug FROM products p
-             JOIN stores s ON s.id = p.store_id
+            'SELECT p.*, s.name AS store_name, s.slug AS store_slug FROM shop_products p
+             JOIN shop_stores s ON s.id = p.store_id
              WHERE p.slug = :slug AND p.status = "active" LIMIT 1'
         );
         $stmt->execute(['slug' => $slug]);
@@ -49,7 +49,7 @@ class Product extends Model {
     }
 
     public static function byStore(int $storeId): array {
-        $stmt = static::db()->prepare('SELECT * FROM products WHERE store_id = :store_id ORDER BY id DESC');
+        $stmt = static::db()->prepare('SELECT * FROM shop_products WHERE store_id = :store_id ORDER BY id DESC');
         $stmt->execute(['store_id' => $storeId]);
         return $stmt->fetchAll();
     }

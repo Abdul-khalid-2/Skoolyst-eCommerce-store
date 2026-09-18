@@ -6,12 +6,12 @@ namespace Skoolyst\Models;
 use Skoolyst\Core\Model;
 
 class Store extends Model {
-    protected static string $table = 'stores';
+    protected static string $table = 'shop_stores';
 
     public static function findByUserId(int $userId): ?array {
         $stmt = static::db()->prepare(
-            'SELECT s.*, sc.name AS category_name FROM stores s
-             LEFT JOIN store_categories sc ON sc.id = s.category_id
+            'SELECT s.*, sc.name AS category_name FROM shop_stores s
+             LEFT JOIN shop_store_categories sc ON sc.id = s.category_id
              WHERE s.user_id = :user_id LIMIT 1'
         );
         $stmt->execute(['user_id' => $userId]);
@@ -27,14 +27,14 @@ class Store extends Model {
     public static function search(array $filters, int $page, int $perPage): array {
         [$where, $params] = self::buildWhere($filters);
 
-        $countStmt = static::db()->prepare("SELECT COUNT(*) FROM stores s {$where}");
+        $countStmt = static::db()->prepare("SELECT COUNT(*) FROM shop_stores s {$where}");
         $countStmt->execute($params);
         $total = (int) $countStmt->fetchColumn();
 
         $offset = paginate_offset($page, $perPage);
         $sql = "SELECT s.*, sc.name AS category_name
-                FROM stores s
-                LEFT JOIN store_categories sc ON sc.id = s.category_id
+                FROM shop_stores s
+                LEFT JOIN shop_store_categories sc ON sc.id = s.category_id
                 {$where}
                 ORDER BY s.rating DESC, s.id DESC
                 LIMIT :limit OFFSET :offset";
@@ -51,7 +51,7 @@ class Store extends Model {
 
     public static function featured(int $limit = 4): array {
         $stmt = static::db()->prepare(
-            'SELECT * FROM stores WHERE status = "active" ORDER BY rating DESC, id DESC LIMIT :limit'
+            'SELECT * FROM shop_stores WHERE status = "active" ORDER BY rating DESC, id DESC LIMIT :limit'
         );
         $stmt->bindValue(':limit', $limit, \PDO::PARAM_INT);
         $stmt->execute();
@@ -60,8 +60,8 @@ class Store extends Model {
 
     public static function findActiveBySlug(string $slug): ?array {
         $stmt = static::db()->prepare(
-            'SELECT s.*, sc.name AS category_name FROM stores s
-             LEFT JOIN store_categories sc ON sc.id = s.category_id
+            'SELECT s.*, sc.name AS category_name FROM shop_stores s
+             LEFT JOIN shop_store_categories sc ON sc.id = s.category_id
              WHERE s.slug = :slug AND s.status = "active" LIMIT 1'
         );
         $stmt->execute(['slug' => $slug]);
