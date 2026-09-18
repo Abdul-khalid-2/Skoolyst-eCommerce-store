@@ -10,6 +10,7 @@ use Skoolyst\Controllers\CartController;
 use Skoolyst\Controllers\CheckoutController;
 use Skoolyst\Controllers\FavoriteController;
 use Skoolyst\Controllers\HomeController;
+use Skoolyst\Controllers\PageController;
 use Skoolyst\Controllers\ProductController;
 use Skoolyst\Controllers\StoreController;
 use Skoolyst\Controllers\StoreOwnerController;
@@ -41,6 +42,13 @@ $router->get('/checkout/success/{orderNumber}', [CheckoutController::class, 'suc
 
 $router->get('/favorites', [FavoriteController::class, 'index']);
 $router->post('/favorites/toggle/{id}', [FavoriteController::class, 'toggle']);
+
+// ---- Informational pages ----
+$router->get('/about', [PageController::class, 'about']);
+$router->get('/contact', [PageController::class, 'contact']);
+$router->get('/privacy-policy', [PageController::class, 'privacy']);
+$router->get('/terms', [PageController::class, 'terms']);
+$router->get('/returns-refunds', [PageController::class, 'returns']);
 
 // ---- Auth ----
 $router->get('/login', [AuthController::class, 'loginForm'], [GuestMiddleware::class]);
