@@ -77,9 +77,9 @@ This applies every *.sql file in database/migrations/ in order (currently
 0001 through 0009) and tracks applied migrations in a `migrations` table,
 so it's safe to re-run — only pending files are applied.
 
-All domain tables are created with a `shop_` prefix (shop_users,
-shop_stores, shop_products, shop_store_categories, shop_product_categories,
-shop_store_images, shop_product_images). Migration 0009 renames the
+All domain tables are created with a `store_` prefix (store_users,
+store_stores, store_products, store_store_categories, store_product_categories,
+store_store_images, store_product_images). Migration 0009 renames the
 originally-unprefixed tables for databases that were migrated before this
 convention was introduced; on a fresh install 0001-0007 create the
 prefixed tables directly and 0009 has nothing to do.
