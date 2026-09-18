@@ -10,13 +10,17 @@ class Database {
 
     public static function connection(): PDO {
         if (!self::$connection) {
+            $config = config('database');
             self::$connection = new PDO(
-                'mysql:host=' . ($_ENV['DB_HOST'] ?? '127.0.0.1') .
-                ';port=' . ($_ENV['DB_PORT'] ?? '3306') .
-                ';dbname=' . ($_ENV['DB_DATABASE'] ?? '') . ';charset=utf8mb4',
-                $_ENV['DB_USERNAME'] ?? 'root',
-                $_ENV['DB_PASSWORD'] ?? '',
-                [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+                'mysql:host=' . $config['host'] .
+                ';port=' . $config['port'] .
+                ';dbname=' . $config['database'] . ';charset=' . $config['charset'],
+                $config['username'],
+                $config['password'],
+                [
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                ]
             );
         }
         return self::$connection;

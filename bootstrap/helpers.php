@@ -10,14 +10,16 @@ require_once dirname(__DIR__) . '/app/Helpers/response.php';
 require_once dirname(__DIR__) . '/app/Helpers/session.php';
 require_once dirname(__DIR__) . '/app/Helpers/upload.php';
 require_once dirname(__DIR__) . '/app/Helpers/format.php';
+require_once dirname(__DIR__) . '/app/Helpers/common.php';
+require_once dirname(__DIR__) . '/app/Helpers/security.php';
 
-// Shared view components (function-based partials used across resources/views).
-require_once dirname(__DIR__) . '/resources/views/components/button.php';
-require_once dirname(__DIR__) . '/resources/views/components/badge.php';
-require_once dirname(__DIR__) . '/resources/views/components/card.php';
-require_once dirname(__DIR__) . '/resources/views/components/input.php';
-require_once dirname(__DIR__) . '/resources/views/components/modal.php';
-require_once dirname(__DIR__) . '/resources/views/components/pagination.php';
-require_once dirname(__DIR__) . '/resources/views/components/empty-state.php';
-require_once dirname(__DIR__) . '/resources/views/components/alert.php';
-require_once dirname(__DIR__) . '/resources/views/components/table.php';
+// Shared view components (function-based partials used across app/Views).
+require_once dirname(__DIR__) . '/app/Views/layouts/partials/button.php';
+require_once dirname(__DIR__) . '/app/Views/layouts/partials/badge.php';
+require_once dirname(__DIR__) . '/app/Views/layouts/partials/card.php';
+require_once dirname(__DIR__) . '/app/Views/layouts/partials/input.php';
+require_once dirname(__DIR__) . '/app/Views/layouts/partials/modal.php';
+require_once dirname(__DIR__) . '/app/Views/layouts/partials/pagination.php';
+require_once dirname(__DIR__) . '/app/Views/layouts/partials/empty-state.php';
+require_once dirname(__DIR__) . '/app/Views/layouts/partials/alerts.php';
+require_once dirname(__DIR__) . '/app/Views/layouts/partials/table.php';
