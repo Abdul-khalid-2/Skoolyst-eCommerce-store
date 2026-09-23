@@ -15,7 +15,7 @@ class Product extends Model {
     public static function search(array $filters, int $page, int $perPage): array {
         [$where, $params] = self::buildWhere($filters);
 
-        $countStmt = static::db()->prepare("SELECT COUNT(*) FROM store_products p {$where}");
+        $countStmt = static::db()->prepare("SELECT COUNT(*) FROM store_products p JOIN store_stores s ON s.id = p.store_id {$where}");
         $countStmt->execute($params);
         $total = (int) $countStmt->fetchColumn();
 
@@ -48,7 +48,7 @@ class Product extends Model {
         $stmt = static::db()->prepare(
             'SELECT p.*, s.name AS store_name, s.slug AS store_slug FROM store_products p
              JOIN store_stores s ON s.id = p.store_id
-             WHERE p.slug = :slug AND p.status = "active" LIMIT 1'
+             WHERE p.slug = :slug AND p.status = "active" AND s.status = "active" LIMIT 1'
         );
         $stmt->execute(['slug' => $slug]);
         $row = $stmt->fetch();
@@ -59,7 +59,7 @@ class Product extends Model {
         $stmt = static::db()->prepare(
             'SELECT p.*, s.name AS store_name, s.slug AS store_slug FROM store_products p
              JOIN store_stores s ON s.id = p.store_id
-             WHERE p.id = :id AND p.status = "active" LIMIT 1'
+             WHERE p.id = :id AND p.status = "active" AND s.status = "active" LIMIT 1'
         );
         $stmt->execute(['id' => $id]);
         $row = $stmt->fetch();
@@ -93,6 +93,10 @@ class Product extends Model {
             $params['status'] = $filters['status'];
         } elseif (empty($filters['include_all_statuses'])) {
             $conditions[] = 'p.status = "active"';
+        }
+
+        if (empty($filters['include_all_statuses'])) {
+            $conditions[] = 's.status = "active"';
         }
 
         $where = $conditions ? ('WHERE ' . implode(' AND ', $conditions)) : '';

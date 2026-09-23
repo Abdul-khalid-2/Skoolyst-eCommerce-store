@@ -45,7 +45,7 @@ $navLink = static fn (string $key, string $label, string $href) =>
         <a href="<?= url('logout') ?>" class="btn btn-sm btn-outline-light">Logout</a>
         <?php else: ?>
         <a href="<?= url('login') ?>" class="btn btn-sm btn-outline-light">Login</a>
-        <a href="<?= url('register') ?>" class="btn btn-sm btn-accent">Open a Store</a>
+        <a href="<?= url('register') ?>" class="btn btn-sm btn-accent">Sign Up</a>
         <?php endif; ?>
       </div>
     </div>
@@ -84,7 +84,7 @@ $navLink = static fn (string $key, string $label, string $href) =>
         <a href="<?= url('logout') ?>" class="btn btn-outline-navy">Logout</a>
         <?php else: ?>
         <a href="<?= url('login') ?>" class="btn btn-outline-navy">Login</a>
-        <a href="<?= url('register') ?>" class="btn btn-accent">Open a Store</a>
+        <a href="<?= url('register') ?>" class="btn btn-accent">Sign Up</a>
         <?php endif; ?>
       </div>
     </div>
