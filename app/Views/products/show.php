@@ -4,7 +4,7 @@ $title = clean($product['name']) . ' — Skoolyst Store';
 $description = product_meta_description($product);
 $active = 'products';
 
-$img = $product['image'] ?: 'https://images.pexels.com/photos/207580/pexels-photo-207580.jpeg?auto=compress&cs=tinysrgb&w=800';
+$img = media_url($product['image'], 'https://images.pexels.com/photos/207580/pexels-photo-207580.jpeg?auto=compress&cs=tinysrgb&w=800');
 
 $productSchema = [
     '@context' => 'https://schema.org',

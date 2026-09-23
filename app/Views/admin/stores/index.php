@@ -32,7 +32,7 @@ ob_start();
     <td>
       <div class="d-flex align-items-center gap-2">
         <div style="width:36px;height:36px;border-radius:8px;overflow:hidden;flex-shrink:0;background:var(--skoolyst-surface-alt)">
-          <?php if ($store['logo']): ?><img src="<?= clean($store['logo']) ?>" alt="" style="width:100%;height:100%;object-fit:cover"><?php endif; ?>
+          <?php if ($store['logo']): ?><img src="<?= clean(media_url($store['logo'])) ?>" alt="" style="width:100%;height:100%;object-fit:cover"><?php endif; ?>
         </div>
         <div>
           <div class="fw-semibold small"><?= clean($store['name']) ?></div>

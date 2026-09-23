@@ -96,7 +96,7 @@ ob_start();
         <div class="card card-hover store-card h-100">
           <div class="card-body d-flex flex-column gap-3">
             <div class="d-flex gap-3 align-items-center">
-              <div class="store-logo-wrap"><img src="<?= clean($store['logo'] ?: 'https://images.pexels.com/photos/8364020/pexels-photo-8364020.jpeg?auto=compress&cs=tinysrgb&w=200') ?>" alt="<?= clean($store['name']) ?> logo"></div>
+              <div class="store-logo-wrap"><img src="<?= clean(media_url($store['logo'], 'https://images.pexels.com/photos/8364020/pexels-photo-8364020.jpeg?auto=compress&cs=tinysrgb&w=200')) ?>" alt="<?= clean($store['name']) ?> logo"></div>
               <div>
                 <h5 class="mb-0 fs-6"><?= clean($store['name']) ?> <?php if ($store['verified']): ?><i class="bi bi-patch-check-fill verified-icon" title="Verified"></i><?php endif; ?></h5>
                 <div class="small text-muted"><i class="bi bi-geo-alt"></i> <?= clean($store['city'] ?? '') ?></div>

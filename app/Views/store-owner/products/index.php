@@ -19,7 +19,7 @@ ob_start();
     <td>
       <div class="d-flex align-items-center gap-2">
         <div style="width:36px;height:36px;border-radius:8px;overflow:hidden;flex-shrink:0;background:var(--skoolyst-surface-alt)">
-          <?php if ($product['image']): ?><img src="<?= clean($product['image']) ?>" alt="" style="width:100%;height:100%;object-fit:cover"><?php endif; ?>
+          <?php if ($product['image']): ?><img src="<?= clean(media_url($product['image'])) ?>" alt="" style="width:100%;height:100%;object-fit:cover"><?php endif; ?>
         </div>
         <div class="fw-semibold small"><?= clean($product['name']) ?></div>
       </div>

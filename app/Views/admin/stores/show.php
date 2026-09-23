@@ -10,7 +10,7 @@ ob_start();
 <div class="dash-panel mb-4">
   <div class="d-flex gap-3 align-items-center flex-wrap">
     <div style="width:64px;height:64px;border-radius:12px;overflow:hidden;background:var(--skoolyst-surface-alt);flex-shrink:0">
-      <?php if ($store['logo']): ?><img src="<?= clean($store['logo']) ?>" alt="" style="width:100%;height:100%;object-fit:cover"><?php endif; ?>
+      <?php if ($store['logo']): ?><img src="<?= clean(media_url($store['logo'])) ?>" alt="" style="width:100%;height:100%;object-fit:cover"><?php endif; ?>
     </div>
     <div class="flex-grow-1">
       <div class="d-flex align-items-center gap-2 flex-wrap">

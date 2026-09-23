@@ -2,8 +2,8 @@
 /storage/logs/*
 /storage/cache/*
 /storage/temp/*
-/public/uploads/*
-!/public/uploads/stores/.gitkeep
-!/public/uploads/products/.gitkeep
+# /public/uploads/*
+# !/public/uploads/stores/.gitkeep
+# !/public/uploads/products/.gitkeep
 /vendor/
 .phpunit.result.cache

@@ -39,6 +39,23 @@ function slugify(string $text): string
 }
 
 /** Appends a filemtime-based ?v= query string so browsers pick up new CSS/JS after every deploy. */
+/**
+ * Resolves a stored image path (e.g. "uploads/products/abc.jpg") to an absolute URL.
+ * Already-absolute URLs (external fallback images) are returned unchanged so the
+ * <img> tag never breaks depending on which page path it's rendered from.
+ */
+function media_url(?string $path, string $fallback = ''): string
+{
+    $path = $path !== null && $path !== '' ? $path : $fallback;
+    if ($path === '') {
+        return '';
+    }
+    if (preg_match('#^(https?:)?//#i', $path)) {
+        return $path;
+    }
+    return url($path);
+}
+
 function asset(string $path): string
 {
     $relative = 'assets/' . ltrim($path, '/');

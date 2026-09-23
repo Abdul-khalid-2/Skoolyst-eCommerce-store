@@ -100,7 +100,7 @@ ob_start();
             <div class="d-flex flex-column gap-2 mb-3">
               <?php foreach ($items as $item): ?>
               <div class="d-flex gap-2 align-items-center">
-                <div class="cart-item-img" style="width:48px;height:48px"><img src="<?= clean($item['image'] ?: 'https://images.pexels.com/photos/207580/pexels-photo-207580.jpeg?auto=compress&cs=tinysrgb&w=100') ?>" alt="<?= clean($item['name']) ?>"></div>
+                <div class="cart-item-img" style="width:48px;height:48px"><img src="<?= clean(media_url($item['image'], 'https://images.pexels.com/photos/207580/pexels-photo-207580.jpeg?auto=compress&cs=tinysrgb&w=100')) ?>" alt="<?= clean($item['name']) ?>"></div>
                 <div class="flex-grow-1"><div class="small fw-semibold"><?= clean($item['name']) ?></div><div class="small text-muted">Qty: <?= $item['qty'] ?></div></div>
                 <div class="small fw-bold">Rs. <?= number_format($item['line_total']) ?></div>
               </div>

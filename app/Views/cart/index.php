@@ -28,7 +28,7 @@ ob_start();
         <div class="d-flex flex-column gap-3">
           <?php foreach ($items as $item): ?>
           <div class="cart-item">
-            <div class="cart-item-img"><img src="<?= clean($item['image'] ?: 'https://images.pexels.com/photos/207580/pexels-photo-207580.jpeg?auto=compress&cs=tinysrgb&w=200') ?>" alt="<?= clean($item['name']) ?>"></div>
+            <div class="cart-item-img"><img src="<?= clean(media_url($item['image'], 'https://images.pexels.com/photos/207580/pexels-photo-207580.jpeg?auto=compress&cs=tinysrgb&w=200')) ?>" alt="<?= clean($item['name']) ?>"></div>
             <div class="flex-grow-1">
               <div class="d-flex justify-content-between align-items-start">
                 <div>

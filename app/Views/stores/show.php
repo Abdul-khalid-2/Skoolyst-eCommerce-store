@@ -26,7 +26,7 @@ $storeSchema = [
     'description' => $store['description'] ?: ($store['name'] . ' on Skoolyst Store.'),
 ];
 if (!empty($store['logo'])) {
-    $storeSchema['image'] = $store['logo'];
+    $storeSchema['image'] = media_url($store['logo']);
 }
 if (!empty($store['address']) || !empty($store['city'])) {
     $storeSchema['address'] = array_filter([
@@ -54,7 +54,7 @@ ob_start();
     <div class="store-header">
       <div class="store-cover"></div>
       <div class="store-body">
-        <div class="store-logo-lg"><img src="<?= clean($store['logo'] ?: 'https://images.pexels.com/photos/8364020/pexels-photo-8364020.jpeg?auto=compress&cs=tinysrgb&w=300') ?>" alt="<?= clean($store['name']) ?> logo"></div>
+        <div class="store-logo-lg"><img src="<?= clean(media_url($store['logo'], 'https://images.pexels.com/photos/8364020/pexels-photo-8364020.jpeg?auto=compress&cs=tinysrgb&w=300')) ?>" alt="<?= clean($store['name']) ?> logo"></div>
         <div class="flex-grow-1">
           <div class="d-flex align-items-center gap-2 flex-wrap">
             <h1 class="mb-0 fs-4"><?= clean($store['name']) ?></h1>

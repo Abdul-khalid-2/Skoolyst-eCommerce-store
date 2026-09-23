@@ -1,7 +1,7 @@
 <?php
 if (!function_exists('render_product_card')) {
     function render_product_card(array $product): string {
-        $img = $product['image'] ?: 'https://images.pexels.com/photos/207580/pexels-photo-207580.jpeg?auto=compress&cs=tinysrgb&w=400';
+        $img = media_url($product['image'], 'https://images.pexels.com/photos/207580/pexels-photo-207580.jpeg?auto=compress&cs=tinysrgb&w=400');
         $price = '<span class="product-price">Rs. ' . number_format((float) $product['price']) . '</span>';
         if (!empty($product['sale_price'])) {
             $price = '<span class="product-price">Rs. ' . number_format((float) $product['sale_price']) . '</span> '

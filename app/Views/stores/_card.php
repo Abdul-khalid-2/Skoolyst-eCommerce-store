@@ -7,7 +7,7 @@ if (!function_exists('render_store_card')) {
             $stars .= '<i class="bi bi-star' . ($i < $full ? '-fill' : '') . '"></i>';
         }
 
-        $logo = $store['logo'] ?: 'https://images.pexels.com/photos/8364020/pexels-photo-8364020.jpeg?auto=compress&cs=tinysrgb&w=200';
+        $logo = media_url($store['logo'], 'https://images.pexels.com/photos/8364020/pexels-photo-8364020.jpeg?auto=compress&cs=tinysrgb&w=200');
         $verifiedBadge = $store['verified'] ? '<i class="bi bi-patch-check-fill verified-icon" title="Verified"></i>' : '';
         $typeLabel = $store['store_type'] === 'wholesale' ? 'Wholesale' : ($store['store_type'] === 'brand_outlet' ? 'Brand Outlet' : 'Retail');
 
