@@ -13,6 +13,7 @@ require_once dirname(__DIR__) . '/app/Helpers/format.php';
 require_once dirname(__DIR__) . '/app/Helpers/common.php';
 require_once dirname(__DIR__) . '/app/Helpers/security.php';
 require_once dirname(__DIR__) . '/app/Helpers/shopping.php';
+require_once dirname(__DIR__) . '/app/Helpers/seo.php';
 
 // Shared view components (function-based partials used across app/Views).
 require_once dirname(__DIR__) . '/app/Views/layouts/partials/button.php';

@@ -12,6 +12,7 @@ class HomeController extends Controller {
         return $this->view('home/index', [
             'categories' => Category::withStoreCounts(),
             'featuredStores' => Store::featured(4),
+            'cities' => Store::cityCounts(),
         ]);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Vars provided by HomeController::index(): $categories, $featuredStores, $recentStores.
+ * Vars provided by HomeController::index(): $categories, $featuredStores, $recentStores, $cities.
  */
 $title = "Skoolyst Store — Find Trusted School Uniform, Shoe & Stationery Stores";
 $description = "Discover school uniforms, shoes, bags, stationery, books and educational essentials from trusted stores across Pakistan.";
@@ -50,7 +50,7 @@ ob_start();
     <div class="row g-3">
       <?php foreach ($categories as $cat): ?>
       <div class="col-6 col-md-3 col-lg">
-        <a href="<?= url('stores?category=' . $cat['id']) ?>" class="card card-hover text-decoration-none">
+        <a href="<?= url('stores/category/' . $cat['slug']) ?>" class="card card-hover text-decoration-none">
           <div class="card-body category-card">
             <div class="cat-icon"><i class="fa-solid <?= clean($cat['icon'] ?: 'fa-shop') ?>"></i></div>
             <div class="cat-name"><?= clean($cat['name']) ?></div>
@@ -63,7 +63,25 @@ ob_start();
   </div>
 </section>
 
+<?php if ($cities): ?>
 <section class="section bg-light-surface">
+  <div class="container">
+    <div class="section-heading">
+      <h2>Browse by City</h2>
+      <a href="<?= url('stores') ?>">View all stores <i class="bi bi-arrow-right"></i></a>
+    </div>
+    <div class="d-flex flex-wrap gap-2">
+      <?php foreach ($cities as $c): ?>
+      <a href="<?= url('stores/city/' . slugify($c['city'])) ?>" class="badge bg-light text-dark border px-3 py-2 text-decoration-none">
+        <i class="bi bi-geo-alt me-1"></i><?= clean($c['city']) ?> <span class="text-muted">(<?= (int) $c['store_count'] ?>)</span>
+      </a>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
+<?php endif; ?>
+
+<section class="section">
   <div class="container">
     <div class="section-heading">
       <h2>Featured Stores</h2>

@@ -49,6 +49,14 @@ class Store extends Model {
         return ['rows' => $stmt->fetchAll(), 'total' => $total];
     }
 
+    /** Distinct cities with an active store count, for city landing pages/navigation. */
+    public static function cityCounts(): array {
+        $sql = 'SELECT city, COUNT(*) AS store_count FROM store_stores
+                WHERE status = "active" AND city IS NOT NULL AND city <> ""
+                GROUP BY city ORDER BY city ASC';
+        return static::db()->query($sql)->fetchAll();
+    }
+
     public static function featured(int $limit = 4): array {
         $stmt = static::db()->prepare(
             'SELECT * FROM store_stores WHERE status = "active" ORDER BY rating DESC, id DESC LIMIT :limit'

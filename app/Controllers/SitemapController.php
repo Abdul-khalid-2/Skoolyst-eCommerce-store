@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Skoolyst\Controllers;
 
 use Skoolyst\Core\Controller;
+use Skoolyst\Models\Category;
 use Skoolyst\Models\Product;
 use Skoolyst\Models\Store;
 
@@ -44,6 +45,16 @@ class SitemapController extends Controller {
             ['loc' => url('terms'), 'changefreq' => 'yearly', 'priority' => '0.2'],
             ['loc' => url('returns-refunds'), 'changefreq' => 'yearly', 'priority' => '0.2'],
         ];
+
+        foreach (Category::withStoreCounts() as $category) {
+            if ((int) $category['store_count'] > 0) {
+                $urls[] = ['loc' => url('stores/category/' . $category['slug']), 'changefreq' => 'weekly', 'priority' => '0.6'];
+            }
+        }
+
+        foreach (Store::cityCounts() as $city) {
+            $urls[] = ['loc' => url('stores/city/' . slugify($city['city'])), 'changefreq' => 'weekly', 'priority' => '0.6'];
+        }
 
         foreach (Store::allActiveForSitemap() as $store) {
             $urls[] = [

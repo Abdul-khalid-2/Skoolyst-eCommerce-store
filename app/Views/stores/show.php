@@ -3,7 +3,7 @@
 require __DIR__ . '/../products/_card.php';
 
 $title = clean($store['name']) . ' — Skoolyst Store';
-$description = (string) ($store['description'] ?: ($store['name'] . ' on Skoolyst Store.'));
+$description = store_meta_description($store);
 $active = 'stores';
 
 $stars = static function (float $rating): string {

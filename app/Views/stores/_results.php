@@ -1,5 +1,10 @@
 <?php
-/** Results grid + pagination fragment, shared by stores/index.php and stores/search.php (AJAX). Expects $result. */
+/**
+ * Results grid + pagination fragment, shared by stores/index.php, stores/search.php
+ * (AJAX), and the category/city landing pages. Expects $result, and optionally
+ * $paginationBase to point pagination links at a clean landing-page URL instead
+ * of /stores?...
+ */
 ?>
 <div class="d-flex justify-content-between align-items-center mb-3">
   <span class="text-muted small">Showing <?= count($result['rows']) ?> of <?= $result['total'] ?> stores</span>
@@ -14,7 +19,7 @@
 </div>
 <?php
 $queryWithoutPage = array_diff_key($_GET, ['page' => null]);
-$baseUrl = url('stores') . ($queryWithoutPage ? '?' . http_build_query($queryWithoutPage) : '');
+$baseUrl = $paginationBase ?? (url('stores') . ($queryWithoutPage ? '?' . http_build_query($queryWithoutPage) : ''));
 ?>
 <?= skoolyst_pagination($result['page'], $result['totalPages'], $baseUrl, 'Store pagination') ?>
 <?php endif; ?>

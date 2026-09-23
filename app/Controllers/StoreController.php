@@ -39,6 +39,57 @@ class StoreController extends Controller {
         ]);
     }
 
+    /** SEO landing page for a single category, e.g. /stores/category/uniforms. */
+    public function category(string $slug): mixed {
+        $category = Category::findBySlug($slug);
+        if (!$category) {
+            http_response_code(404);
+            return $this->view('errors/404');
+        }
+
+        $filters = array_filter([
+            'q' => trim((string) Request::input('q', '')),
+            'category_id' => (int) $category['id'],
+        ]);
+        $page = (int) Request::input('page', 1);
+        $perPage = (int) config('settings.pagination.stores_per_page', 9);
+        $result = $this->stores->paginate($filters, $page, $perPage);
+
+        return $this->view('stores/category', [
+            'result' => $result,
+            'category' => $category,
+            'categories' => Category::withStoreCounts(),
+            'cities' => $this->stores->cityCounts(),
+            'filters' => $filters,
+        ]);
+    }
+
+    /** SEO landing page for a single city, e.g. /stores/city/karachi. */
+    public function city(string $slug): mixed {
+        $city = $this->stores->findCityBySlug($slug);
+        if (!$city) {
+            http_response_code(404);
+            return $this->view('errors/404');
+        }
+
+        $filters = array_filter([
+            'q' => trim((string) Request::input('q', '')),
+            'city' => $city['city'],
+        ]);
+        $page = (int) Request::input('page', 1);
+        $perPage = (int) config('settings.pagination.stores_per_page', 9);
+        $result = $this->stores->paginate($filters, $page, $perPage);
+
+        return $this->view('stores/city', [
+            'result' => $result,
+            'city' => $city['city'],
+            'cityStoreCount' => $city['store_count'],
+            'categories' => Category::withStoreCounts(),
+            'cities' => $this->stores->cityCounts(),
+            'filters' => $filters,
+        ]);
+    }
+
     public function show(string $slug): mixed {
         $store = $this->stores->findBySlugOrFail($slug);
         if (!$store) {

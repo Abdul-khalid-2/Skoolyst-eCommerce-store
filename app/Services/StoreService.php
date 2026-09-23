@@ -37,6 +37,24 @@ class StoreService {
         return Store::featured($limit);
     }
 
+    public function cityCounts(): array {
+        return Store::cityCounts();
+    }
+
+    /**
+     * Resolves a URL slug (e.g. "karachi") back to the exact city name stored
+     * on stores (e.g. "Karachi"), since city is a free-text column with no
+     * dedicated slug of its own.
+     */
+    public function findCityBySlug(string $slug): ?array {
+        foreach (Store::cityCounts() as $row) {
+            if (slugify($row['city']) === $slug) {
+                return $row;
+            }
+        }
+        return null;
+    }
+
     /** @return array{errors: array<string,string>, id: ?int} */
     public function create(array $data, ?string $logoPath): array {
         $errors = Validator::make($data, self::RULES);

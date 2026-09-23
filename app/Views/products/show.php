@@ -1,7 +1,7 @@
 <?php
 /** Vars from ProductController::show(): $product. */
 $title = clean($product['name']) . ' — Skoolyst Store';
-$description = 'Available at ' . $product['store_name'] . '. Rs. ' . number_format((float) $product['price']) . '.';
+$description = product_meta_description($product);
 $active = 'products';
 
 $img = $product['image'] ?: 'https://images.pexels.com/photos/207580/pexels-photo-207580.jpeg?auto=compress&cs=tinysrgb&w=800';

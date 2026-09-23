@@ -30,6 +30,8 @@ $router->get('/', [HomeController::class, 'index']);
 
 $router->get('/stores', [StoreController::class, 'index']);
 $router->get('/stores/search', [StoreController::class, 'search']);
+$router->get('/stores/category/{slug}', [StoreController::class, 'category']);
+$router->get('/stores/city/{slug}', [StoreController::class, 'city']);
 $router->get('/stores/{slug}', [StoreController::class, 'show']);
 
 $router->get('/products', [ProductController::class, 'index']);
