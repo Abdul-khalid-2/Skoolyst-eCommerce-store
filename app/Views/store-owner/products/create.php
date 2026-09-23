@@ -38,6 +38,7 @@ ob_start();
 
   <div class="form-card">
     <div class="form-card-title"><i class="fa-solid fa-image text-navy me-1"></i> Media</div>
+    <div class="mb-2"><img data-file-preview alt="" style="width:80px;height:80px;border-radius:12px;object-fit:cover;display:none"></div>
     <input type="file" class="form-control" name="image" accept="image/png,image/jpeg,image/webp">
     <?php if (!empty($errors['image'])): ?><div class="form-error"><?= clean($errors['image']) ?></div><?php endif; ?>
   </div>

@@ -108,6 +108,25 @@
       .catch(function () { showToast("Something went wrong. Please try again."); });
   });
 
+  /* ---------- Live image preview on file inputs ---------- */
+  document.addEventListener("change", function (e) {
+    const input = e.target;
+    if (input.tagName !== "INPUT" || input.type !== "file") return;
+    const file = input.files && input.files[0];
+    if (!file || file.type.indexOf("image/") !== 0) return;
+
+    const scope = input.closest(".form-card") || input.parentElement;
+    const preview = scope ? scope.querySelector("[data-file-preview]") : null;
+    if (!preview) return;
+
+    const reader = new FileReader();
+    reader.onload = function (ev) {
+      preview.src = ev.target.result;
+      preview.style.display = "block";
+    };
+    reader.readAsDataURL(file);
+  });
+
   /* ---------- Gallery thumbnail switcher (product page) ---------- */
   document.addEventListener("click", function (e) {
     const thumb = e.target.closest(".gallery-thumb");

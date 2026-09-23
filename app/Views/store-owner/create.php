@@ -31,6 +31,7 @@ ob_start();
           <div class="col-12"><?= skoolyst_input(['type' => 'textarea', 'name' => 'description', 'label' => 'Description', 'value' => $old['description'] ?? '']) ?></div>
           <div class="col-md-6">
             <label class="form-label">Store Logo</label>
+            <div class="mb-2"><img data-file-preview alt="" style="width:64px;height:64px;border-radius:12px;object-fit:cover;display:none"></div>
             <input type="file" class="form-control" name="logo" accept="image/png,image/jpeg,image/webp">
             <?php if (!empty($errors['logo'])): ?><div class="form-error"><?= clean($errors['logo']) ?></div><?php endif; ?>
           </div>
