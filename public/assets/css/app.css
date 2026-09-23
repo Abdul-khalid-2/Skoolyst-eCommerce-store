@@ -201,7 +201,7 @@ img { max-width: 100%; }
 .rating-num { font-size: .8rem; color: var(--sk-gray-500); font-weight: 600; }
 
 /* ---------- Header / Navbar (storefront, dark brand) ---------- */
-.sk-header { background: var(--skoolyst-brand-dark); }
+.sk-header { background: var(--skoolyst-brand-dark); z-index: 1030; }
 .sk-header .navbar-brand { font-weight: 800; font-size: 1.35rem; color: #fff; letter-spacing: -.5px; }
 .sk-header .navbar-brand .brand-accent { color: var(--sk-accent); }
 .sk-header .nav-link { color: rgba(255,255,255,.85); font-weight: 500; font-size: .9rem; padding: .5rem 1rem !important; border-radius: var(--skoolyst-radius-sm); transition: all .15s; }
@@ -258,6 +258,7 @@ img { max-width: 100%; }
 .sk-breadcrumb .breadcrumb-item.active { color: var(--sk-navy); font-weight: 600; }
 
 /* ---------- Filter sidebar ---------- */
+.filter-sidebar.sticky-top { z-index: 1; }
 .filter-sidebar { background: var(--sk-surface); border: 1px solid var(--sk-border); border-radius: var(--skoolyst-card-radius); padding: 1.25rem; }
 .filter-sidebar .filter-group { padding-bottom: 1rem; margin-bottom: 1rem; border-bottom: 1px solid var(--sk-border); }
 .filter-sidebar .filter-group:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
