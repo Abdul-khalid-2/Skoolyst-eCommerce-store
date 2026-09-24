@@ -73,6 +73,8 @@ $router->post('/store/update', [StoreOwnerController::class, 'update'], [StoreOw
 $router->get('/store/products', [StoreOwnerController::class, 'productsIndex'], [StoreOwnerMiddleware::class]);
 $router->get('/store/products/create', [StoreOwnerController::class, 'productCreate'], [StoreOwnerMiddleware::class]);
 $router->post('/store/products', [StoreOwnerController::class, 'productStore'], [StoreOwnerMiddleware::class]);
+$router->get('/store/products/{id}/edit', [StoreOwnerController::class, 'productEdit'], [StoreOwnerMiddleware::class]);
+$router->post('/store/products/{id}/update', [StoreOwnerController::class, 'productUpdate'], [StoreOwnerMiddleware::class]);
 $router->post('/store/products/{id}/delete', [StoreOwnerController::class, 'productDestroy'], [StoreOwnerMiddleware::class]);
 $router->get('/store/orders', [StoreOwnerController::class, 'ordersIndex'], [StoreOwnerMiddleware::class]);
 $router->get('/store/orders/{id}', [StoreOwnerController::class, 'orderShow'], [StoreOwnerMiddleware::class]);

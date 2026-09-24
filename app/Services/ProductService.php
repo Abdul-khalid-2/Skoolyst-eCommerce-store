@@ -71,6 +71,37 @@ class ProductService {
         return $this->create($data, $imagePath);
     }
 
+    /**
+     * Store-owner product update. Caller must already have verified the
+     * product belongs to the caller's store before calling this.
+     * @return array<string,string> errors
+     */
+    public function updateOwnProduct(int $id, array $data, ?string $imagePath): array {
+        $errors = Validator::make($data, self::RULES);
+        if ($errors) {
+            return $errors;
+        }
+
+        $stock = (int) ($data['stock'] ?? 0);
+
+        $update = [
+            'category_id' => !empty($data['category_id']) ? (int) $data['category_id'] : null,
+            'name' => $data['name'],
+            'description' => $data['description'] ?? null,
+            'price' => (float) $data['price'],
+            'sale_price' => isset($data['sale_price']) && $data['sale_price'] !== '' ? (float) $data['sale_price'] : null,
+            'stock' => $stock,
+            'status' => $data['status'] ?? ($stock > 0 ? 'active' : 'out_of_stock'),
+        ];
+
+        if ($imagePath !== null) {
+            $update['image'] = $imagePath;
+        }
+
+        Product::updateById($id, $update);
+        return [];
+    }
+
     public function setStatus(int $id, string $status): void {
         Product::updateById($id, ['status' => $status]);
     }

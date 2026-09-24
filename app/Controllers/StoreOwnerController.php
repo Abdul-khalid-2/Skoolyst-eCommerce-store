@@ -146,6 +146,55 @@ class StoreOwnerController extends Controller {
         Response::redirect(url('store/products'));
     }
 
+    public function productEdit(string $id): mixed {
+        $store = Store::findByUserId(auth_id());
+        $product = Product::find((int) $id);
+
+        if (!$product || (int) $product['store_id'] !== (int) $store['id']) {
+            http_response_code(404);
+            return $this->view('errors/404');
+        }
+
+        return $this->view('store-owner/products/edit', [
+            'product' => $product,
+            'categories' => Category::all('name ASC'),
+        ]);
+    }
+
+    public function productUpdate(string $id): mixed {
+        csrf_verify_or_abort();
+
+        $store = Store::findByUserId(auth_id());
+        $product = Product::find((int) $id);
+
+        if (!$product || (int) $product['store_id'] !== (int) $store['id']) {
+            http_response_code(404);
+            return $this->view('errors/404');
+        }
+
+        $upload = ['path' => null, 'errors' => []];
+        if (!empty($_FILES['image']['name'])) {
+            $upload = $this->images->upload($_FILES['image'], config('settings.upload.products_dir'));
+        }
+
+        $errors = $this->products->updateOwnProduct((int) $id, Request::all(), $upload['path']);
+
+        if ($errors || $upload['errors']) {
+            return $this->view('store-owner/products/edit', [
+                'product' => $product,
+                'categories' => Category::all('name ASC'),
+                'errors' => $errors,
+            ]);
+        }
+
+        if ($upload['path'] && $product['image']) {
+            $this->images->delete($product['image']);
+        }
+
+        flash('success', 'Product updated.');
+        Response::redirect(url('store/products'));
+    }
+
     public function productDestroy(string $id): never {
         csrf_verify_or_abort();
 

@@ -28,10 +28,13 @@ ob_start();
     <td><?= (int) $product['stock'] ?></td>
     <td><?= skoolyst_status_badge(str_replace('_', ' ', ucfirst($product['status'])), $product['status']) ?></td>
     <td>
-      <form method="post" action="<?= url('store/products/' . $product['id'] . '/delete') ?>" onsubmit="return confirm('Delete this product?');">
-        <?= csrf_field() ?>
-        <button type="submit" class="btn btn-sm btn-light-navy text-danger" title="Delete"><i class="fa-solid fa-trash"></i></button>
-      </form>
+      <div class="d-flex gap-1">
+        <a href="<?= url('store/products/' . $product['id'] . '/edit') ?>" class="btn btn-sm btn-light-navy" title="Edit"><i class="fa-solid fa-pen"></i></a>
+        <form method="post" action="<?= url('store/products/' . $product['id'] . '/delete') ?>" onsubmit="return confirm('Delete this product?');">
+          <?= csrf_field() ?>
+          <button type="submit" class="btn btn-sm btn-light-navy text-danger" title="Delete"><i class="fa-solid fa-trash"></i></button>
+        </form>
+      </div>
     </td>
   </tr>
   <?php endforeach; ?>
