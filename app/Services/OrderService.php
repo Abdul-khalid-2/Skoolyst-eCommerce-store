@@ -87,4 +87,57 @@ class OrderService {
 
         return $number;
     }
+
+    /** Every order in the system, for the admin order list. */
+    public function paginateForAdmin(array $filters, int $page, int $perPage): array {
+        return $this->wrapPagination(Order::paginateForAdmin($filters, max(1, $page), $perPage), $page, $perPage);
+    }
+
+    /** Only orders containing at least one of this store's own items. */
+    public function paginateForStore(int $storeId, array $filters, int $page, int $perPage): array {
+        return $this->wrapPagination(Order::paginateForStore($storeId, $filters, max(1, $page), $perPage), $page, $perPage);
+    }
+
+    /** @return array{order: array, items: list<array>}|null */
+    public function findForAdmin(int $id): ?array {
+        $order = Order::find($id);
+        if (!$order) {
+            return null;
+        }
+
+        return ['order' => $order, 'items' => OrderItem::byOrderId($id)];
+    }
+
+    /**
+     * @return array{order: array, items: list<array>}|null null when the order
+     *     doesn't exist OR has no items belonging to $storeId — a store admin
+     *     has no business seeing an order it isn't part of.
+     */
+    public function findForStore(int $id, int $storeId): ?array {
+        $order = Order::find($id);
+        if (!$order) {
+            return null;
+        }
+
+        $items = OrderItem::byOrderAndStore($id, $storeId);
+        if (!$items) {
+            return null;
+        }
+
+        return ['order' => $order, 'items' => $items];
+    }
+
+    public function setStatus(int $id, string $status): void {
+        Order::updateById($id, ['status' => $status]);
+    }
+
+    private function wrapPagination(array $result, int $page, int $perPage): array {
+        return [
+            'rows' => $result['rows'],
+            'total' => $result['total'],
+            'page' => max(1, $page),
+            'perPage' => $perPage,
+            'totalPages' => max(1, (int) ceil($result['total'] / $perPage)),
+        ];
+    }
 }

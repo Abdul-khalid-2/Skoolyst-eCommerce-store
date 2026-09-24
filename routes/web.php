@@ -3,6 +3,7 @@
 
 use Skoolyst\Controllers\Admin\CategoryController as AdminCategoryController;
 use Skoolyst\Controllers\Admin\DashboardController as AdminDashboardController;
+use Skoolyst\Controllers\Admin\OrderController as AdminOrderController;
 use Skoolyst\Controllers\Admin\ProductController as AdminProductController;
 use Skoolyst\Controllers\Admin\StoreController as AdminStoreController;
 use Skoolyst\Controllers\AuthController;
@@ -73,9 +74,15 @@ $router->get('/store/products', [StoreOwnerController::class, 'productsIndex'], 
 $router->get('/store/products/create', [StoreOwnerController::class, 'productCreate'], [StoreOwnerMiddleware::class]);
 $router->post('/store/products', [StoreOwnerController::class, 'productStore'], [StoreOwnerMiddleware::class]);
 $router->post('/store/products/{id}/delete', [StoreOwnerController::class, 'productDestroy'], [StoreOwnerMiddleware::class]);
+$router->get('/store/orders', [StoreOwnerController::class, 'ordersIndex'], [StoreOwnerMiddleware::class]);
+$router->get('/store/orders/{id}', [StoreOwnerController::class, 'orderShow'], [StoreOwnerMiddleware::class]);
 
 // ---- Admin (platform admin managing the store directory) ----
 $router->get('/admin/dashboard', [AdminDashboardController::class, 'index'], [AdminMiddleware::class]);
+
+$router->get('/admin/orders', [AdminOrderController::class, 'index'], [AdminMiddleware::class]);
+$router->get('/admin/orders/{id}', [AdminOrderController::class, 'show'], [AdminMiddleware::class]);
+$router->post('/admin/orders/{id}/status', [AdminOrderController::class, 'setStatus'], [AdminMiddleware::class]);
 
 $router->get('/admin/stores', [AdminStoreController::class, 'index'], [AdminMiddleware::class]);
 $router->get('/admin/stores/create', [AdminStoreController::class, 'create'], [AdminMiddleware::class]);

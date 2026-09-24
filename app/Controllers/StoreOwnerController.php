@@ -11,6 +11,7 @@ use Skoolyst\Models\Product;
 use Skoolyst\Models\Store;
 use Skoolyst\Models\User;
 use Skoolyst\Services\ImageService;
+use Skoolyst\Services\OrderService;
 use Skoolyst\Services\ProductService;
 use Skoolyst\Services\StoreService;
 
@@ -21,11 +22,13 @@ class StoreOwnerController extends Controller {
     private StoreService $stores;
     private ProductService $products;
     private ImageService $images;
+    private OrderService $orders;
 
     public function __construct() {
         $this->stores = new StoreService();
         $this->products = new ProductService();
         $this->images = new ImageService();
+        $this->orders = new OrderService();
     }
 
     public function create(): mixed {
@@ -155,5 +158,31 @@ class StoreOwnerController extends Controller {
         }
 
         Response::redirect(url('store/products'));
+    }
+
+    public function ordersIndex(): mixed {
+        $store = Store::findByUserId(auth_id());
+        $filters = array_filter([
+            'status' => trim((string) Request::input('status', '')),
+        ]);
+        $page = (int) Request::input('page', 1);
+        $perPage = (int) config('settings.pagination.admin_per_page', 15);
+
+        return $this->view('store-owner/orders/index', [
+            'store' => $store,
+            'result' => $this->orders->paginateForStore((int) $store['id'], $filters, $page, $perPage),
+            'filters' => $filters,
+        ]);
+    }
+
+    public function orderShow(string $id): mixed {
+        $store = Store::findByUserId(auth_id());
+        $data = $this->orders->findForStore((int) $id, (int) $store['id']);
+        if (!$data) {
+            http_response_code(404);
+            return $this->view('errors/404');
+        }
+
+        return $this->view('store-owner/orders/show', $data);
     }
 }

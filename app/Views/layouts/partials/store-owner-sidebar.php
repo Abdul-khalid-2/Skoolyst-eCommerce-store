@@ -11,6 +11,7 @@ $link = static fn (string $key, string $icon, string $label, string $href) =>
     <?= $link('dashboard', 'fa-gauge-high', 'Dashboard', url('store/dashboard')) ?>
     <?= $link('store', 'fa-store', 'Store Details', url('store/edit')) ?>
     <?= $link('products', 'fa-box', 'Products', url('store/products')) ?>
+    <?= $link('orders', 'fa-receipt', 'Orders', url('store/orders')) ?>
     <div class="nav-section-label">Account</div>
     <a class="nav-link" href="<?= url('logout') ?>"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
   </nav>

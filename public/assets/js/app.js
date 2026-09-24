@@ -79,22 +79,25 @@
     const card = btn.closest(".product-card, .col-lg-6, main");
     const qtyInput = card ? card.querySelector("[data-qty]") : null;
     const qty = qtyInput ? (parseInt(qtyInput.value, 10) || 1) : 1;
+    const originalHtml = btn.innerHTML;
     btn.disabled = true;
+    btn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
     postForm(window.SK_URL_BASE + "cart/add", { product_id: id, qty: qty })
       .then(function (res) {
         showToast(res.message || (res.ok ? "Added to cart" : "Could not add to cart"));
         if (res.ok) window.skUpdateCartBadge(res.count);
       })
       .catch(function () { showToast("Something went wrong. Please try again."); })
-      .finally(function () { btn.disabled = false; });
+      .finally(function () { btn.disabled = false; btn.innerHTML = originalHtml; });
   });
 
   /* ---------- Favorite toggle buttons ---------- */
   document.addEventListener("click", function (e) {
     const btn = e.target.closest("[data-favorite-toggle]");
-    if (!btn) return;
+    if (!btn || btn.disabled) return;
     e.preventDefault();
     const id = btn.dataset.id;
+    btn.disabled = true;
     postForm(window.SK_URL_BASE + "favorites/toggle/" + id, {})
       .then(function (res) {
         if (!res.ok) return;
@@ -105,7 +108,8 @@
         window.skUpdateFavoriteBadge(res.count);
         showToast(res.isFavorite ? "Added to favorites" : "Removed from favorites");
       })
-      .catch(function () { showToast("Something went wrong. Please try again."); });
+      .catch(function () { showToast("Something went wrong. Please try again."); })
+      .finally(function () { btn.disabled = false; });
   });
 
   /* ---------- Live image preview on file inputs ---------- */
@@ -195,6 +199,21 @@
       showToast("Please fill in all required fields correctly");
     }
     // Otherwise let the form submit normally to the server route.
+  });
+
+  /* ---------- Prevent double-submit: disable + show a spinner on the submit button ---------- */
+  document.addEventListener("submit", function (e) {
+    if (e.defaultPrevented) return;
+    const form = e.target;
+    const btn = form.querySelector('button[type="submit"], input[type="submit"]');
+    if (!btn || btn.disabled) return;
+
+    btn.disabled = true;
+    if (btn.tagName === "BUTTON") {
+      btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Please wait...';
+    } else {
+      btn.value = "Please wait...";
+    }
   });
 
   /* ---------- Tab persistence via ?tab= (store profile, settings) ---------- */

@@ -13,6 +13,7 @@ $link = static fn (string $key, string $icon, string $label, string $href) =>
     <?= $link('dashboard', 'fa-gauge-high', 'Dashboard', url('admin/dashboard')) ?>
     <?= $link('stores', 'fa-store', 'Stores', url('admin/stores')) ?>
     <?= $link('products', 'fa-box', 'Products', url('admin/products')) ?>
+    <?= $link('orders', 'fa-receipt', 'Orders', url('admin/orders')) ?>
     <?= $link('categories', 'fa-tags', 'Categories', url('admin/categories')) ?>
     <div class="nav-section-label">Account</div>
     <a class="nav-link" href="<?= url('logout') ?>"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>

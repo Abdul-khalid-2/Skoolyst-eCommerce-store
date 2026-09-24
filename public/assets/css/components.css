@@ -46,6 +46,9 @@
 .status-inactive { background: var(--skoolyst-danger-bg); color: var(--skoolyst-danger); }
 .status-out-of-stock { background: var(--skoolyst-danger-bg); color: var(--skoolyst-danger); }
 .status-draft { background: var(--skoolyst-border); color: var(--skoolyst-muted); }
+.status-processing { background: var(--skoolyst-warning-bg); color: var(--skoolyst-warning); }
+.status-completed { background: var(--skoolyst-success-bg); color: var(--skoolyst-success); }
+.status-cancelled { background: var(--skoolyst-danger-bg); color: var(--skoolyst-danger); }
 
 /* ---------- Cards ---------- */
 .card { border: 1px solid var(--sk-border); border-radius: var(--skoolyst-card-radius); box-shadow: var(--skoolyst-shadow-sm); transition: box-shadow .2s, transform .2s; background: var(--sk-surface); }
