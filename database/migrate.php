@@ -3,8 +3,10 @@ declare(strict_types=1);
 
 /**
  * Minimal migration runner: applies pending .php files from database/migrations
- * (each returning ['up' => sql, 'down' => sql]) in filename order and records
- * each one in the `store_migrations` table.
+ * (each returning ['up' => sql|callable, 'down' => sql|callable]) in filename
+ * order and records each one in the `store_migrations` table. 'up'/'down' may
+ * be a raw SQL string, or a callable(PDO $pdo) when the migration needs
+ * conditional logic (e.g. checking whether a table already exists).
  * Usage: php database/migrate.php
  */
 require dirname(__DIR__) . '/bootstrap/app.php';
@@ -34,7 +36,8 @@ foreach ($files as $file) {
     }
 
     $migration = require $file;
-    $pdo->exec($migration['up']);
+    $up = $migration['up'];
+    is_callable($up) ? $up($pdo) : $pdo->exec($up);
 
     $stmt = $pdo->prepare('INSERT INTO store_migrations (migration) VALUES (:name)');
     $stmt->execute(['name' => $name]);
