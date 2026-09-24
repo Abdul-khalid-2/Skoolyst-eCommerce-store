@@ -1,0 +1,31 @@
+<?php
+return [
+    'up' => "CREATE TABLE IF NOT EXISTS store_stores (
+        id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        user_id INT UNSIGNED DEFAULT NULL,
+        category_id INT UNSIGNED DEFAULT NULL,
+        name VARCHAR(160) NOT NULL,
+        slug VARCHAR(180) NOT NULL,
+        description TEXT,
+        city VARCHAR(80) DEFAULT NULL,
+        address VARCHAR(255) DEFAULT NULL,
+        store_type ENUM('retail','wholesale','brand_outlet') NOT NULL DEFAULT 'retail',
+        phone VARCHAR(30) DEFAULT NULL,
+        email VARCHAR(160) DEFAULT NULL,
+        website VARCHAR(255) DEFAULT NULL,
+        logo VARCHAR(255) DEFAULT NULL,
+        cover_image VARCHAR(255) DEFAULT NULL,
+        status ENUM('active','pending','inactive') NOT NULL DEFAULT 'pending',
+        verified TINYINT(1) NOT NULL DEFAULT 0,
+        rating DECIMAL(3,2) NOT NULL DEFAULT 0,
+        created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        UNIQUE KEY uq_stores_slug (slug),
+        KEY idx_stores_city (city),
+        KEY idx_stores_status (status),
+        KEY idx_stores_category (category_id),
+        CONSTRAINT fk_stores_category FOREIGN KEY (category_id) REFERENCES store_store_categories(id) ON DELETE SET NULL,
+        CONSTRAINT fk_stores_user FOREIGN KEY (user_id) REFERENCES store_users(id) ON DELETE SET NULL
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci",
+    'down' => 'DROP TABLE IF EXISTS store_stores',
+];

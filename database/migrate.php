@@ -2,8 +2,9 @@
 declare(strict_types=1);
 
 /**
- * Minimal migration runner: applies pending .sql files from database/migrations
- * in filename order and records each one in a `migrations` table.
+ * Minimal migration runner: applies pending .php files from database/migrations
+ * (each returning ['up' => sql, 'down' => sql]) in filename order and records
+ * each one in the `store_migrations` table.
  * Usage: php database/migrate.php
  */
 require dirname(__DIR__) . '/bootstrap/app.php';
@@ -22,7 +23,7 @@ $pdo->exec("CREATE TABLE IF NOT EXISTS store_migrations (
 $applied = $pdo->query('SELECT migration FROM store_migrations')->fetchAll(PDO::FETCH_COLUMN);
 
 $dir = __DIR__ . '/migrations';
-$files = glob($dir . '/*.sql');
+$files = glob($dir . '/*.php');
 sort($files);
 
 $ran = 0;
@@ -32,8 +33,8 @@ foreach ($files as $file) {
         continue;
     }
 
-    $sql = file_get_contents($file);
-    $pdo->exec($sql);
+    $migration = require $file;
+    $pdo->exec($migration['up']);
 
     $stmt = $pdo->prepare('INSERT INTO store_migrations (migration) VALUES (:name)');
     $stmt->execute(['name' => $name]);

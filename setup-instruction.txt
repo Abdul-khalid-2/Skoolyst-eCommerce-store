@@ -73,9 +73,10 @@ Make sure DB_DATABASE in .env matches the name you created.
 ------------------------------------------------------------------------
     php database/migrate.php
 
-This applies every *.sql file in database/migrations/ in order (currently
-0001 through 0009) and tracks applied migrations in a `migrations` table,
-so it's safe to re-run — only pending files are applied.
+This applies every *.php file in database/migrations/ in order (currently
+0001 through 0012), each returning ['up' => sql, 'down' => sql], and tracks
+applied migrations in a `store_migrations` table, so it's safe to re-run —
+only pending files are applied.
 
 All domain tables are created with a `store_` prefix (store_users,
 store_stores, store_products, store_store_categories, store_product_categories,
