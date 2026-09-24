@@ -5,7 +5,7 @@ return [
         name VARCHAR(120) NOT NULL,
         email VARCHAR(160) NOT NULL,
         password VARCHAR(255) NOT NULL,
-        role ENUM('admin','user') NOT NULL DEFAULT 'user',
+        role ENUM('admin','store_admin','user') NOT NULL DEFAULT 'user',
         created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
         updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
         UNIQUE KEY uq_users_email (email)

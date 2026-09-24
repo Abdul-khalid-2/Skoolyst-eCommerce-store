@@ -73,17 +73,17 @@ Make sure DB_DATABASE in .env matches the name you created.
 ------------------------------------------------------------------------
     php database/migrate.php
 
-This applies every *.php file in database/migrations/ in order (currently
-0001 through 0012), each returning ['up' => sql, 'down' => sql], and tracks
-applied migrations in a `store_migrations` table, so it's safe to re-run —
-only pending files are applied.
+This applies every *.php file in database/migrations/ in order (timestamp
+prefixed, e.g. 2026_09_24_090000_create_store_users_table.php), each
+returning ['up' => sql, 'down' => sql], and tracks applied migrations in
+a `store_migrations` table, so it's safe to re-run — only pending files
+are applied.
 
 All domain tables are created with a `store_` prefix (store_users,
 store_stores, store_products, store_store_categories, store_product_categories,
-store_store_images, store_product_images). Migration 0009 renames the
-originally-unprefixed tables for databases that were migrated before this
-convention was introduced; on a fresh install 0001-0007 create the
-prefixed tables directly and 0009 has nothing to do.
+store_store_images, store_product_images, store_orders, store_order_items).
+Every migration creates its prefixed table directly — there are no legacy
+rename/alter fixup migrations to carry forward.
 
 (A full reference schema dump also exists at database/sql/module_database.sql
 if you ever need to inspect or import the final schema directly, but the
