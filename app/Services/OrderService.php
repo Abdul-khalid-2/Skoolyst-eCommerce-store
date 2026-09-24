@@ -9,6 +9,9 @@ use Skoolyst\Models\Order;
 use Skoolyst\Models\OrderItem;
 
 class OrderService {
+    /** Store Pickup is fully built (single-store detection included) but turned off for now — flip to true to re-enable. */
+    public const PICKUP_ENABLED = false;
+
     private const RULES = [
         'full_name' => 'required|max:160',
         'phone' => 'required|max:30',
@@ -34,9 +37,20 @@ class OrderService {
             return ['errors' => $errors, 'order' => null];
         }
 
+        // Store Pickup only makes sense when every item comes from the same
+        // store, so a tampered/stale request can't force it on a multi-store
+        // cart even though the UI already disables that option. Pickup itself
+        // is currently switched off altogether (see PICKUP_ENABLED).
+        $singleStore = count(array_unique(array_column($cartItems, 'store_id'))) <= 1;
         $deliveryMethod = $data['delivery_method'] ?? 'delivery';
+        if ($deliveryMethod === 'pickup' && (!self::PICKUP_ENABLED || !$singleStore)) {
+            $deliveryMethod = 'delivery';
+        }
         $deliveryFee = $deliveryMethod === 'pickup' ? 0.0 : (new CartService())->deliveryFee($subtotal);
         $total = $subtotal + $deliveryFee;
+
+        // Online payment has no gateway wired up yet — always settle as COD.
+        $paymentMethod = 'cod';
 
         $pdo = Database::connection();
         $pdo->beginTransaction();
@@ -52,7 +66,7 @@ class OrderService {
                 'area' => $data['area'] ?? null,
                 'postal_code' => $data['postal_code'] ?? null,
                 'delivery_method' => $deliveryMethod,
-                'payment_method' => $data['payment_method'] ?? 'cod',
+                'payment_method' => $paymentMethod,
                 'subtotal' => $subtotal,
                 'delivery_fee' => $deliveryFee,
                 'total' => $total,

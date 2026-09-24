@@ -7,6 +7,10 @@ $robots = 'noindex, follow';
 $old = $old ?? [];
 $errors = $errors ?? [];
 $val = static fn (string $key, string $default = '') => (string) ($old[$key] ?? $default);
+$singleStore = $singleStore ?? false;
+$pickupEnabled = $pickupEnabled ?? false;
+$pickupAvailable = $pickupEnabled && $singleStore;
+$deliveryMethod = $pickupAvailable ? $val('delivery_method', 'delivery') : 'delivery';
 
 ob_start();
 ?>
@@ -18,7 +22,7 @@ ob_start();
 
 <section class="section-sm">
   <div class="container">
-    <?= skoolyst_alert('Cash on Delivery is fully supported. Online Payment is recorded as your chosen method but no payment gateway is connected yet.', 'info') ?>
+    <?= skoolyst_alert('Cash on Delivery is the only payment option for now — online payment is coming soon.', 'info') ?>
     <?php if (!empty($errors['cart'])): ?><?= skoolyst_alert($errors['cart'], 'danger', 'bi-exclamation-triangle-fill') ?><?php endif; ?>
     <h1 class="mb-4">Checkout</h1>
     <form method="post" action="<?= url('checkout') ?>" data-validate>
@@ -56,19 +60,24 @@ ob_start();
             <div class="form-card-title"><i class="bi bi-truck text-navy me-1"></i> Delivery Method</div>
             <div class="d-flex flex-column gap-2">
               <div class="form-check border rounded p-3">
-                <input class="form-check-input" type="radio" name="delivery_method" value="delivery" id="dmStandard" <?= $val('delivery_method', 'delivery') === 'delivery' ? 'checked' : '' ?>>
+                <input class="form-check-input" type="radio" name="delivery_method" value="delivery" id="dmStandard" <?= $deliveryMethod === 'delivery' ? 'checked' : '' ?>>
                 <label class="form-check-label d-flex justify-content-between align-items-center w-100 ms-2" for="dmStandard">
                   <span><i class="bi bi-truck me-2"></i>Standard Delivery <span class="small text-muted d-block ms-4">3-5 business days</span></span>
                   <span class="fw-bold text-navy">Rs. 200 (free over Rs. 3,000)</span>
                 </label>
               </div>
-              <div class="form-check border rounded p-3">
-                <input class="form-check-input" type="radio" name="delivery_method" value="pickup" id="dmPickup" <?= $val('delivery_method') === 'pickup' ? 'checked' : '' ?>>
+              <div class="form-check border rounded p-3<?= $pickupAvailable ? '' : ' opacity-50' ?>">
+                <input class="form-check-input" type="radio" name="delivery_method" value="pickup" id="dmPickup" <?= $deliveryMethod === 'pickup' ? 'checked' : '' ?> <?= $pickupAvailable ? '' : 'disabled' ?>>
                 <label class="form-check-label d-flex justify-content-between align-items-center w-100 ms-2" for="dmPickup">
                   <span><i class="bi bi-shop me-2"></i>Store Pickup <span class="small text-muted d-block ms-4">Pick up from store</span></span>
                   <span class="fw-bold text-success">Free</span>
                 </label>
               </div>
+              <?php if (!$pickupEnabled): ?>
+              <div class="small text-muted"><i class="bi bi-info-circle"></i> Store pickup isn't available yet — only delivery is offered for now.</div>
+              <?php elseif (!$singleStore): ?>
+              <div class="small text-muted"><i class="bi bi-info-circle"></i> Your cart has items from more than one store, so store pickup isn't available for this order — only delivery is offered when ordering from multiple stores at once.</div>
+              <?php endif; ?>
             </div>
           </div>
 
@@ -76,21 +85,21 @@ ob_start();
             <div class="form-card-title"><i class="bi bi-credit-card-fill text-navy me-1"></i> Payment Method</div>
             <div class="d-flex flex-column gap-2">
               <div class="form-check border rounded p-3">
-                <input class="form-check-input" type="radio" name="payment_method" value="cod" id="pmCod" <?= $val('payment_method', 'cod') === 'cod' ? 'checked' : '' ?>>
+                <input class="form-check-input" type="radio" name="payment_method" value="cod" id="pmCod" checked>
                 <label class="form-check-label d-flex align-items-center w-100 ms-2" for="pmCod">
                   <i class="bi bi-cash-coin me-2 fs-5 text-success"></i>
                   <span>Cash on Delivery <span class="small text-muted d-block">Pay when you receive your order</span></span>
                 </label>
               </div>
-              <div class="form-check border rounded p-3">
-                <input class="form-check-input" type="radio" name="payment_method" value="online" id="pmOnline" <?= $val('payment_method') === 'online' ? 'checked' : '' ?>>
+              <div class="form-check border rounded p-3 opacity-50">
+                <input class="form-check-input" type="radio" name="payment_method" value="online" id="pmOnline" disabled>
                 <label class="form-check-label d-flex align-items-center w-100 ms-2" for="pmOnline">
                   <i class="bi bi-credit-card me-2 fs-5 text-navy"></i>
-                  <span>Online Payment <span class="small text-muted d-block">Pay with card or mobile wallet</span></span>
+                  <span>Online Payment <span class="small text-muted d-block">Coming soon</span></span>
                 </label>
               </div>
             </div>
-            <div class="small text-muted mt-2"><i class="bi bi-info-circle text-navy"></i> We don't collect any card or wallet details at checkout — Cash on Delivery is paid directly to the courier or store.</div>
+            <div class="small text-muted mt-2"><i class="bi bi-info-circle text-navy"></i> Online payment isn't connected yet — Cash on Delivery is the only option for now.</div>
           </div>
         </div>
 

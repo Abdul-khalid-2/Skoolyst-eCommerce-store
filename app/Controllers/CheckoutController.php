@@ -34,6 +34,8 @@ class CheckoutController extends Controller {
             'subtotal' => $cart['subtotal'],
             'deliveryFee' => $deliveryFee,
             'total' => $cart['subtotal'] + $deliveryFee,
+            'singleStore' => $this->isSingleStore($cart['items']),
+            'pickupEnabled' => OrderService::PICKUP_ENABLED,
             'old' => [],
             'errors' => [],
         ]);
@@ -58,6 +60,8 @@ class CheckoutController extends Controller {
                 'subtotal' => $cart['subtotal'],
                 'deliveryFee' => $deliveryFee,
                 'total' => $cart['subtotal'] + $deliveryFee,
+                'singleStore' => $this->isSingleStore($cart['items']),
+                'pickupEnabled' => OrderService::PICKUP_ENABLED,
                 'old' => $data,
                 'errors' => $result['errors'],
             ]);
@@ -78,5 +82,10 @@ class CheckoutController extends Controller {
             'order' => $order,
             'items' => OrderItem::byOrderId((int) $order['id']),
         ]);
+    }
+
+    /** Store Pickup only makes sense when every cart item comes from the same store. */
+    private function isSingleStore(array $items): bool {
+        return count(array_unique(array_column($items, 'store_id'))) <= 1;
     }
 }

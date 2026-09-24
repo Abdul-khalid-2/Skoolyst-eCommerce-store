@@ -38,7 +38,6 @@ function slugify(string $text): string
     return trim($slug, '-');
 }
 
-/** Appends a filemtime-based ?v= query string so browsers pick up new CSS/JS after every deploy. */
 /**
  * Resolves a stored image path (e.g. "uploads/products/abc.jpg") to an absolute URL.
  * Already-absolute URLs (external fallback images) are returned unchanged so the
@@ -56,6 +55,7 @@ function media_url(?string $path, string $fallback = ''): string
     return url($path);
 }
 
+/** Appends a filemtime-based ?v= query string so browsers pick up new CSS/JS after every deploy. */
 function asset(string $path): string
 {
     $relative = 'assets/' . ltrim($path, '/');
@@ -63,6 +63,15 @@ function asset(string $path): string
     $version = is_file($absolute) ? filemtime($absolute) : null;
 
     return url($relative) . ($version ? '?v=' . $version : '');
+}
+
+/** The app favicon, served from /public/favicon.jpg with the same cache-busting as asset(). */
+function favicon_url(): string
+{
+    $absolute = dirname(__DIR__, 2) . '/public/favicon.jpg';
+    $version = is_file($absolute) ? filemtime($absolute) : null;
+
+    return url('favicon.jpg') . ($version ? '?v=' . $version : '');
 }
 
 function paginate_offset(int $page, int $perPage): int
