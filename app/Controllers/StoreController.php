@@ -5,14 +5,18 @@ namespace Skoolyst\Controllers;
 
 use Skoolyst\Core\Controller;
 use Skoolyst\Core\Request;
+use Skoolyst\Core\Response;
 use Skoolyst\Models\Category;
+use Skoolyst\Services\ReviewService;
 use Skoolyst\Services\StoreService;
 
 class StoreController extends Controller {
     private StoreService $stores;
+    private ReviewService $reviews;
 
     public function __construct() {
         $this->stores = new StoreService();
+        $this->reviews = new ReviewService();
     }
 
     public function index(): mixed {
@@ -102,7 +106,29 @@ class StoreController extends Controller {
         return $this->view('stores/show', [
             'store' => $store,
             'products' => $productService->byStore((int) $store['id']),
+            'reviews' => $this->reviews->byStore((int) $store['id']),
         ]);
+    }
+
+    /** Customer review submission. Always saved as pending — visible only after admin approval. */
+    public function storeReview(string $slug): never {
+        csrf_verify_or_abort();
+
+        $store = $this->stores->findBySlugOrFail($slug);
+        if (!$store) {
+            http_response_code(404);
+            Response::redirect(url('stores'));
+        }
+
+        $result = $this->reviews->create((int) $store['id'], (int) auth_user()['id'], Request::all());
+
+        if ($result['errors']) {
+            flash('errors', $result['errors']);
+        } else {
+            flash('success', 'Thanks for your review! It will appear once approved by our team.');
+        }
+
+        Response::redirect(url('stores/' . $slug));
     }
 
     private function filtersFromRequest(): array {

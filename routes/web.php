@@ -5,6 +5,7 @@ use Skoolyst\Controllers\Admin\CategoryController as AdminCategoryController;
 use Skoolyst\Controllers\Admin\DashboardController as AdminDashboardController;
 use Skoolyst\Controllers\Admin\OrderController as AdminOrderController;
 use Skoolyst\Controllers\Admin\ProductController as AdminProductController;
+use Skoolyst\Controllers\Admin\ReviewController as AdminReviewController;
 use Skoolyst\Controllers\Admin\StoreController as AdminStoreController;
 use Skoolyst\Controllers\AuthController;
 use Skoolyst\Controllers\CartController;
@@ -34,6 +35,7 @@ $router->get('/stores/search', [StoreController::class, 'search']);
 $router->get('/stores/category/{slug}', [StoreController::class, 'category']);
 $router->get('/stores/city/{slug}', [StoreController::class, 'city']);
 $router->get('/stores/{slug}', [StoreController::class, 'show']);
+$router->post('/stores/{slug}/reviews', [StoreController::class, 'storeReview'], [AuthMiddleware::class]);
 
 $router->get('/products', [ProductController::class, 'index']);
 $router->get('/products/{slug}', [ProductController::class, 'show']);
@@ -100,6 +102,10 @@ $router->get('/admin/products/create', [AdminProductController::class, 'create']
 $router->post('/admin/products', [AdminProductController::class, 'store'], [AdminMiddleware::class]);
 $router->post('/admin/products/{id}/status', [AdminProductController::class, 'setStatus'], [AdminMiddleware::class]);
 $router->post('/admin/products/{id}/delete', [AdminProductController::class, 'destroy'], [AdminMiddleware::class]);
+
+$router->get('/admin/reviews', [AdminReviewController::class, 'index'], [AdminMiddleware::class]);
+$router->post('/admin/reviews/{id}/status', [AdminReviewController::class, 'setStatus'], [AdminMiddleware::class]);
+$router->post('/admin/reviews/{id}/delete', [AdminReviewController::class, 'destroy'], [AdminMiddleware::class]);
 
 $router->get('/admin/categories', [AdminCategoryController::class, 'index'], [AdminMiddleware::class]);
 $router->get('/admin/categories/create', [AdminCategoryController::class, 'create'], [AdminMiddleware::class]);

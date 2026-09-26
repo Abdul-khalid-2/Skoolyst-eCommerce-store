@@ -1,5 +1,5 @@
 <?php
-/** Vars from StoreController::show(): $store, $products. */
+/** Vars from StoreController::show(): $store, $products, $reviews. */
 require __DIR__ . '/../products/_card.php';
 
 $title = clean($store['name']) . ' — Skoolyst Store';
@@ -90,6 +90,57 @@ ob_start();
             <?= render_product_card(array_merge($product, ['store_name' => $store['name'], 'store_slug' => $store['slug']])) ?>
           <?php endforeach; ?>
         </div>
+        <?php endif; ?>
+
+        <div class="section-heading mt-5"><h2>Reviews</h2></div>
+        <?php if ($msg = flash('success')): ?><?= skoolyst_alert($msg, 'success', 'bi-check-circle-fill') ?><?php endif; ?>
+        <?php if ($errors = flash('errors')): ?>
+          <?= skoolyst_alert(implode(' ', $errors), 'danger', 'bi-exclamation-triangle-fill') ?>
+        <?php endif; ?>
+
+        <?php if (!$reviews): ?>
+          <?= skoolyst_empty_state('bi-chat-square-text', 'No reviews yet', 'Be the first to review this store.') ?>
+        <?php else: ?>
+        <div class="d-flex flex-column gap-3 mb-4">
+          <?php foreach ($reviews as $review): ?>
+          <div class="dash-panel">
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="stars"><?= $stars((float) $review['rating']) ?></span>
+              <span class="small text-muted"><?= clean($review['user_name'] ?? 'Guest') ?></span>
+            </div>
+            <?php if ($review['title']): ?><div class="fw-semibold mt-2"><?= clean($review['title']) ?></div><?php endif; ?>
+            <?php if ($review['comment']): ?><p class="small text-muted mb-0 mt-1"><?= clean($review['comment']) ?></p><?php endif; ?>
+          </div>
+          <?php endforeach; ?>
+        </div>
+        <?php endif; ?>
+
+        <?php if (is_authenticated()): ?>
+        <div class="dash-panel">
+          <h5 class="panel-title">Write a Review</h5>
+          <form method="post" action="<?= url('stores/' . $store['slug'] . '/reviews') ?>">
+            <?= csrf_field() ?>
+            <div class="mb-3">
+              <label class="form-label small">Rating</label>
+              <select name="rating" class="form-select form-select-sm" style="width:auto" required>
+                <?php foreach ([5, 4, 3, 2, 1] as $value): ?>
+                <option value="<?= $value ?>"><?= $value ?> Star<?= $value > 1 ? 's' : '' ?></option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label small">Title (optional)</label>
+              <input type="text" name="title" class="form-control form-control-sm" maxlength="160">
+            </div>
+            <div class="mb-3">
+              <label class="form-label small">Comment (optional)</label>
+              <textarea name="comment" class="form-control form-control-sm" rows="3" maxlength="2000"></textarea>
+            </div>
+            <button type="submit" class="btn btn-sm btn-navy">Submit Review</button>
+          </form>
+        </div>
+        <?php else: ?>
+          <p class="small text-muted"><a href="<?= url('login') ?>">Log in</a> to write a review for this store.</p>
         <?php endif; ?>
       </div>
       <div class="col-lg-4">
