@@ -9,6 +9,7 @@ use Skoolyst\Core\Response;
 use Skoolyst\Models\Order;
 use Skoolyst\Models\OrderItem;
 use Skoolyst\Services\CartService;
+use Skoolyst\Services\MailService;
 use Skoolyst\Services\OrderService;
 
 class CheckoutController extends Controller {
@@ -68,7 +69,11 @@ class CheckoutController extends Controller {
         }
 
         $this->cart->clear();
-        Response::redirect(url('checkout/success/' . $result['order']['order_number']));
+
+        $order = $result['order'];
+        (new MailService())->sendOrderConfirmation($order, OrderItem::byOrderId((int) $order['id']));
+
+        Response::redirect(url('checkout/success/' . $order['order_number']));
     }
 
     public function success(string $orderNumber): mixed {
