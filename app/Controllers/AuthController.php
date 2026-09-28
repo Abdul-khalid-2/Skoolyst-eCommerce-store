@@ -7,6 +7,7 @@ use Skoolyst\Core\Controller;
 use Skoolyst\Core\Request;
 use Skoolyst\Core\Response;
 use Skoolyst\Services\AuthService;
+use Skoolyst\Services\MailService;
 
 // Authentication UI/API entry points: login, logout, register, password flows.
 class AuthController extends Controller {
@@ -52,6 +53,8 @@ class AuthController extends Controller {
         if ($errors) {
             return $this->view('auth/register', ['errors' => $errors, 'old' => $data]);
         }
+
+        (new MailService())->sendWelcomeEmail($data['name'], $data['email']);
 
         flash('success', 'Account created. You can now log in.');
         Response::redirect(url('login'));

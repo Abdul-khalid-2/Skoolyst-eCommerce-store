@@ -7,6 +7,7 @@ use Skoolyst\Core\Controller;
 use Skoolyst\Core\Request;
 use Skoolyst\Core\Response;
 use Skoolyst\Models\Category;
+use Skoolyst\Services\MailService;
 use Skoolyst\Services\ReviewService;
 use Skoolyst\Services\StoreService;
 
@@ -120,11 +121,15 @@ class StoreController extends Controller {
             Response::redirect(url('stores'));
         }
 
-        $result = $this->reviews->create((int) $store['id'], (int) auth_user()['id'], Request::all());
+        $data = Request::all();
+        $result = $this->reviews->create((int) $store['id'], (int) auth_user()['id'], $data);
 
         if ($result['errors']) {
             flash('errors', $result['errors']);
         } else {
+            $reviewer = auth_user();
+            (new MailService())->sendReviewSubmittedEmail($reviewer['email'], $reviewer['name'], $store['name'], (int) $data['rating']);
+
             flash('success', 'Thanks for your review! It will appear once approved by our team.');
         }
 

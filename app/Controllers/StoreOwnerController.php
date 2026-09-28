@@ -11,6 +11,7 @@ use Skoolyst\Models\Product;
 use Skoolyst\Models\Store;
 use Skoolyst\Models\User;
 use Skoolyst\Services\ImageService;
+use Skoolyst\Services\MailService;
 use Skoolyst\Services\OrderService;
 use Skoolyst\Services\ProductService;
 use Skoolyst\Services\StoreService;
@@ -61,6 +62,9 @@ class StoreOwnerController extends Controller {
 
         User::updateById(auth_id(), ['role' => 'store_admin']);
         $_SESSION['user']['role'] = 'store_admin';
+
+        $owner = auth_user();
+        (new MailService())->sendStoreSubmittedEmail($owner['email'], $owner['name'], Request::input('name', ''));
 
         flash('success', 'Your store has been submitted and is pending approval.');
         Response::redirect(url('store/dashboard'));
@@ -141,6 +145,9 @@ class StoreOwnerController extends Controller {
                 'old' => Request::all(),
             ]);
         }
+
+        $owner = auth_user();
+        (new MailService())->sendProductAddedEmail($owner['email'], $owner['name'], Request::input('name', ''), $store['name']);
 
         flash('success', 'Product added.');
         Response::redirect(url('store/products'));

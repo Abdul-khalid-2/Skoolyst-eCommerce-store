@@ -93,4 +93,62 @@ class MailService {
 
         return $this->send($order['email'], 'Order Confirmation — ' . $order['order_number'], implode("\n", $lines));
     }
+
+    /** Welcome email sent right after a new account is registered. */
+    public function sendWelcomeEmail(string $name, string $email): bool {
+        $body = implode("\n", [
+            'Hi ' . $name . ',',
+            '',
+            'Welcome to Skoolyst Store! Your account has been created successfully.',
+            '',
+            'You can now browse stores, add products to your cart, and check out.',
+            '',
+            '— Skoolyst Store',
+        ]);
+
+        return $this->send($email, 'Welcome to Skoolyst Store', $body);
+    }
+
+    /** Sent to the owner right after they submit a new store via "Open a Store". */
+    public function sendStoreSubmittedEmail(string $ownerEmail, string $ownerName, string $storeName): bool {
+        $body = implode("\n", [
+            'Hi ' . $ownerName . ',',
+            '',
+            'Your store "' . $storeName . '" has been submitted to Skoolyst Store.',
+            '',
+            'It is currently pending approval — we will let you know once it has been reviewed by our team.',
+            '',
+            '— Skoolyst Store',
+        ]);
+
+        return $this->send($ownerEmail, 'Store Submitted — ' . $storeName, $body);
+    }
+
+    /** Sent to the store owner right after they add a new product to their store. */
+    public function sendProductAddedEmail(string $ownerEmail, string $ownerName, string $productName, string $storeName): bool {
+        $body = implode("\n", [
+            'Hi ' . $ownerName . ',',
+            '',
+            'Your product "' . $productName . '" has been added to your store "' . $storeName . '" on Skoolyst Store.',
+            '',
+            '— Skoolyst Store',
+        ]);
+
+        return $this->send($ownerEmail, 'Product Added — ' . $productName, $body);
+    }
+
+    /** Sent to the reviewer right after they submit a store review. */
+    public function sendReviewSubmittedEmail(string $email, string $name, string $storeName, int $rating): bool {
+        $body = implode("\n", [
+            'Hi ' . $name . ',',
+            '',
+            'Thanks for reviewing "' . $storeName . '" (' . $rating . '/5) on Skoolyst Store!',
+            '',
+            'Your review is pending approval and will appear on the store page once approved by our team.',
+            '',
+            '— Skoolyst Store',
+        ]);
+
+        return $this->send($email, 'Review Submitted — ' . $storeName, $body);
+    }
 }
