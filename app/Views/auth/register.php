@@ -23,6 +23,9 @@ ob_start();
   <?= skoolyst_btn('Create Account', ['variant' => 'accent', 'class' => 'w-100 mb-3', 'type' => 'submit', 'icon' => 'bi-person-plus']) ?>
 </form>
 
+<div class="text-center small text-muted my-3">or</div>
+<a href="<?= url('auth/skoolyst/redirect') ?>" class="btn btn-outline-navy w-100 mb-3"><i class="bi bi-box-arrow-in-right me-1"></i> Continue with Skoolyst</a>
+
 <hr class="my-4">
 <div class="text-center small">
   Already have an account? <a href="<?= url('login') ?>" class="fw-semibold">Login here</a>

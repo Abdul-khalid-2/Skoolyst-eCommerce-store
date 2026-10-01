@@ -15,4 +15,11 @@ class User extends Model {
         $row = $stmt->fetch();
         return $row === false ? null : $row;
     }
+
+    public static function findBySkoolystId(int $skoolystId): ?array {
+        $stmt = static::db()->prepare('SELECT * FROM store_users WHERE skoolyst_id = :skoolyst_id LIMIT 1');
+        $stmt->execute(['skoolyst_id' => $skoolystId]);
+        $row = $stmt->fetch();
+        return $row === false ? null : $row;
+    }
 }

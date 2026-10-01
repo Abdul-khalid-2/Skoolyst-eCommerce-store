@@ -30,6 +30,9 @@ ob_start();
   <?= skoolyst_btn('Login', ['variant' => 'navy', 'class' => 'w-100 mb-3', 'type' => 'submit', 'icon' => 'bi-box-arrow-in-right']) ?>
 </form>
 
+<div class="text-center small text-muted my-3">or</div>
+<a href="<?= url('auth/skoolyst/redirect') ?>" class="btn btn-outline-navy w-100 mb-3"><i class="bi bi-box-arrow-in-right me-1"></i> Login with Skoolyst</a>
+
 <hr class="my-4">
 <div class="text-center small">
   Don't have an account? <a href="<?= url('register') ?>" class="fw-semibold">Create one</a>

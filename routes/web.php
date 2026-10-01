@@ -15,6 +15,7 @@ use Skoolyst\Controllers\HomeController;
 use Skoolyst\Controllers\PageController;
 use Skoolyst\Controllers\ProductController;
 use Skoolyst\Controllers\SitemapController;
+use Skoolyst\Controllers\SkoolystAuthController;
 use Skoolyst\Controllers\StoreController;
 use Skoolyst\Controllers\StoreOwnerController;
 use Skoolyst\Middleware\AdminMiddleware;
@@ -65,6 +66,9 @@ $router->post('/login', [AuthController::class, 'login'], [GuestMiddleware::clas
 $router->get('/register', [AuthController::class, 'registerForm'], [GuestMiddleware::class]);
 $router->post('/register', [AuthController::class, 'register'], [GuestMiddleware::class]);
 $router->get('/logout', [AuthController::class, 'logout']);
+
+$router->get('/auth/skoolyst/redirect', [SkoolystAuthController::class, 'redirect'], [GuestMiddleware::class]);
+$router->get('/auth/skoolyst/callback', [SkoolystAuthController::class, 'callback']);
 
 // ---- Store owner self-service ("Open a Store") ----
 $router->get('/store/create', [StoreOwnerController::class, 'create'], [AuthMiddleware::class]);
