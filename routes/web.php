@@ -11,6 +11,7 @@ use Skoolyst\Controllers\AuthController;
 use Skoolyst\Controllers\CartController;
 use Skoolyst\Controllers\CheckoutController;
 use Skoolyst\Controllers\FavoriteController;
+use Skoolyst\Controllers\GoogleAuthController;
 use Skoolyst\Controllers\HomeController;
 use Skoolyst\Controllers\PageController;
 use Skoolyst\Controllers\ProductController;
@@ -69,6 +70,9 @@ $router->get('/logout', [AuthController::class, 'logout']);
 
 $router->get('/auth/skoolyst/redirect', [SkoolystAuthController::class, 'redirect'], [GuestMiddleware::class]);
 $router->get('/auth/skoolyst/callback', [SkoolystAuthController::class, 'callback']);
+
+$router->get('/auth/google/redirect', [GoogleAuthController::class, 'redirect'], [GuestMiddleware::class]);
+$router->get('/auth/google/callback', [GoogleAuthController::class, 'callback']);
 
 // ---- Store owner self-service ("Open a Store") ----
 $router->get('/store/create', [StoreOwnerController::class, 'create'], [AuthMiddleware::class]);

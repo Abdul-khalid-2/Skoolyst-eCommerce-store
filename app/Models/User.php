@@ -22,4 +22,11 @@ class User extends Model {
         $row = $stmt->fetch();
         return $row === false ? null : $row;
     }
+
+    public static function findByGoogleId(string $googleId): ?array {
+        $stmt = static::db()->prepare('SELECT * FROM store_users WHERE google_id = :google_id LIMIT 1');
+        $stmt->execute(['google_id' => $googleId]);
+        $row = $stmt->fetch();
+        return $row === false ? null : $row;
+    }
 }

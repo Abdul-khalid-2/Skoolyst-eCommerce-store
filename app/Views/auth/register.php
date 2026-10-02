@@ -24,7 +24,8 @@ ob_start();
 </form>
 
 <div class="text-center small text-muted my-3">or</div>
-<a href="<?= url('auth/skoolyst/redirect') ?>" class="btn btn-outline-navy w-100 mb-3"><i class="bi bi-box-arrow-in-right me-1"></i> Continue with Skoolyst</a>
+<a href="<?= url('auth/skoolyst/redirect') ?>" class="btn btn-outline-navy w-100 mb-2"><i class="bi bi-box-arrow-in-right me-1"></i> Continue with Skoolyst</a>
+<a href="<?= url('auth/google/redirect') ?>" class="btn btn-outline-secondary w-100 mb-3"><i class="bi bi-google me-1"></i> Continue with Google</a>
 
 <hr class="my-4">
 <div class="text-center small">
